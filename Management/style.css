@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+:root {
+    --colorA: #25aae1;
+    --colorB: #4481eb;
+    --main-color: linear-gradient(to right, var(--colorA), var(--colorB));
+    --text-color: #333;
+    --navbar-color: #fff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--main-color);
+    margin: 0;
+	font-size: 15px;
+}
+
+h1 {
+    color: var(--text-color);
+}
+
+/* ---------------- NAVIGATION BAR ---------------- */
+#nav_bar_data {
+	text-align: right;
+	font-size: 15px;
+	color: var(--text-color);
+}
+#nav_bar_box {
+	position:relative;
+	padding: 0.5px;
+	background-color:white;
+	width: 100%;
+}
+
+/* ---------------- REGISTRATION AND LOGIN ---------------- */
+#form-sfondo {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+}
+#form {
+    width: 350px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0% 2% 4% 2%;
+    border-radius: 10px;
+}
+#form-dati {
+    margin: 7% -7% 0% 7%;
+}
+
+label {
+    display: block;
+    color: #555;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 50%;
+    margin: auto;
+    display: flex;
+}
+
+input[type="submit"]:hover {
+    background-color: #258cd1;
+}
+
+input[type="submit"]:disabled {
+    background-color: grey;
+}
