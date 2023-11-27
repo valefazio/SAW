@@ -7,20 +7,22 @@
 </head>
 <body id="form-sfondo">
     <div id="form">
-        <h1>Sign-up</h1>
-        <form action="" method="POST" id="form-dati">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+        <form action="" method="POST">
+			<div id="form-dati">
+        		<h1>Sign-up</h1>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
 
-            <label for="pass">Password:</label>
-            <input type="password" id="pass" name="pass" required>
+                <label for="pass">Password:</label>
+                <input type="password" id="pass" name="pass" required><br><br>
 
-            <label for="confirm-password">Confirm Password:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required><br><br>
 
+			</div>
             <input type="submit" value="Registrati" id="register-button" disabled>
         </form>
     </div>

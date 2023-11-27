@@ -16,11 +16,19 @@
 				<label for="pass">Password:</label>
 				<input type="password" id="pass" name="pass" required><br><br>
 
-				<input type="checkbox" id="remember-me" name="remember-me">Remember me<br><br>
+				<input type="checkbox" id="remember-me" name="remember-me">
+				<label for="remember-me" id="remember-me-text"> Remember me</label><br><br>
 			</div>
-           <input type="submit" value="Login" id="login-button" disabled>
+           	<input type="submit" value="Login" id="login-button" disabled>
+
+			<div style="text-align: center;">
+				<br><a href="registration.php" style="">Not registered yet? Sign up here</a>
+			</div>
         </form>
     </div>
+</body>
+</html>
+
 
     <script>
         // Ottieni i riferimenti agli elementi del modulo
@@ -77,7 +85,8 @@
 				$bytes = random_bytes(12);
 				setcookie("remember-me", $bytes, time() + (86400 * 30), "/");
 				$cookie = hash("sha256", $bytes);
-				updateDb("remember", "'$cookie'", "email = '$email'");
+				updateDb("remember_token", "'$cookie'", "email = '$email'");
+				updateDb("remember_token_created_at", "CURRENT_TIMESTAMP", "email = '$email'");
 			}
 			
 			header("Location: ../Pages/index.php");

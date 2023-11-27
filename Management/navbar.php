@@ -138,8 +138,8 @@
             }
         }
 
-		document.getElementById("profile").setAttribute("onclick", "removeColumnBar()");
-		document.getElementById("profile").textContent = "close";
+		document.getElementById("menu").setAttribute("onclick", "removeColumnBar()");
+		document.getElementById("menu").textContent = "close";
     }
 
 	function removeColumnBar() {
@@ -153,8 +153,8 @@
 			}
 		}
 
-		document.getElementById("profile").setAttribute("onclick", "affixColumnBar()");
-		document.getElementById("profile").textContent = "account_circle";
+		document.getElementById("menu").setAttribute("onclick", "affixColumnBar()");
+		document.getElementById("menu").textContent = "account_circle";
 	}
 </script>
 
@@ -180,8 +180,8 @@
         	<li>
 				<!-- FOTO DA DB
 					<img src="../Management/images/profile.png" class="profile"/>-->
-				<span class="material-icons-outlined clickable" onclick="affixColumnBar()" id="profile" title="affix column bar">
-					account_circle
+				<span class="material-icons-outlined clickable" onclick="affixColumnBar()" id="menu" title="affix column bar">
+					menu
 				</span>
           		<ul id="column">
 					<li class="sub-item clickable"  onclick="removeColumnBar(); window.location.href='../Access/login.php'" id="login">
@@ -194,35 +194,17 @@
     </nav>
 
 	<?php
-		$logged = false;
-		
-		if(isset($_COOKIE['remember-me']) && $_COOKIE['remember-me']) {
-			$cookie = $_COOKIE['remember-me'];
-			$cookie = hash("sha256", $cookie);
-			include "../Management/connection.php";
-			$res = selectDb("email", "remember = '$cookie'");
-			if ($res->num_rows > 0) {	//cookie corrisponde
-				$logged = true;
-				if(!isset($_SESSION['logged']))
-					$_SESSION['logged'] = $res->fetch_assoc()['email'];
-			} else {	//cookie non trovato
-				$logged = false;
-			}
-		} else if (isset($_SESSION['logged'])) {	//utente appena loggato
-			$logged = true;
-		} else {	//utente non ancora loggato
-			$logged = false;
-		}
+		include("accessControl.php");
+        $logged = isLogged();
 
-		if (!$logged) {
-			echo "<h1 style='text-align: center'>Welcome user not logged</h1>";
-		} else {
+		if ($logged) {
 	?>
             <script>
                 document.getElementById("login").remove();
                 document.getElementsByTagName("span")[0].setAttribute("onclick", "window.location.href='../Pages/news.php'");
 				document.getElementsByTagName("span")[1].setAttribute("onclick", "window.location.href='../Pages/favs.php'");
 				document.getElementsByTagName("span")[2].setAttribute("onclick", "window.location.href='../Pages/cart.php'");
+                createNewElement("../Pages/profile.php", "account_circle", "My Profile");
                 createNewElement("../Pages/dash.php", "grid_view", "Dashboard");
                 createNewElement("../Pages/orders.php", "format_list_bulleted", "My Orders");
                 createNewElement("../Pages/updateProfile.php", "manage_accounts", "Update Profile");
@@ -248,7 +230,6 @@
                 }
 
             </script>
-			<h1 style='text-align: center'>Welcome user :)</h1>
 	<?php
 		}
 	?>
