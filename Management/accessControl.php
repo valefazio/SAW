@@ -1,4 +1,5 @@
 <?php
+	if(!session_start()) exit("Troubles starting session.");
     function isLogged() {
         $logged = false;
 		

@@ -42,11 +42,10 @@ h1 {
 #form {
     width: 350px;
     background: rgba(255, 255, 255, 0.5);
-    padding: 0% 2% 4% 2%;
     border-radius: 10px;
 }
 #form-dati {
-    margin: 7% -7% 0% 7%;
+    margin: 0% -7% 0% 7%;
 }
 
 #remember-me-text {
@@ -67,7 +66,7 @@ input[type="password"],
 input[type="email"] {
     width: 80%;
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px 0 0 0;
     border: 1px solid #ccc;
     border-radius: 3px;
     font-size: 16px;

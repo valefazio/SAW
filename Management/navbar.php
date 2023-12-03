@@ -1,11 +1,9 @@
 <!-- Code adapted from "Create a Navbar Dropdown Menu" tutorial by TimeToProgram.
   Source: https://timetoprogram.com/create-navbar-dropdown-menu-html-css/
 -->
-
 <?php
-	if(PHP_SESSION_ACTIVE != session_status())
-	if(!session_start()) 
-		exit("Troubles starting session.");
+		include("accessControl.php");
+        $logged = isLogged();
 ?>
 
 <!DOCTYPE html>
@@ -194,9 +192,6 @@
     </nav>
 
 	<?php
-		include("accessControl.php");
-        $logged = isLogged();
-
 		if ($logged) {
 	?>
             <script>

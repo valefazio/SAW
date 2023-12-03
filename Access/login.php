@@ -21,8 +21,8 @@
 			</div>
            	<input type="submit" value="Login" id="login-button" disabled>
 
-			<div style="text-align: center;">
-				<br><a href="registration.php" style="">Not registered yet? Sign up here</a>
+			<div style="text-align: center; margin: -4% 0 4% 0">
+				<br><a href="registration.php">Not registered yet? Sign up here</a>
 			</div>
         </form>
     </div>

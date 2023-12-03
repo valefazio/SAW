@@ -29,17 +29,14 @@
 		$conn = accessDb();
 		$sql = "SELECT $columns FROM $table WHERE $where";
 		$res = $conn->query($sql);
-		if (!$res) {
-			mysqli_close($conn);
-			die("Unable to execute selection query.");
-		}
-		mysqli_close($conn);
-	
-		$data = array(); // Initialize an array to store the result
-		while ($row = $res->fetch_assoc()) {
-			$data[] = $row;
-		}
-		return $data;
+        if(!$res) {
+            mysqli_close($conn);
+            die("Unable to execute query: table '$table' not found.");
+        }
+        mysqli_close($conn);
+        if($res->num_rows == 0)
+            return array();
+        return $res;
 	}
 	
 

@@ -21,9 +21,12 @@
 
                 <label for="confirm-password">Confirm Password:</label>
                 <input type="password" id="confirm-password" name="confirm-password" required><br><br>
-
 			</div>
             <input type="submit" value="Registrati" id="register-button" disabled>
+
+			<div style="text-align: center; margin: -4% 0 4% 0">
+				<br><a href="login.php">Already registered? Login here</a>
+			</div>
         </form>
     </div>
 
