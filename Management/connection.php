@@ -1,9 +1,5 @@
 <?php
-    $dbhost = 'localhost';
-    $dbuser = 'andrea';
-    $dbpass = 'a';
-    $dbname = 'test';
-    $table = "users";
+    include "credentials.php";
     function accessDb() {
         global $dbhost, $dbuser, $dbpass, $dbname;
         $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
@@ -38,6 +34,19 @@
             return array();
         return $res;
 	}
+
+    function selectDbColumns($columns) {
+		global $table;
+		$conn = accessDb();
+		$sql = "SELECT $columns FROM $table";
+		$res = $conn->query($sql);
+        if(!$res) {
+            mysqli_close($conn);
+            die("Unable to execute query: table '$table' not found.");
+        }
+        mysqli_close($conn);
+        return $res;
+	}
 	
 
     function updateDb($columns, $values, $where) {
@@ -55,5 +64,15 @@
     function getUserProfileData($email) {
 		return selectDb("username, email", "email = '$email'");
 	}
+    function getUsers($email) {
+		return selectDbColumns("username, email, admin");
+	}
+
+    function toArray($res) {
+        $array = array();
+        while($row = $res->fetch_assoc())
+            $array[] = $row;
+        return $array;
+    }
 	
 ?>

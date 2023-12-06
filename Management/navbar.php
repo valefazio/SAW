@@ -197,7 +197,7 @@
         /*$logged = isLogged();
         $currentFileName = basename($_SERVER['PHP_SELF']);
         if($currentFileName != "login.php" && $currentFileName != "registration.php")*/
-            checkAccess();
+           // checkAccess();
 		if (isLogged()) {
 	?>
             <script>
@@ -209,6 +209,7 @@
                 createNewElement("../Pages/dash.php", "grid_view", "Dashboard");
                 createNewElement("../Pages/orders.php", "format_list_bulleted", "My Orders");
                 createNewElement("../Pages/updateProfile.php", "manage_accounts", "Update Profile");
+                createNewElement("../Pages/users.php", "group", "List of users");
                 createNewElement("../Access/logout.php", "logout", "Logout");
 
                 function createNewElement(link, spanName, textToPrint) {
