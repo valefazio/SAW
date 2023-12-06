@@ -2,8 +2,6 @@
 	include("../Management/navbar.php");
     // Get the user's profile information from the database
     $profileData = getUserProfileData($_SESSION['logged']);
-
-    // Display the profile information
 ?>
 <!DOCTYPE html>
 <html>

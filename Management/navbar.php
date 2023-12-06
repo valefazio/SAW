@@ -157,7 +157,7 @@
 </script>
 
 
-  <body>
+ <body>
     <nav>
     	<ul id="bar">
         	<li>
@@ -191,39 +191,48 @@
       </ul>
     </nav>
 
+	
+
 	<?php
-        checkAccess();
+        /*$logged = isLogged();
+        $currentFileName = basename($_SERVER['PHP_SELF']);
+        if($currentFileName != "login.php" && $currentFileName != "registration.php")*/
+            checkAccess();
+		if (isLogged()) {
 	?>
-        <script>
-            document.getElementById("login").remove();
-            document.getElementsByTagName("span")[0].setAttribute("onclick", "window.location.href='../Pages/news.php'");
-            document.getElementsByTagName("span")[1].setAttribute("onclick", "window.location.href='../Pages/favs.php'");
-            document.getElementsByTagName("span")[2].setAttribute("onclick", "window.location.href='../Pages/cart.php'");
-            createNewElement("../Pages/profile.php", "account_circle", "My Profile");
-            createNewElement("../Pages/dash.php", "grid_view", "Dashboard");
-            createNewElement("../Pages/orders.php", "format_list_bulleted", "My Orders");
-            createNewElement("../Pages/updateProfile.php", "manage_accounts", "Update Profile");
-            createNewElement("../Access/logout.php", "logout", "Logout");
+            <script>
+                document.getElementById("login").remove();
+                document.getElementsByTagName("span")[0].setAttribute("onclick", "window.location.href='../Pages/news.php'");
+				document.getElementsByTagName("span")[1].setAttribute("onclick", "window.location.href='../Pages/favs.php'");
+				document.getElementsByTagName("span")[2].setAttribute("onclick", "window.location.href='../Pages/cart.php'");
+                createNewElement("../Pages/profile.php", "account_circle", "My Profile");
+                createNewElement("../Pages/dash.php", "grid_view", "Dashboard");
+                createNewElement("../Pages/orders.php", "format_list_bulleted", "My Orders");
+                createNewElement("../Pages/updateProfile.php", "manage_accounts", "Update Profile");
+                createNewElement("../Access/logout.php", "logout", "Logout");
 
-            function createNewElement(link, spanName, textToPrint) {
-                var li = document.createElement("li");
-                li.setAttribute("class", "sub-item clickable");
-                li.setAttribute("onclick", "window.location.href='" + link + "'");
+                function createNewElement(link, spanName, textToPrint) {
+                    var li = document.createElement("li");
+                    li.setAttribute("class", "sub-item clickable");
+                    li.setAttribute("onclick", "window.location.href='" + link + "'");
 
-                var span = document.createElement("span");
-                span.setAttribute("class", "material-icons-outlined");
-                var text = document.createTextNode(spanName);
-                span.appendChild(text);
+                    var span = document.createElement("span");
+                    span.setAttribute("class", "material-icons-outlined");
+                    var text = document.createTextNode(spanName);
+                    span.appendChild(text);
 
-                var p = document.createElement("p");
-                var text = document.createTextNode(textToPrint);
-                p.appendChild(text);
+                    var p = document.createElement("p");
+                    var text = document.createTextNode(textToPrint);
+                    p.appendChild(text);
 
-                li.append(span);
-                li.append(p);
-                document.getElementById("column").append(li);
-            }
+                    li.append(span);
+                    li.append(p);
+                    document.getElementById("column").append(li);
+                }
 
-        </script>
+            </script>
+	<?php
+		}
+	?>
   </body>
 </html>

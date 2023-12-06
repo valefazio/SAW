@@ -20,7 +20,6 @@
 		} else {	//utente non ancora loggato
 			$logged = 0;
 		}
-
 		return $logged;
     }
 
@@ -40,15 +39,15 @@
 	}
 
 	function checkAccess() {
+		$currentFileName = basename($_SERVER['PHP_SELF']);
+		
 		if(isLogged() == 0){
 			echo "<script>window.location.href = '../Access/login.php';</script>";
 			exit;
 		}
 
-		$currentFileName = basename($_SERVER['PHP_SELF']);
-
 		//PAGINE AD ACCESSO RISTRETTO
-		$restrictedAccess = ['registration.php', 'users.php'];
+		$restrictedAccess = [];
 
 		if(in_array($currentFileName, $restrictedAccess) && !isAdmin()) {
 			echo "<h1 syle='text-align: center';>Accesso riservato agli amministratori</h1>";

@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="../Management/style.css">
+
+    <?php
+		include("../Management/accessControl.php");
+	?>
 </head>
-<body id="form-sfondo">
+<body>
+	<div id="form-sfondo">
     <div id="form">
         <form action="" method="POST">
 			<div id="form-dati">
         		<h1>Login</h1>
-				<label for="email">Email:</label>
+				<label for="email">Email:</label><br>
 				<input type="email" id="email" name="email" required><br><br>
 
-				<label for="pass">Password:</label>
+				<label for="pass">Password:</label><br>
 				<input type="password" id="pass" name="pass" required><br><br>
 
 				<input type="checkbox" id="remember-me" name="remember-me">
@@ -26,6 +31,7 @@
 			</div>
         </form>
     </div>
+	</div>
 </body>
 </html>
 
@@ -50,14 +56,15 @@
     </script>
 
 	<?php
-		//SESSIONE
 		if(!session_start()) exit("Troubles starting session.");
-		
+		if(isLogged()) {
+			header("Location: ../Pages/index.php");
+			exit;
+		}
 		if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['pass'])) {	//ha inserito i dati
 			$email = htmlspecialchars($_POST['email']);
 			$password = $_POST['pass'];
 
-			include "../Management/connection.php";
 			$res = selectDb("email, password", "email = '$email'");
 			if ($res->num_rows == 0) {
 				echo "<script>alert('User not found')</script>";
@@ -88,7 +95,6 @@
 				updateDb("remember_token", "'$cookie'", "email = '$email'");
 				updateDb("remember_token_created_at", "CURRENT_TIMESTAMP", "email = '$email'");
 			}
-			
 			header("Location: ../Pages/index.php");
 			exit;
 

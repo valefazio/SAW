@@ -4,31 +4,37 @@
     <meta charset="UTF-8">
     <title>Registration</title>
     <link rel="stylesheet" type="text/css" href="../Management/style.css">
+	
+    <?php
+		include("../Management/accessControl.php");
+	?>
 </head>
-<body id="form-sfondo">
-    <div id="form">
-        <form action="" method="POST">
-			<div id="form-dati">
-        		<h1>Sign-up</h1>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br><br>
+<body>
+	<div id="form-sfondo">
+		<div id="form">
+			<form action="" method="POST">
+				<div id="form-dati">
+					<h1>Sign-up</h1>
+					<label for="username">Username:</label><br>
+					<input type="text" id="username" name="username" required><br><br>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br><br>
+					<label for="email">Email:</label><br>
+					<input type="email" id="email" name="email" required><br><br>
 
-                <label for="pass">Password:</label>
-                <input type="password" id="pass" name="pass" required><br><br>
+					<label for="pass">Password:</label><br>
+					<input type="password" id="pass" name="pass" required><br><br>
 
-                <label for="confirm-password">Confirm Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" required><br><br>
-			</div>
-            <input type="submit" value="Registrati" id="register-button" disabled>
+					<label for="confirm-password">Confirm Password:</label><br>
+					<input type="password" id="confirm-password" name="confirm-password" required><br><br>
+				</div>
+				<input type="submit" value="Registrati" id="register-button" disabled>
 
-			<div style="text-align: center; margin: -4% 0 4% 0">
-				<br><a href="login.php">Already registered? Login here</a>
-			</div>
-        </form>
-    </div>
+				<div style="text-align: center; margin: -4% 0 4% 0">
+					<br><a href="login.php">Already registered? Login here</a>
+				</div>
+			</form>
+		</div>
+	</div>
 
     <script>
         // Ottieni i riferimenti agli elementi del modulo
@@ -55,7 +61,10 @@
 	
 	<?php
 		if(!session_start()) exit("Troubles starting session.");
-
+		if(isLogged()) {
+			header("Location: ../Pages/index.php");
+			exit;
+		}
 		$email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$psw = password_hash(trim($_POST['pass']), PASSWORD_DEFAULT);
@@ -77,7 +86,6 @@
 
 			$email = htmlspecialchars(trim($_POST['email']));
 
-			include "../Management/connection.php";
 			$res = selectDb("email", "email = '$email'");
 			if($res->num_rows != 0) {
 				echo "<script>alert('Utente già registrato')</script>";
