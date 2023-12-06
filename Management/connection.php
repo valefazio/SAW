@@ -1,8 +1,8 @@
 <?php
-    $dbhost = 'localhost:3306';
-    $dbuser = 'vale';
-    $dbpass = 'uni23';
-    $dbname = 'prove';
+    $dbhost = 'localhost';
+    $dbuser = 'andrea';
+    $dbpass = 'a';
+    $dbname = 'test';
     $table = "users";
     function accessDb() {
         global $dbhost, $dbuser, $dbpass, $dbname;
