@@ -1,16 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['logged'])) {
-    // Redirect to the login page if not logged in
-    header("Location: ../Access/login.php");
-    exit();
-}
+	include("../Management/navbar.php");
+    // Get the user's profile information from the database
+    include "../Management/connection.php";
+    $profileData = getUserProfileData($_SESSION['logged']);
 
-// Get the user's profile information from the database
-include "../Management/connection.php";
-$profileData = getUserProfileData($_SESSION['logged']);
-
-// Display the profile information
+    // Display the profile information
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +13,6 @@ $profileData = getUserProfileData($_SESSION['logged']);
 </head>
 <body>
     <?php
-		include("../Management/navbar.php");
         // Note: Removed redundant assignment to $profileData
         if ($profileData) {
             foreach ($profileData as $profile) {

@@ -53,8 +53,7 @@
     }
 
     function getUserProfileData($email) {
-		$profileData = selectDb("username, email", "email = '$email'");
-		return $profileData;
+		return selectDb("username, email", "email = '$email'");
 	}
 	
 ?>
