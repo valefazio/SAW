@@ -2,7 +2,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
-    <link rel="stylesheet" type="text/css" href="../Management/style.css">
     
     <?php
         include("../Management/navbar.php");

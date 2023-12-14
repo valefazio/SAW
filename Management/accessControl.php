@@ -23,8 +23,7 @@
 		return $logged;
     }
 
-	function isAdmin() {
-		$logged = isLogged();
+	function isAdmin($logged) {
 		//if user is not admin
 		$res = selectDb("admin", "email = '$_SESSION[logged]'");
 			
@@ -38,24 +37,15 @@
 		} else header("Location: login.php");
 	}
 
-	function checkAccess() {
+	function checkAccess($logged) {
 		$currentFileName = basename($_SERVER['PHP_SELF']);
-		
-		if(isLogged() == 0){
-			echo "<script>window.location.href = '../Access/login.php';</script>";
-			exit;
-		}
 
 		//PAGINE AD ACCESSO RISTRETTO
 		$restrictedAccess = [];
 
-		if(in_array($currentFileName, $restrictedAccess) && !isAdmin()) {
+		if(in_array($currentFileName, $restrictedAccess) && !isAdmin($logged)) {
 			echo "<h1 syle='text-align: center';>Accesso riservato agli amministratori</h1>";
-					echo "	<script> setTimeout(function() {
-						window.location.href = '../Pages/home.php';
-							}, 2000);
-						</script>";
-					exit;
+			timerRelocation('../Pages/home.php');
 		}
 	}
 ?>

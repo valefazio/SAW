@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <link rel="stylesheet" type="text/css" href="../Management/style.css">
-	
-    <?php
-		include("../Management/accessControl.php");
+    <link rel="stylesheet" type="text/css" href="../Management/Style/forms.css">
+
+	<?php
+		include("../Management/navbar.php");
 	?>
 </head>
 <body>
@@ -29,7 +29,7 @@
 				</div>
 				<input type="submit" value="Registrati" id="register-button" disabled>
 
-				<div style="text-align: center; margin: -4% 0 4% 0">
+				<div id="switchForm">
 					<br><a href="login.php">Already registered? Login here</a>
 				</div>
 			</form>
@@ -60,43 +60,49 @@
     </script>
 	
 	<?php
-		if(!session_start()) exit("Troubles starting session.");
 		if(isLogged()) {
-			header("Location: ../Pages/index.php");
+			echo "<script> window.location.href = '../Pages/index.php';</script>";
 			exit;
 		}
+
 		$email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			if(!isFilled("username") && !isFilled("email") && !isFilled("pass") && !isFilled("confirm-password")) {
+				alert("Compilare tutti i campi");
+				if(session_status() == PHP_SESSION_ACTIVE)
+					session_abort();
+				timerRelocation("registration.php");
+			} 
+
 			$psw = password_hash(trim($_POST['pass']), PASSWORD_DEFAULT);
 			if (!password_verify($_POST['confirm-password'], $psw)) {
-				echo "<script>alert('Le password inserite non combaciano')</script>";
-				echo "	<script> setTimeout(function() {
-							window.location.href = 'registration.php';
-							}, 2000);
-						</script>";
-				exit;
+				alert("Le password inserite non combaciano");
+				if(session_status() == PHP_SESSION_ACTIVE)
+					session_abort();
+				timerRelocation("registration.php");
 			} else if(!preg_match($email_pattern, $_POST['email'])) {
-				echo "<script>alert('Il campo email non rispetta il formato richiesto')</script>";
-				echo "	<script> setTimeout(function() {
-							window.location.href = 'registration.php';
-						}, 2000);
-					</script>";
-				exit;
+				alert("Il campo email non rispetta il formato richiesto");
+				if(session_status() == PHP_SESSION_ACTIVE)
+					session_abort();
+				timerRelocation("registration.php");
 			}
 
 			$email = htmlspecialchars(trim($_POST['email']));
 
 			$res = selectDb("email", "email = '$email'");
 			if($res->num_rows != 0) {
-				echo "<script>alert('Utente già registrato')</script>";
-				echo "<script>window.location.href = 'login.php'</script>";
+				alert("Utente già registrato");
+				if(session_status() == PHP_SESSION_ACTIVE)
+					session_abort();
+				timerRelocation("login.php");
 				exit;
 			}
 			$username = htmlspecialchars(trim($_POST["username"]));
 			insertDb("username, email, password", "'$username', '$email', '$psw'");
 			
 			$_SESSION['logged'] = $email;
-			header("Location: ../Pages/index.php");
+			echo "<script> window.location.href = '../Pages/index.php';</script>";
+			exit;
 		}
 	?>
 </body>

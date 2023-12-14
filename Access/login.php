@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="../Management/style.css">
+    <link rel="stylesheet" type="text/css" href="../Management/Style/forms.css">
 
     <?php
-		include("../Management/accessControl.php");
+		include("../Management/navbar.php");
 	?>
 </head>
 <body>
 	<div id="form-sfondo">
-    <div id="form">
         <form action="" method="POST">
 			<div id="form-dati">
         		<h1>Login</h1>
@@ -26,11 +25,10 @@
 			</div>
            	<input type="submit" value="Login" id="login-button" disabled>
 
-			<div style="text-align: center; margin: -4% 0 4% 0">
+			<div id="switchForm">
 				<br><a href="registration.php">Not registered yet? Sign up here</a>
 			</div>
         </form>
-    </div>
 	</div>
 </body>
 </html>
@@ -56,36 +54,27 @@
     </script>
 
 	<?php
-		if(!session_start()) exit("Troubles starting session.");
 		if(isLogged()) {
-			header("Location: ../Pages/index.php");
+			echo "<script> window.location.href = '../Pages/index.php';</script>";
 			exit;
 		}
-		if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['pass'])) {	//ha inserito i dati
+		if($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass")) {	//ha inserito i dati
 			$email = htmlspecialchars($_POST['email']);
 			$password = $_POST['pass'];
 
 			$res = selectDb("email, password", "email = '$email'");
 			if ($res->num_rows == 0) {
-				echo "<script>alert('User not found')</script>";
+				alert("User not found");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				echo "	<script> setTimeout(function() {
-							window.location.href = 'login.php';
-							}, 2000);
-						</script>";
-				exit;
+				timerRelocation("login.php");
 			}
 			$row = $res->fetch_assoc();
 			if (!password_verify($password, $row['password'])) {
-				echo "<script>alert('Incorrect password')</script>";
+				alert("Incorrect password");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				echo "	<script> setTimeout(function() {
-							window.location.href = 'login.php';
-							}, 2000);
-						</script>";
-				exit;
+				timerRelocation("login.php");
 			}
 			$_SESSION['logged'] = $email;
 			if(isset($_POST['remember-me'])) {
@@ -95,9 +84,8 @@
 				updateDb("remember_token", "'$cookie'", "email = '$email'");
 				updateDb("remember_token_created_at", "CURRENT_TIMESTAMP", "email = '$email'");
 			}
-			header("Location: ../Pages/index.php");
+			echo "<script> window.location.href = '../Pages/index.php';</script>";
 			exit;
-
 		} else {
 			if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit']))
 				header("Location: login.php");
