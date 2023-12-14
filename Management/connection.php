@@ -11,29 +11,40 @@
     function insertDb($columns, $values) {
         global $table;
         $conn = accessDb();
-        $sql = "INSERT INTO $table ($columns) VALUES ($values)";
-        $res = $conn->query($sql);
-        if(!$res) {
-            mysqli_close($conn);
-            die("Unable to execute query: values were not inserted into table '$table'.");
+        
+        $stmt = $conn->prepare("INSERT INTO $table ($columns) VALUES ($values)");
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
         }
-        mysqli_close($conn);
+        
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        }
+        
+        $stmt->close();
+        $conn->close();
     }
 
     function selectDb($columns, $where) {
-		global $table;
-		$conn = accessDb();
-		$sql = "SELECT $columns FROM $table WHERE $where";
-		$res = $conn->query($sql);
-        if(!$res) {
-            mysqli_close($conn);
+        global $table;
+        $conn = accessDb();
+        $stmt = $conn->prepare("SELECT $columns FROM $table WHERE $where");
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        }
+        $res = $stmt->get_result();
+        if (!$res) {
             die("Unable to execute query: table '$table' not found.");
         }
         mysqli_close($conn);
-        if($res->num_rows == 0)
+        if ($res->num_rows == 0) {
             return array();
+        }
         return $res;
-	}
+    }
 
     function selectDbColumns($columns) {
 		global $table;
