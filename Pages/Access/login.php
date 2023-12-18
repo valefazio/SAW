@@ -20,10 +20,12 @@
 				<input type="email" id="email" name="email" required><br><br>
 
 				<label for="pass">Password:</label><br>
-				<input type="password" id="pass" name="pass" required><br><br>
+				<input type="password" id="pass" name="pass" required><br>
+				<input type="checkbox" id="show-pass" onclick="togglePassword()">
+				<label for="show-pass" id="show-pass">Mostra Password</label> <br><br>
 
 				<input type="checkbox" id="remember-me" name="remember-me">
-				<label for="remember-me" id="remember-me-text"> Remember me</label><br><br>
+				<label for="remember-me" id="remember-me-text">Ricordati di me</label><br>
 			</div>
            	<input type="submit" value="Login" id="login-button" disabled>
 
@@ -32,8 +34,6 @@
 			</div>
         </form>
 	</div>
-</body>
-</html>
 
 
     <script>
@@ -43,15 +43,29 @@
         const loginButton = document.getElementById("login-button");
 
         // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
-        passwordInput.addEventListener("input", toggleLoginButton);
+        passwordInput.addEventListener("input", togglePassword);
         emailInput.addEventListener("input", toggleLoginButton);
 
         function toggleLoginButton() {
+			//check if their formats are valid
+			//***********************/
             if (emailInput.value !== "" && passwordInput.value !== "") {
                 loginButton.removeAttribute("disabled");
             } else {
                 loginButton.setAttribute("disabled", "disabled");
             }
+        }
+
+		function togglePassword() {
+            var passField = document.getElementById("pass");
+            var showPassCheckbox = document.getElementById("show-pass");
+
+            if (showPassCheckbox.checked) {
+                passField.type = "text";
+            } else {
+                passField.type = "password";
+            }
+			toggleLoginButton();
         }
     </script>
 

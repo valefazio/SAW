@@ -1,7 +1,7 @@
 <?php
     $dbhost = 'localhost';
-    $dbuser = 'andrea';
-    $dbpass = 'a';
-    $dbname = 'test';
+    $dbuser = 'vale';
+    $dbpass = 'uni23';
+    $dbname = 'uni';
     $table = "users";
 ?>

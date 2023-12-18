@@ -68,8 +68,8 @@
 				</span>
         	</li>
         	<li>
-				<span class="material-icons-outlined clickable" title="Cart" onclick="window.location.href='Access/login.php'">
-					shopping_cart
+				<span class="material-icons-outlined clickable" title="Servizio clienti" onclick="window.location.href='help.php'">
+					contact_support
 				</span>
         	</li>
         	<li>
@@ -91,44 +91,38 @@
 	
 
 	<?php
-		$logged = isLogged();
-        checkAccess($logged);
-		if ($logged) {
-	?>
-            <script>
-                document.getElementById("login").remove();
-                document.getElementsByTagName("span")[0].setAttribute("onclick", "window.location.href='../Pages/news.php'");
-				document.getElementsByTagName("span")[1].setAttribute("onclick", "window.location.href='../Pages/favs.php'");
-				document.getElementsByTagName("span")[2].setAttribute("onclick", "window.location.href='../Pages/cart.php'");
-                createNewElement("../Pages/profile.php", "account_circle", "My Profile");
-                createNewElement("../Pages/dash.php", "grid_view", "Dashboard");
-                createNewElement("../Pages/orders.php", "format_list_bulleted", "My Orders");
-                createNewElement("../Pages/updateProfile.php", "manage_accounts", "Update Profile");
-                createNewElement("../Pages/users.php", "group", "List of users");
-                createNewElement("Access/logout.php", "logout", "Logout");
+	$logged = isLogged();
+	checkAccess($logged);	//checks if current page is for admin users only
+	if ($logged) {
+	?><script>
+		document.getElementById("login").remove();
+		document.getElementsByTagName("span")[0].setAttribute("onclick", "window.location.href='../Pages/news.php'");
+		document.getElementsByTagName("span")[1].setAttribute("onclick", "window.location.href='../Pages/favs.php'");
+		createNewElement("../Pages/profile.php", "account_circle", "Profilo");
+		createNewElement("../Pages/dash.php", "luggage", "Le tue prenotazioni");
+		//createNewElement("../Pages/orders.php", "format_list_bulleted", "My Orders");
+		createNewElement("../Pages/updateProfile.php", "manage_accounts", "Gestisci Profilo");//aggiungere elimina profilo
+		//createNewElement("../Pages/users.php", "group", "List of users");
+		createNewElement("Access/logout.php", "logout", "Logout");
 
-                function createNewElement(link, spanName, textToPrint) {
-                    var li = document.createElement("li");
-                    li.setAttribute("class", "sub-item clickable");
-                    li.setAttribute("onclick", "window.location.href='" + link + "'");
+		function createNewElement(link, spanName, textToPrint) {
+			var li = document.createElement("li");
+			li.setAttribute("class", "sub-item clickable");
+			li.setAttribute("onclick", "window.location.href='" + link + "'");
 
-                    var span = document.createElement("span");
-                    span.setAttribute("class", "material-icons-outlined");
-                    var text = document.createTextNode(spanName);
-                    span.appendChild(text);
+			var span = document.createElement("span");
+			span.setAttribute("class", "material-icons-outlined");
+			var text = document.createTextNode(spanName);
+			span.appendChild(text);
 
-                    var p = document.createElement("p");
-                    var text = document.createTextNode(textToPrint);
-                    p.appendChild(text);
+			var p = document.createElement("p");
+			var text = document.createTextNode(textToPrint);
+			p.appendChild(text);
 
-                    li.append(span);
-                    li.append(p);
-                    document.getElementById("column").append(li);
-                }
-
-            </script>
-	<?php
+			li.append(span);
+			li.append(p);
+			document.getElementById("column").append(li);
 		}
-	?>
+    </script><?php } ?>
   </body>
 </html>

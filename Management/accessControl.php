@@ -24,7 +24,6 @@
     }
 
 	function isAdmin($logged) {
-		//if user is not admin
 		$res = selectDb("admin", "email = '$_SESSION[logged]'");
 			
 		if($res) {
@@ -34,7 +33,7 @@
 					return false;
 				} else return true;
 			}
-		} else header("Location: login.php");	//ERROR
+		} else header("Location: login.php");	//***********************/
 	}
 
 	function checkAccess($logged) {

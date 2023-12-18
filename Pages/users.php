@@ -1,3 +1,5 @@
+<!-- TO DELETE -->
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -7,7 +9,7 @@
         include("../Management/navbar.php");
     ?>
 </head>
-<body>
+<body><main>
 <?php
     $users = getUsers($_SESSION['logged']);
     if ($users) {
@@ -33,4 +35,5 @@
         echo "User not found.";
     }
 ?>
-</body>
+</main></body>
+</html>
