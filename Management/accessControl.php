@@ -41,10 +41,16 @@
 		$currentFileName = basename($_SERVER['PHP_SELF']);
 
 		//PAGINE AD ACCESSO RISTRETTO
-		$restrictedAccess = [];
+		$adminAccess = [/***********/];
+		$loggedAccess = [/***********/];
 
-		if(in_array($currentFileName, $restrictedAccess) && !isAdmin($logged)) {
+		if(in_array($currentFileName, $adminAccess) && !isAdmin($logged)) {
 			echo "<h1 syle='text-align: center';>Accesso riservato agli amministratori</h1>";
+			timerRelocation('../Pages/index.php');	//ERROR
+		}
+
+		if(in_array($currentFileName, $loggedAccess) && !$logged) {
+			echo "<h1 syle='text-align: center';>Accesso riservato agli utenti registrati</h1>";
 			timerRelocation('../Pages/index.php');	//ERROR
 		}
 	}
