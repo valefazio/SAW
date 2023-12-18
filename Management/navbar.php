@@ -50,7 +50,7 @@
 		}
 
 		document.getElementById("menu").setAttribute("onclick", "affixColumnBar()");
-		document.getElementById("menu").textContent = "account_circle";
+		document.getElementById("menu").textContent = "menu";
 	}
 </script>
 
