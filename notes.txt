@@ -1,4 +1,4 @@
-- prepared statement: Esercizio 13
+- prepared statement: Esercizio 13 (gestione degli errori)
 - footer
 - quando accedi controllare che il cookie non sia scaduto
 - banner cookie
@@ -7,3 +7,9 @@
 - accessControl: aggiungere che le pagine possono essere riservate per admin o user loggati
 - fare logo
 - privacy e cookies
+- mettere placeholders nei form
+- controllo js form + campo rosso se vuoto nei form
+- fare la trim nel login
+- gestione scadenza remember-me nel db
+- visualizza password
+- close database connection

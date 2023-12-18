@@ -1,6 +1,6 @@
 <?php
 	if(!session_start()) exit("Troubles starting session.");
-	include "connection.php";
+	include "Database/connection.php";
     function isLogged() {
         $logged = 0;
 		
@@ -34,7 +34,7 @@
 					return false;
 				} else return true;
 			}
-		} else header("Location: login.php");
+		} else header("Location: login.php");	//ERROR
 	}
 
 	function checkAccess($logged) {
@@ -45,7 +45,7 @@
 
 		if(in_array($currentFileName, $restrictedAccess) && !isAdmin($logged)) {
 			echo "<h1 syle='text-align: center';>Accesso riservato agli amministratori</h1>";
-			timerRelocation('../Pages/home.php');
+			timerRelocation('../Pages/index.php');	//ERROR
 		}
 	}
 ?>

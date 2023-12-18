@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <link rel="stylesheet" type="text/css" href="../Management/Style/forms.css">
+	<link rel="stylesheet" type="text/css" href="../../Management/Style/style.css">
+    <link rel="stylesheet" type="text/css" href="../../Management/Style/forms.css">
 
-	<?php
-		include("../Management/navbar.php");
+    <?php
+		include("../../Management/accessControl.php");
+		include("../../Management/utility.php");
 	?>
 </head>
 <body>
@@ -94,14 +96,14 @@
 				alert("Utente già registrato");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				timerRelocation("login.php");
+				timerRelocation("");
 				exit;
 			}
 			$username = htmlspecialchars(trim($_POST["username"]));
 			insertDb("username, email, password", "'$username', '$email', '$psw'");
 			
 			$_SESSION['logged'] = $email;
-			echo "<script> window.location.href = '../Pages/index.php';</script>";
+			echo "<script> window.location.href = '../index.php';</script>";
 			exit;
 		}
 	?>

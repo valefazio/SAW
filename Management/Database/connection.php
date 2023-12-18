@@ -25,10 +25,11 @@
         $conn->close();
     }
 
-    function selectDb($columns, $where) {
+    function selectDb($columns, $where="") {
         global $table;
         $conn = accessDb();
-        $stmt = $conn->prepare("SELECT $columns FROM $table WHERE $where");
+        $condition = ($where != "") ? " WHERE $where" : "";
+        $stmt = $conn->prepare("SELECT $columns FROM $table $condition");
         if (!$stmt) {
             die("Prepare failed: " . $conn->error);
         }
@@ -40,24 +41,8 @@
             die("Unable to execute query: table '$table' not found.");
         }
         mysqli_close($conn);
-        if ($res->num_rows == 0) {
-            return array();
-        }
         return $res;
     }
-
-    function selectDbColumns($columns) {
-		global $table;
-		$conn = accessDb();
-		$sql = "SELECT $columns FROM $table";
-		$res = $conn->query($sql);
-        if(!$res) {
-            mysqli_close($conn);
-            die("Unable to execute query: table '$table' not found.");
-        }
-        mysqli_close($conn);
-        return $res;
-	}
 	
 
     function updateDb($columns, $values, $where) {
@@ -76,7 +61,7 @@
 		return selectDb("username, email", "email = '$email'");
 	}
     function getUsers($email) {
-		return selectDbColumns("username, email, admin");
+		return selectDb("username, email, admin");
 	}
 
     function toArray($res) {

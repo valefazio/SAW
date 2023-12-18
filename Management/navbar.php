@@ -58,17 +58,17 @@
     <nav>
     	<ul id="bar">
         	<li>
-        		<span class="material-icons-outlined clickable" title="Notifications" onclick="window.location.href='../Access/login.php'">
+        		<span class="material-icons-outlined clickable" title="Notifications" onclick="window.location.href='Access/login.php'">
 					notifications
 				</span>
         	</li>
         	<li>
-        		<span class="material-icons-outlined clickable" title="Favorites" onclick="window.location.href='../Access/login.php'">
+        		<span class="material-icons-outlined clickable" title="Favorites" onclick="window.location.href='Access/login.php'">
 					favorite_border
 				</span>
         	</li>
         	<li>
-				<span class="material-icons-outlined clickable" title="Cart" onclick="window.location.href='../Access/login.php'">
+				<span class="material-icons-outlined clickable" title="Cart" onclick="window.location.href='Access/login.php'">
 					shopping_cart
 				</span>
         	</li>
@@ -79,7 +79,7 @@
 					menu
 				</span>
           		<ul id="column">
-					<li class="sub-item clickable"  onclick="removeColumnBar(); window.location.href='../Access/login.php'" id="login">
+					<li class="sub-item clickable"  onclick="removeColumnBar(); window.location.href='Access/login.php'" id="login">
 						<span class="material-icons-outlined"> login </span>
 						<p>Login</p>
 					</li>
@@ -105,7 +105,7 @@
                 createNewElement("../Pages/orders.php", "format_list_bulleted", "My Orders");
                 createNewElement("../Pages/updateProfile.php", "manage_accounts", "Update Profile");
                 createNewElement("../Pages/users.php", "group", "List of users");
-                createNewElement("../Access/logout.php", "logout", "Logout");
+                createNewElement("Access/logout.php", "logout", "Logout");
 
                 function createNewElement(link, spanName, textToPrint) {
                     var li = document.createElement("li");

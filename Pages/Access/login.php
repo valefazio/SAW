@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="../Management/Style/forms.css">
+	<link rel="stylesheet" type="text/css" href="../../Management/Style/style.css">
+    <link rel="stylesheet" type="text/css" href="../../Management/Style/forms.css">
 
     <?php
-		include("../Management/navbar.php");
+		include("../../Management/accessControl.php");
+		include("../../Management/utility.php");
 	?>
 </head>
 <body>
@@ -55,7 +57,7 @@
 
 	<?php
 		if(isLogged()) {
-			echo "<script> window.location.href = '../Pages/index.php';</script>";
+			header("Location: ../index.php");
 			exit;
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass")) {	//ha inserito i dati
@@ -64,14 +66,14 @@
 
 			$res = selectDb("email, password", "email = '$email'");
 			if ($res->num_rows == 0) {
-				alert("User not found");
+				alert("Email or password incorrect.");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
 				timerRelocation("login.php");
 			}
 			$row = $res->fetch_assoc();
-			if (!password_verify($password, $row['password'])) {
-				alert("Incorrect password");
+			if(!password_verify($password, $row['password'])) {
+				alert("Email or password incorrect.");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
 				timerRelocation("login.php");
@@ -84,7 +86,7 @@
 				updateDb("remember_token", "'$cookie'", "email = '$email'");
 				updateDb("remember_token_created_at", "CURRENT_TIMESTAMP", "email = '$email'");
 			}
-			echo "<script> window.location.href = '../Pages/index.php';</script>";
+			header("Location: ../index.php");
 			exit;
 		} else {
 			if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit']))
