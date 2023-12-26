@@ -4,7 +4,6 @@
 
 <?php
 	include("accessControl.php");
-	include("utility.php");
 ?>
 
 <!DOCTYPE html>
@@ -56,36 +55,36 @@
 
 <body>
     <nav>
-    	<ul id="bar">
-        	<li>
-        		<span class="material-icons-outlined clickable" title="Notifications" onclick="window.location.href='Access/login.php'">
-					notifications
-				</span>
-        	</li>
-        	<li>
-        		<span class="material-icons-outlined clickable" title="Favorites" onclick="window.location.href='Access/login.php'">
-					favorite_border
-				</span>
-        	</li>
-        	<li>
-				<span class="material-icons-outlined clickable" title="Servizio clienti" onclick="window.location.href='help.php'">
-					contact_support
-				</span>
-        	</li>
-        	<li>
-				<!-- FOTO DA DB
-					<img src="../Management/images/profile.png" class="profile"/>-->
-				<span class="material-icons-outlined clickable" onclick="affixColumnBar()" id="menu" title="affix column bar">
-					menu
-				</span>
-          		<ul id="column">
-					<li class="sub-item clickable"  onclick="removeColumnBar(); window.location.href='Access/login.php'" id="login">
-						<span class="material-icons-outlined"> login </span>
-						<p>Login</p>
-					</li>
-				</ul>
-			</li>
-      </ul>
+		<ul id="bar">
+		<li>
+			<span class="material-icons-outlined clickable" title="Notifications" onclick="window.location.href='Access/login.php'">
+				notifications
+			</span>
+		</li>
+		<li>
+			<span class="material-icons-outlined clickable" title="Favorites" onclick="window.location.href='Access/login.php'">
+				favorite_border
+			</span>
+		</li>
+		<li>
+			<span class="material-icons-outlined clickable" title="Servizio clienti" onclick="window.location.href='help.php'">
+				contact_support
+			</span>
+		</li>
+		<li>
+			<!-- FOTO DA DB
+				<img src="../Management/images/profile.png" class="profile"/>-->
+			<span class="material-icons-outlined clickable" onclick="affixColumnBar()" id="menu" title="affix column bar">
+				menu
+			</span>
+			<ul id="column">
+				<li class="sub-item clickable"  onclick="removeColumnBar(); window.location.href='Access/login.php'" id="login">
+					<span class="material-icons-outlined"> login </span>
+					<p>Login</p>
+				</li>
+			</ul>
+		</li>
+    	</ul>
     </nav>
 
 	

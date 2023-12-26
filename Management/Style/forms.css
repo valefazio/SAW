@@ -68,3 +68,22 @@ input[type="submit"]:hover {
 input[type="submit"]:disabled {
     background-color: grey;
 }
+
+.help {
+    font-family: 'Material Icons Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.help:hover{
+    cursor: default;
+}

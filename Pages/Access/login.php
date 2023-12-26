@@ -8,7 +8,10 @@
 
     <?php
 		include("../../Management/accessControl.php");
-		include("../../Management/utility.php");
+		if(isLogged()) {
+			header("Location: ../index.php");
+			exit;
+		}
 	?>
 </head>
 <body>
@@ -43,12 +46,16 @@
         const loginButton = document.getElementById("login-button");
 
         // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
-        passwordInput.addEventListener("input", togglePassword);
         emailInput.addEventListener("input", toggleLoginButton);
+        passwordInput.addEventListener("input", togglePassword);
 
+		<?php
+			include("checkFields.js");
+		?>
         function toggleLoginButton() {
-			//check if their formats are valid
-			//***********************/
+			checkEmailFormat();
+			//checkPasswordFormat();	//DEBUG
+
             if (emailInput.value !== "" && passwordInput.value !== "") {
                 loginButton.removeAttribute("disabled");
             } else {
@@ -56,7 +63,7 @@
             }
         }
 
-		function togglePassword() {
+		function togglePassword() {	//show password in plain text or not
             var passField = document.getElementById("pass");
             var showPassCheckbox = document.getElementById("show-pass");
 
@@ -70,42 +77,64 @@
     </script>
 
 	<?php
-		if(isLogged()) {
-			header("Location: ../index.php");
-			exit;
-		}
 		if($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass")) {	//ha inserito i dati
 			$email = htmlspecialchars($_POST['email']);
-			$password = $_POST['pass'];
 
 			$res = selectDb("email, password", "email = '$email'");
 			if ($res->num_rows == 0) {
-				alert("Email or password incorrect.");
+				alert("L\'email o la password non sono corrette", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				timerRelocation("login.php");
+				header("login.php");
+				exit;
 			}
+
 			$row = $res->fetch_assoc();
+			$password = $_POST['pass'];
+			
 			if(!password_verify($password, $row['password'])) {
-				alert("Email or password incorrect.");
+				alert("L\'email o la password non sono corrette", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				timerRelocation("login.php");
+				header("login.php");
+				exit;
 			}
+
+			//impostazione variabili di sessione e cookies
 			$_SESSION['logged'] = $email;
 			if(isset($_POST['remember-me'])) {
-				$bytes = random_bytes(12);
+				rememberMe($email, $bytes);
 				setcookie("remember-me", $bytes, time() + (86400 * 30), "/");
-				$cookie = hash("sha256", $bytes);
-				updateDb("remember_token", "'$cookie'", "email = '$email'");
+				updateDb("remember_token", hash('sha256', $bytes), "email = '$email'");
 				updateDb("remember_token_created_at", "CURRENT_TIMESTAMP", "email = '$email'");
 			}
+
 			header("Location: ../index.php");
 			exit;
 		} else {
 			if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit']))
 				header("Location: login.php");
 			//else wait for data...
+		}
+
+		function rememberMe($email, $bytes) {
+			$conn = accessDb();
+			try {
+				$bytes = random_bytes(12);
+				$conn->begin_transaction();
+			
+				updateDb("remember_token", hash('sha256', $bytes), "email = '$email'");
+				updateDb("remember_token_created_at", "CURRENT_TIMESTAMP", "email = '$email'");
+			
+				$conn->commit();
+			
+				setcookie("remember-me", $bytes, time() + (86400 * 30), "/");
+			} catch (Exception $e) {
+				// An error occurred, rollback the transaction
+				$conn->rollBack();
+				echo "Error: " . $e->getMessage();
+			}
+			$conn->close();
 		}
 	?>
 </body>

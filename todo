@@ -1,0 +1,29 @@
+To fix:
+- gestione degli errori
+- footer
+- quando accedi controllare che il cookie non sia scaduto
+- accessControl: aggiungere che le pagine possono essere riservate per admin o user loggati
+- password dimenticata
+- mettere placeholders nei form
+- controllo js form + campo rosso se vuoto nei form
+- fare la trim nel login
+- gestione scadenza remember-me nel db
+- visualizza password
+- fare logo
+- privacy e cookies
+- rimuovere profilo
+- togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali)
+- pulisci cookies in db da pagina admin
+- dividere form login e registratione in html e php
+
+Cerca
+- TOGLIERE --> pagine da togliere
+- DEBUG --> cose commentate per facilitarci la vita mo
+- ERROR --> da controllare
+- MANAGE --> decidere cosa fare
+- 
+
+Nuovo form
+- controllare date prima in e poi out
+- dare opzioni tra cui scegliere la destinazione
+- "amato dagli ospiti"

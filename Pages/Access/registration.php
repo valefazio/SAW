@@ -5,10 +5,13 @@
     <title>Registration</title>
 	<link rel="stylesheet" type="text/css" href="../../Management/Style/style.css">
     <link rel="stylesheet" type="text/css" href="../../Management/Style/forms.css">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
 
     <?php
 		include("../../Management/accessControl.php");
-		include("../../Management/utility.php");
 	?>
 </head>
 <body>
@@ -23,7 +26,11 @@
 					<label for="email">Email:</label><br>
 					<input type="email" id="email" name="email" required><br><br>
 
-					<label for="pass">Password:</label><br>
+					<label for="pass">Password
+						<span class="help" title="La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero">
+							help_outline
+						</span>
+					:</label><br>
 					<input type="password" id="pass" name="pass" required><br><br>
 
 					<label for="confirm-password">Confirm Password:</label><br>
@@ -48,11 +55,19 @@
 
         // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
         usernameInput.addEventListener("input", toggleRegisterButton);
+        emailInput.addEventListener("input", toggleRegisterButton);
         passwordInput.addEventListener("input", toggleRegisterButton);
         confirmPasswordInput.addEventListener("input", toggleRegisterButton);
-        emailInput.addEventListener("input", toggleRegisterButton);
+
+		<?php
+			include("checkFields.js");
+		?>
 
         function toggleRegisterButton() {
+			checkEmailFormat();
+			checkPasswordFormat();
+			checkPasswordMatch();
+			
             if (usernameInput.value !== "" && passwordInput.value !== "" && confirmPasswordInput.value !== "" && emailInput.value !== "") {
                 registerButton.removeAttribute("disabled");
             } else {
@@ -70,26 +85,26 @@
 		$email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			if(!isFilled("username") && !isFilled("email") && !isFilled("pass") && !isFilled("confirm-password")) {
-				alert("Compilare tutti i campi");
+				alert("Compilare tutti i campi", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
 				timerRelocation("registration.php");
 			} 
 
+			$email = htmlspecialchars(trim($_POST['email']));
 			$psw = password_hash(trim($_POST['pass']), PASSWORD_DEFAULT);
+
 			if (!password_verify($_POST['confirm-password'], $psw)) {
-				alert("Le password inserite non combaciano");
+				alert("Le password inserite non combaciano", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
 				timerRelocation("registration.php");
-			} else if(!preg_match($email_pattern, $_POST['email'])) {
-				alert("Il campo email non rispetta il formato richiesto");
+			} else if(!preg_match($email_pattern, $email)) {
+				alert("Il campo email non rispetta il formato richiesto", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
 				timerRelocation("registration.php");
 			}
-
-			$email = htmlspecialchars(trim($_POST['email']));
 
 			$res = selectDb("email", "email = '$email'");
 			if($res->num_rows != 0) {
