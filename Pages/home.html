@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="../Management/Style/style.css">
+    <link rel="stylesheet" href="../Management/Style/calendar.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body id="top">
+	<nav id="navbar">
+		<img src="../Management/Images/logo.png" alt="logo" class="logo">
+		<ul class="nav-links">
+			<li><a href="http://localhost/SAW">In primo piano</a></li>	
+			<li><a href="#">Lasciati ispirare</a></li>	 <!--possibili itinerari magari? -->
+			<li><a href="#">Pacchetti Regalo</a></li>
+		</ul>
+		<a href="Access/registration.php" class="register-btn">Register Now</a>
+		<!--<script> 
+			$(function(){
+			  $("#top").load("../Management/navbar.html"); 
+			});
+			</script> -->
+	</nav>
+<div class="header">
+	<div class="container">
+		<h1>Find Your Next Stay</h1>
+		<div class="search-bar">
+			<form action="" method="POST">
+				<div class="field">
+					<label for="location">Location</label>
+					<input type="text" name="location" placeholder="Dove vuoi andare?" required>
+				</div>
+				<div class="field">
+					<label>Check-in</label>
+					<input type="text" id="check-in" placeholder="Aggiungi data" readonly required></p>
+				</div>
+				<div class="field">
+					<label>Check-out</label>
+					<input type="text" id="check-out" placeholder="Aggiungi data" readonly required></p>
+				</div>
+				<div class="field" style="min-width: 60px; margin: 0; padding: 0;">
+					<label>Guests</label><br>
+					<div class="guests">
+						<div class="g"><span class="material-symbols-outlined">remove</span></div>
+						<div class="g">
+							<input type="text" id="nGuests" placeholder="0" readonly required></p>
+						</div>
+						<div class="g"><span class="material-symbols-outlined">add</span></div>
+					</div>
+				</div>
+				<button type="submit">
+					<span class="material-symbols-outlined">search</span>
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</p><br>0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</p>
+<!--<div class="container">
+	<h2>Exclusives</h2>
+	<div class="exclusives">
+		
+	</div>
+</div>
+-->
+</body>
+<script src="../Management/searchBarScripts.js" defer></script>
+<script>
+	document.getElementsByTagName("form")[0].addEventListener("submit", function(event) {
+		event.preventDefault();
+		var location = document.getElementsByName("location")[0].value;
+		var checkin = document.getElementById("check-in").value || "anytime";
+		var checkout = document.getElementById("check-out").value || "anytime";
+		var guests = document.getElementById("nGuests").value || "0";
+		var url = "http://localhost/SAW/Pages/search.php?location="+location+"&checkin="+checkin+"&checkout="+checkout+"&guests="+guests;
+		window.location.href = url;
+		return;
+	});
+
+	/*var timeout;
+	window.addEventListener('scroll', function() {
+		clearTimeout(timeout);
+		timeout = setTimeout(function() {
+			var scrollPosition = window.scrollY;
+			var navbar = document.getElementById('navbar');
+			texts = document.querySelectorAll(".nav-links li a");
+
+			if (scrollPosition > 200) {
+				navbar.setAttribute("style", "background-color: #fff;");
+				Array.from(texts).forEach(element => {
+					element.setAttribute("style", "color: #000;");
+				});
+			} else {
+				navbar.setAttribute("style", "background-color: transparent; color: #fff;");
+				Array.from(texts).forEach(element => {
+					element.setAttribute("style", "color: white;");
+				});
+			}
+		}, 200); // Change 200 to the number of milliseconds to wait before calling the function again
+	});*/
+</script>
+</html>

@@ -1,18 +1,19 @@
 /***************** GUESTS *****************/
-const removeGuest = document.getElementsByClassName('material-symbols-outlined')[0];
-removeGuest.addEventListener('click', () => {
-    const guests = document.querySelector('.guests p');
-    if (guests.innerHTML > 0)
-        guests.innerHTML--;
-});
+const removeGuest = document.getElementsByClassName('g')[0];
+removeGuest.addEventListener('click', () => updateGuests(-1));
 
-const addGuest = document.getElementsByClassName('material-symbols-outlined')[1];
-addGuest.addEventListener('click', () => {
-    const guests = document.querySelector('.guests p');
-    if (guests.innerHTML < 20)
-        guests.innerHTML++;
-});
+const addGuest = document.getElementsByClassName('g')[2];
+addGuest.addEventListener('click', () => updateGuests(1));
 
+function updateGuests(change) {
+    const guests = document.getElementById('nGuests');
+    const currentValue = parseInt(guests.value) || 0;
+    const newValue = currentValue + change;
+
+    if (newValue >= 0 && newValue <= 20) {
+        guests.value = newValue;
+    }
+}	
 
 
 /***************** CALENDAR *****************/
@@ -52,8 +53,8 @@ function showCalendar(n) {
 
     currDate = generateCalendar();
 
-	document.getElementById('prevMonth').addEventListener('click', () => prevMonthAction());
-	document.getElementById('nextMonth').addEventListener('click', () => nextMonthAction());	
+	document.getElementById('prevMonth').addEventListener('click', () => prevMonthAction(n));
+	document.getElementById('nextMonth').addEventListener('click', () => nextMonthAction(n));	
 }
 
 function createCalendar() {
@@ -78,13 +79,13 @@ function createCalendar() {
         calendar.appendChild(monthHeader);
         var daysHeader = document.createElement('div');
         daysHeader.className = 'days-header';
-            daysHeader.appendChild(document.createElement('span')).innerHTML = 'Lu';
-            daysHeader.appendChild(document.createElement('span')).innerHTML = 'Ma';
-            daysHeader.appendChild(document.createElement('span')).innerHTML = 'Me';
-            daysHeader.appendChild(document.createElement('span')).innerHTML = 'Gi';
-            daysHeader.appendChild(document.createElement('span')).innerHTML = 'Ve';
-            daysHeader.appendChild(document.createElement('span')).innerHTML = 'Sa';
-            daysHeader.appendChild(document.createElement('span')).innerHTML = 'Do';
+            daysHeader.appendChild(document.createElement('span')).innerText = 'Lu';
+            daysHeader.appendChild(document.createElement('span')).innerText = 'Ma';
+            daysHeader.appendChild(document.createElement('span')).innerText = 'Me';
+            daysHeader.appendChild(document.createElement('span')).innerText = 'Gi';
+            daysHeader.appendChild(document.createElement('span')).innerText = 'Ve';
+            daysHeader.appendChild(document.createElement('span')).innerText = 'Sa';
+            daysHeader.appendChild(document.createElement('span')).innerText = 'Do';
         calendar.appendChild(daysHeader);
         var calendarDays = document.createElement('div');
         calendarDays.className = 'calendar-days';
@@ -103,7 +104,7 @@ function generateCalendar() {
     currentMonthElement.innerText = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
 
     // Clear previous days
-    calendarDays.innerHTML = '';
+    calendarDays.value = '';
     // Get the first day of the month
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
     const daysInWeek = 7;
@@ -121,6 +122,18 @@ function generateCalendar() {
         day.addEventListener('click', () => scrivi(i));
         calendarDays.appendChild(day);
     }
+    if(!isLastDaySunday(currentMonth, currentYear)){
+        // Generate empty cells for days after the last day of the month
+        for (let i = 0; i < daysInWeek - new Date(currentYear, currentMonth + 1, 0).getDay(); i++) {
+            const emptyDay = document.createElement('div');
+            emptyDay.className = 'day inactive';
+            calendarDays.appendChild(emptyDay);
+        }
+    }
+}
+
+function isLastDaySunday(month, year) {
+    return new Date(year, month + 1, 0).getDay() == 0;
 }
 
 function prevMonthAction() {
@@ -131,10 +144,10 @@ function prevMonthAction() {
     }
     if (currentMonth === currentDate.getMonth() && currentYear === currentDate.getFullYear())
         document.getElementById('prevMonth').setAttribute('style', 'visibility: hidden; pointer-events: none;');
-    generateCalendar();
+    updateCalendar();
 }
 
-function nextMonthAction() {
+function nextMonthAction(n) {
     currentMonth++;
     if (currentMonth > 11) {
         currentMonth = 0;
@@ -142,38 +155,51 @@ function nextMonthAction() {
     }
     if((currentYear > currentDate.getFullYear()) || (currentYear == currentDate.getFullYear() && currentMonth > currentDate.getMonth()))
         document.getElementById('prevMonth').setAttribute('style', 'visibility: visible; pointer-events: auto;');
-    generateCalendar();
+    updateCalendar();
 }
 
 function scrivi(i) {
 	if(document.getElementById("calendarIn") != null){
 		var checkIn = document.getElementById("check-in");
-		checkIn.innerHTML = i + '/' +  (currentMonth + 1)+ '/' + currentYear;
+		checkIn.value = i + '/' +  (currentMonth + 1)+ '/' + currentYear;
 		checkIn.setAttribute('style', 'color: #000;');
-		if(document.getElementById("check-in").innerHTML != "Check-in" && document.getElementById("check-out").innerHTML != "Check-out")
+		if(document.getElementById("check-in").value != "Check-in" && document.getElementById("check-out").value != "Check-out")
 			checkDate();
 		showCalendar(2);
 	} else if(document.getElementById("calendarOut") != null) {
 		var checkOut = document.getElementById("check-out");
-		checkOut.innerHTML = i + '/' +  (currentMonth + 1)+ '/' + currentYear;
+		checkOut.value = i + '/' +  (currentMonth + 1)+ '/' + currentYear;
 		checkOut.setAttribute('style', 'color: #000;');
-		if(document.getElementById("check-in").innerHTML != "Aggiungi data" && document.getElementById("check-out").innerHTML != "Aggiungi data")
+		if(document.getElementById("check-in").value != "Aggiungi data" && document.getElementById("check-out").value != "Aggiungi data")
 			checkDate();
-		if(document.getElementById("check-out").innerHTML != "Aggiungi data")
+		if(document.getElementById("check-out").value != "Aggiungi data")
 			showCalendar(2);
 		return;
 	}
 }
 
 function checkDate() {
-	var checkIn = document.getElementById("check-in").innerHTML;
-	var checkOut = document.getElementById("check-out").innerHTML;
+	var checkIn = document.getElementById("check-in").value;
+	var checkOut = document.getElementById("check-out").value;
 	var checkInDate = new Date(checkIn.split('/')[2], checkIn.split('/')[0], checkIn.split('/')[1]);
 	var checkOutDate = new Date(checkOut.split('/')[2], checkOut.split('/')[0], checkOut.split('/')[1]);
 	if(checkInDate > checkOutDate){
-		document.getElementById("check-in").innerHTML = document.getElementById("check-out").innerHTML;
-		document.getElementById("check-out").innerHTML = "Aggiungi data";
+		document.getElementById("check-in").value = document.getElementById("check-out").value;
+		document.getElementById("check-out").value = "Aggiungi data";
 		document.getElementById("check-out").setAttribute('style', 'color: #858585;');
 	}
 	return;
+}
+
+function closeCalendar(n) {
+    if(n == 1)
+        document.getElementById('calendarIn').remove();
+    else
+        document.getElementById('calendarOut').remove();
+}
+
+function updateCalendar() {
+    n = (document.getElementById('calendarIn') != null) ? 1 : 2;
+    closeCalendar(n);
+    showCalendar(n);
 }
