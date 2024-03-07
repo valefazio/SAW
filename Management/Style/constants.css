@@ -1,0 +1,19 @@
+@font-face {
+	font-family: 'Monster AG';
+	src: url('Font/Monster AG.ttf') format('truetype');
+	/* Add other font properties if needed, like font-weight, font-style, etc. */
+}
+
+:root {
+	--colorA: black;
+    --colorB: #1a3a4e;
+    --colorC: #c24757 /*#fe0758*/;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}

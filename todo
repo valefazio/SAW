@@ -15,15 +15,15 @@ To fix:
 - togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali)
 - pulisci cookies in db da pagina admin
 - dividere form login e registratione in html e php
+- aggiungere gli alt alle immagini
 
-Cerca
+Debugging
 - TOGLIERE --> pagine da togliere
 - DEBUG --> cose commentate per facilitarci la vita mo
 - ERROR --> da controllare
 - MANAGE --> decidere cosa fare
 - 
 
-Nuovo form
-- controllare date prima in e poi out
-- dare opzioni tra cui scegliere la destinazione
-- "amato dagli ospiti"
+Notes
+- programma del giorno
+- riservato admin
