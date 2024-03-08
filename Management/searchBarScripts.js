@@ -104,13 +104,13 @@ class Calendar {
 
 		var daysHeader = document.createElement('div');
 		daysHeader.className = 'days-header';
-		daysHeader.appendChild(document.createElement('span')).innerText = 'Lu';
-		daysHeader.appendChild(document.createElement('span')).innerText = 'Ma';
-		daysHeader.appendChild(document.createElement('span')).innerText = 'Me';
-		daysHeader.appendChild(document.createElement('span')).innerText = 'Gi';
-		daysHeader.appendChild(document.createElement('span')).innerText = 'Ve';
+		daysHeader.appendChild(document.createElement('span')).innerText = 'Mo';
+		daysHeader.appendChild(document.createElement('span')).innerText = 'Tu';
+		daysHeader.appendChild(document.createElement('span')).innerText = 'We';
+		daysHeader.appendChild(document.createElement('span')).innerText = 'Th';
+		daysHeader.appendChild(document.createElement('span')).innerText = 'Fr';
 		daysHeader.appendChild(document.createElement('span')).innerText = 'Sa';
-		daysHeader.appendChild(document.createElement('span')).innerText = 'Do';
+		daysHeader.appendChild(document.createElement('span')).innerText = 'Su';
 		calendar.appendChild(daysHeader);
 
 		var calendarDays = document.createElement('div');
@@ -118,7 +118,7 @@ class Calendar {
 		calendarDays.id = 'calendarDays';
 		calendar.appendChild(calendarDays);
 
-		document.getElementsByClassName("container")[0].appendChild(calendar);
+		document.getElementsByClassName("header")[0].appendChild(calendar);
 
 		return calendar;
 	}
@@ -128,7 +128,7 @@ class Calendar {
 		const currentMonthElement = document.getElementById('currentMonth');
 		const calendarDays = document.getElementById('calendarDays');
 
-		currentMonthElement.innerText = new Date(this.currentYear, this.currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
+		currentMonthElement.innerText = new Date(this.currentYear, this.currentMonth).toLocaleString('en-US', { month: 'long', year: 'numeric' });
 
 		calendarDays.value = '';
 		const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay();

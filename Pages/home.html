@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" href="../Management/Style/home.css">
-    <link rel="stylesheet" href="../Management/Style/calendar.css">
+	<title>Home</title>
+	<link rel="stylesheet" href="../Management/Style/home.css">
+	<link rel="stylesheet" href="../Management/Style/calendar.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="../Management/searchBarScripts.js" defer></script>
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body id="top">
 
+<body id="top">
 	<div class="header">
-	<nav id="navbar">
-		<script> 
-			$(function(){
-			  $("#navbar").load("../Management/navbar.html"); 
-			});
-		</script> 
-	</nav>
-	<div class="container">
-		<h1>Find Your Next Victim</h1>
+		<nav id="navbar">
+			<script>
+				$(function () {
+					$("#navbar").load("../Management/navbar.html");
+				});
+			</script>
+		</nav>
+		<div class="text">
+			<span style="font-size: 120px;">Find Your Next</span>
+			<span style="font-size: 135px;">Victim</span>
+		</div>
 		<div class="search-bar">
 			<form action="" method="POST">
 				<div class="field">
 					<label for="location">Location</label>
-					<select type="text" id="location" placeholder="Which country" >
+					<select type="text" id="location" placeholder="Which country">
 						<option value="anywhere">Anywhere</option>
 						<option value="italy">Italy</option>
 						<option value="france">France</option>
@@ -60,30 +64,24 @@
 			</form>
 		</div>
 	</div>
+	<div id="footer">
+		<script>
+			$(function () {
+				$("#footer").load("../Management/footer.html");
+			});
+		</script>
 	</div>
-
-
-	<!--<div class="container">
-		<h2>Exclusives</h2>
-		<div class="exclusives">
-			
-		</div>
-	</div>
-	-->
-
-	<div class="footer">
-        <p>&copy; 2024 Monster & Co. All rights reserved. Contact us at <a href="mailto:info@monsterandco.com">info@monsterandco.com</a></p>
-    </div>
 </body>
 <script>
-	document.getElementsByTagName("form")[0].addEventListener("submit", function(event) {
+	document.getElementsByTagName("form")[0].addEventListener("submit", function (event) {
 		event.preventDefault();
 		var location = document.getElementById("location").value;
 		var checkin = document.getElementById("calendar").value || "anytime"; //ERROR
 		var level = document.getElementById("nLevel").value || "0";
-		var url = "http://localhost/SAW/Pages/search.php?location="+location+"&checkin="+checkin+"&level="+level;	//ERROR assoluto
+		var url = "http://localhost/SAW/Pages/search.php?location=" + location + "&checkin=" + checkin + "&level=" + level;	//ERROR assoluto
 		window.location.href = url;
 		return;
 	});
 </script>
+
 </html>

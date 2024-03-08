@@ -4,37 +4,38 @@
 </header>
 
 <body>
-<div class="calendar" id="calendar">
-    <div class="month-header">
-        <span id="prevMonth" style="visibility: hidden;">&#9666;</span>
-        <span id="currentMonth"></span>
-        <span id="nextMonth">&#9656;</span>
+    <div class="calendar" id="calendar">
+        <div class="month-header">
+            <span id="prevMonth" style="visibility: hidden;">&#9666;</span>
+            <span id="currentMonth"></span>
+            <span id="nextMonth">&#9656;</span>
+        </div>
+
+        <div class="days-header">
+            <span>Mo</span>
+            <span>Tu</span>
+            <span>We</span>
+            <span>Th</span>
+            <span>Fr</span>
+            <span>Sa</span>
+            <span>Su</span>
+        </div>
+
+        <div class="calendar-days" id="calendarDays"></div>
     </div>
 
-    <div class="days-header">
-        <span>Mo</span>
-        <span>Tu</span>
-        <span>We</span>
-        <span>Th</span>
-        <span>Fr</span>
-        <span>Sa</span>
-        <span>Su</span>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendar = document.getElementById('calendar');
+            const currentMonthElement = document.getElementById('currentMonth');
+            const calendarDays = document.getElementById('calendarDays');
+            const prevMonthButton = document.getElementById('prevMonth');
+            const nextMonthButton = document.getElementById('nextMonth');
 
-    <div class="calendar-days" id="calendarDays"></div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const calendar = document.getElementById('calendar');
-        const currentMonthElement = document.getElementById('currentMonth');
-        const calendarDays = document.getElementById('calendarDays');
-        const prevMonthButton = document.getElementById('prevMonth');
-        const nextMonthButton = document.getElementById('nextMonth');
-
-        let currentDate = new Date();
-        let currentMonth = currentDate.getMonth();
-        let currentYear = currentDate.getFullYear();
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+        });
 
         function generateCalendar() {
             currentMonthElement.innerText = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
@@ -91,11 +92,11 @@
                 currentMonth = 0;
                 currentYear++;
             }
-            if((currentYear > currentDate.getFullYear()) || (currentYear == currentDate.getFullYear() && currentMonth > currentDate.getMonth()))
+            if ((currentYear > currentDate.getFullYear()) || (currentYear == currentDate.getFullYear() && currentMonth > currentDate.getMonth()))
                 prevMonthButton.setAttribute('style', 'visibility: visible; pointer-events: auto;');
             updateCalendar();
         });
-    });
-</script>        
+    </script>
 </body>
+
 </html>

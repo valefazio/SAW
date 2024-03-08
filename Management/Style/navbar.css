@@ -26,6 +26,10 @@ nav {
 	text-decoration: none;
 	color: var(--colorB);
 }
+.nav-links li a:hover {
+	color: var(--colorC);
+	font-size: large;
+}
 .register-btn {
 	background-color: var(--colorC);
 	color: #fff;
@@ -42,15 +46,4 @@ nav {
     text-decoration: none;
     color: black;
     margin-top: -4.5px;
-}
-
-.footer {
-	background-color: var(--colorB);
-	color: #fff;
-	text-align: center;
-	padding: 20px;
-}
-
-.footer a {
-    color: aqua;
 }

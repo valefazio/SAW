@@ -1,6 +1,5 @@
 To fix:
 - gestione degli errori
-- footer
 - quando accedi controllare che il cookie non sia scaduto
 - accessControl: aggiungere che le pagine possono essere riservate per admin o user loggati
 - password dimenticata
@@ -11,11 +10,16 @@ To fix:
 - visualizza password
 - fare logo
 - privacy e cookies
-- rimuovere profilo
+- cancella profilo
 - togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali)
 - pulisci cookies in db da pagina admin
 - dividere form login e registratione in html e php
 - aggiungere gli alt alle immagini
+
+Notes
+- programma del giorno
+- riservato admin?
+- nel profilo avere un motto?
 
 Debugging
 - TOGLIERE --> pagine da togliere
@@ -23,7 +27,3 @@ Debugging
 - ERROR --> da controllare
 - MANAGE --> decidere cosa fare
 - 
-
-Notes
-- programma del giorno
-- riservato admin
