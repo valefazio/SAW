@@ -1,4 +1,6 @@
 To fix:
+- nel calendario mettere non selezionabili i giorni passati
+- MODIFICARE connection.php -> PREPARED STATEMENT
 - gestione degli errori
 - quando accedi controllare che il cookie non sia scaduto
 - accessControl: aggiungere che le pagine possono essere riservate per admin o user loggati
@@ -15,11 +17,34 @@ To fix:
 - pulisci cookies in db da pagina admin
 - dividere form login e registratione in html e php
 - aggiungere gli alt alle immagini
+- aggiustare dimensione titolo in base a dimensione finestra
+- togliere gli alert
+    - fare pagine di errore
+- 
 
 Notes
 - programma del giorno
 - riservato admin?
 - nel profilo avere un motto?
+
+
+HOME:
+    - chi shiamo/cosa facciamo
+    - lasciati ispirare
+    BARRA DI RICERCA:
+        - IMPIEGATO DEL MESE
+        - DESTINAZIONI PREFERITE
+        - LOGIN
+            - Registrati
+          che diventa PROFILO:
+            - show profile
+                - modifica profilo
+            - le tue prenotazioni
+            - i tuoi salvati/preferiti --> carrello
+            - calendario degli impegni
+                - mostra a elenco
+                - valutazione
+            - logout
 
 Debugging
 - TOGLIERE --> pagine da togliere

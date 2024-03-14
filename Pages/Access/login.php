@@ -80,7 +80,7 @@
 		if($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass")) {	//ha inserito i dati
 			$email = htmlspecialchars($_POST['email']);
 
-			$res = selectDb("email, password", "email = '$email'");
+			$res = selectDb("users", ["email, password"], "email = '$email'");
 			if ($res->num_rows == 0) {
 				alert("L\'email o la password non sono corrette", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)

@@ -106,7 +106,7 @@
 				timerRelocation("registration.php");
 			}
 
-			$res = selectDb("email", "email = '$email'");
+			$res = selectDb("users", ["email"], "email = '$email'");
 			if($res->num_rows != 0) {
 				alert("Utente già registrato");
 				if(session_status() == PHP_SESSION_ACTIVE)
@@ -115,7 +115,7 @@
 				exit;
 			}
 			$username = htmlspecialchars(trim($_POST["username"]));
-			insertDb("username, email, password", "'$username', '$email', '$psw'");
+			insertDb("users", ["username", "email", "password"], [$username, $email, $psw], "");
 			
 			$_SESSION['logged'] = $email;
 			echo "<script> window.location.href = '../index.php';</script>";
