@@ -6,7 +6,6 @@
 	<link rel="stylesheet" href="../Management/Style/home.css">
 	<link rel="stylesheet" href="../Management/Style/calendar.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="../Management/searchBarScripts.js" defer></script>
 
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -26,43 +25,35 @@
 			<span style="font-size: 120px;">Find Your Next</span>
 			<span style="font-size: 135px;">Victim</span>
 		</div>
-		<div class="search-bar">
-			<form action="" method="POST">
-				<div class="field">
-					<label for="location">Location</label>
-					<select type="text" id="location" placeholder="Which country">
-						<option value="anywhere">Anywhere</option>
-						<option value="italy">Italy</option>
-						<option value="france">France</option>
-						<option value="spain">Spain</option>
-						<option value="germany">Germany</option>
-						<option value="uk">United Kingdom</option>
-						<option value="usa">United States</option>
-						<option value="japan">Japan</option>
-						<option value="china">China</option>
-						<option value="russia">Russia</option>
-						<option value="australia">Australia</option>
-					</select>
-				</div>
-				<div class="field">
-					<label>Night</label>
-					<input type="text" id="calendar" placeholder="Add date" readonly></p>
-				</div>
-				<div class="field" style="min-width: 60px; margin: 0; padding: 0;">
-					<label>Level</label><br>
-					<div class="level">
-						<div class="g"><span class="material-symbols-outlined">remove</span></div>
-						<div class="g">
-							<input type="text" id="nLevel" placeholder="0" readonly></p>
-						</div>
-						<div class="g"><span class="material-symbols-outlined">add</span></div>
-					</div>
-				</div>
-				<button type="submit">
-					<p id="eye">O</p>
-				</button>
-			</form>
+		<div class="rectangles">
+			<div class="rectangle" onclick="location.href='#'">
+				<h2>Most liked destinations</h2>
+				<img class="foto-box" src="../Management/Images/stars.png" alt="Best reviews">
+			</div>
+			<div class="rectangle" onclick="location.href='#'">
+				<h2>Inspire me</h2>
+				<img class="foto-box" src="../Management/Images/light-bulb.png" alt="idea">
+			</div>
+			<div class="rectangle" onclick="location.href='#'">
+				<h2>Employee of the Month</h2>
+				<img class="foto-box" src="../Management/Images/coccarda.png" alt="Employee of the month cockade">
+			</div>
 		</div>
+	</div>
+	<div class="website_description">
+		<div class="description">
+			<h1>What is SCREAM?</h1>
+			<p>SCREAM is a website that allows you to find the best places to visit in the world. You can search for
+				destinations, filter them by location, number of nights and reviews, and find the best place for your next
+				vacation. You can also find the best employees of the month and the most liked destinations by other
+				users.</p>
+		</div>
+		<div class="description">
+			<h1>How does it work?</h1>
+			<p>SCREAM is a website that allows you to find the best places to visit in the world. You can search for
+				destinations, filter them by location, number of nights and reviews, and find the best place for your next
+				vacation. You can also find the best employees of the month and the most liked destinations by other
+				users.</p>
 	</div>
 	<div id="footer">
 		<script>
@@ -72,16 +63,5 @@
 		</script>
 	</div>
 </body>
-<script>
-	document.getElementsByTagName("form")[0].addEventListener("submit", function (event) {
-		event.preventDefault();
-		var location = document.getElementById("location").value;
-		var checkin = document.getElementById("calendar").value || "anytime"; //ERROR
-		var level = document.getElementById("nLevel").value || "0";
-		var url = "http://localhost/SAW/Pages/search.php?location=" + location + "&checkin=" + checkin + "&level=" + level;	//ERROR assoluto
-		window.location.href = url;
-		return;
-	});
-</script>
 
 </html>

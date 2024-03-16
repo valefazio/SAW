@@ -2,15 +2,61 @@
 <html lang="it">
 <head>
     <link rel="stylesheet" href="../Management/Style/navbar.css">
+	<script src="../Management/scripts/searchBarScripts.js" defer></script>
 </head>
 <body>
-	<!--<img src="../Management/Images/logo.png" alt="logo" class="logo">-->
 	<a href="http://localhost/SAW" id="logo">SCREAM</a>	<!--ERROR assoluto-->
-	<ul class="nav-links">
-		<li><a href="http://localhost/SAW">Cerca destinazione</a></li>	<!--ERROR assoluto-->
-		<li><a href="#">Lasciati ispirare</a></li>	<!-- possibili itinerari magari? -->
-		<li><a href="#">Spaventa in compagnia</a></li>
-	</ul>
-	<a href="Access/registration.php" class="register-btn">Register Now</a>
+	<!-- <ul class="nav-links">
+		<li><a href="#">Impiegato del mese</a></li>	
+		<li><a href="#">Destinazioni preferite</a></li>
+	</ul> -->
+	<div class="search-bar">
+		<form action="" method="POST">
+			<div class="field"> <!-- Location -->
+				<label for="location">Location</label>
+				<select type="text" id="location" placeholder="Which country">
+					<option value="anywhere">Anywhere</option>
+					<option value="italy">Italy</option>
+					<option value="france">France</option>
+					<option value="spain">Spain</option>
+					<option value="germany">Germany</option>
+					<option value="uk">United Kingdom</option>
+					<option value="usa">United States</option>
+					<option value="japan">Japan</option>
+					<option value="china">China</option>
+					<option value="russia">Russia</option>
+					<option value="australia">Australia</option>
+				</select>
+			</div>
+			<div class="field"> <!-- Night -->
+				<label>Night</label>
+				<input type="text" id="calendar" placeholder="Add date" readonly></p>
+			</div>
+			<div class="field" style="min-width: 60px; margin: 0; padding: 0;"> <!-- Level -->
+				<label>Level</label><br>
+				<div class="level">
+					<div class="g"><span class="material-symbols-outlined">remove</span></div>
+					<div class="g">
+						<input type="text" id="nLevel" placeholder="0" readonly></p>
+					</div>
+					<div class="g"><span class="material-symbols-outlined">add</span></div>
+				</div>
+			</div>
+			<div class="field" style="min-width: 60px; margin: 0; padding: 0;"> <!-- Reviews -->
+				<label>Reviews</label><br>
+				<div class="reviews">
+					<div class="r"><span class="material-symbols-outlined">remove</span></div>
+					<div class="r">
+						<input type="text" id="rLevel" placeholder="0" readonly></p>
+					</div>
+					<div class="r"><span class="material-symbols-outlined">add</span></div>
+				</div>
+			</div>
+			<button type="submit">
+				<p id="eye">O</p>
+			</button>
+		</form>
+	</div>
+	<a href="Access/registration.php" class="register-btn">Account</a>
 </body>
 </html>

@@ -1,124 +1,53 @@
 @import url(constants.css);
 
-/* Header - search bar */
+/* Scritta */
 .header {
     min-height: 89vh;
     width: 100%;
     background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url(../Images/monstersandco_xl.jpg);
     background-position: center;
     background-size: cover;
+	padding-bottom: 5%;
 }
 .header .text {
 	font-size: 4vw;
 	font-weight: 500;
 	color: #fff;
 	text-align: center;
-	padding-top: 15%;
 }
 .header .text span {
 	font-family: 'Creepster', sans-serif;
 	-webkit-text-stroke: 2px black;
 }
-.search-bar {
-	background: rgba(255, 255, 255, 0.912);
-	margin: 30px auto;
-	padding: 10px 10px 10px 20px;
-	border-radius: 50px;
-}
-@media (min-width: 1200px) {
-	.search-bar {
-		width: 40%;
-	}
-	.header h1 {
-		padding-top: 11%;
-	}
-}
-@media (min-width: 960px) and (max-width: 1199px) {
-	.search-bar {
-		width: 50%;
-	}
-	.header h1 {
-		padding-top: 11%;
-	}
-}
-@media (min-width: 701px) and (max-width: 959px) {
-	.search-bar {
-		width: 70%;
-	}
-}
-@media (max-width: 700px) {
-	.search-bar {
-		width: 80%;
-	}
-}
-.search-bar form {
+
+/* Rettangoli/Box */
+.rectangles {
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	margin: 0;
-	padding: 0;
+	margin-top: 10px;
 }
-
-/*Fields*/
-.search-bar form input,  .search-bar form select{
-	display: block;
-	border: 0;
-	outline: none;
-	background: transparent;
-}
-.field {
-	flex: 1;
-	min-width: 150px;
-	margin-left: 2%;
-}
-.search-bar form label {
-	font-weight: 600;
-}
-#location {
-	border-color: none;
-}
-
-/*Level*/
-.level {
-	display: flex;
-	align-items: center;
-}
-.level span {
-	border:#000 1px solid;
-	border-radius: 100%;
-	font-size: medium;
-	cursor: pointer;
+.rectangle {
 	text-align: center;
-	user-select: none;
+	width: 30%;
+	height: 300px;
+	background-color: rgba(255, 255, 255, 0.87);
+	border-radius: 10px;
+	padding: 20px;
+	margin-right: 10px;
+	cursor: pointer;
 }
-.g {
-	width: 20px;
-	text-align: center;
+.rectangle h2 {
+	color: var(--colorB);
+	cursor: pointer;
 }
-#nLevel {
-	margin-top: -3px;
-	margin-left: 5px;
-	width: 10px;
+.rectangle:hover {
+	color: var(--colorC);
 }
 
-/*Search button*/
-.search-bar form button {
-	background: var(--colorC);
-	width: 55px;
-	height: 55px;
-	border: 0;
-	border-radius: 50%;
-	outline: none;
-	cursor: pointer;
-	margin: 0;
-	padding: 0;
-}
-.search-bar form button span {
-	color: #fff;
-}
-#eye {
-	font-family: 'Monster AG', sans-serif;
-	font-size: 50px;
-	color:white;
-	margin-top: -5%;
+.foto-box {
+	max-height: 200px;
+	max-width: 100%;
+	margin-top: 20px;
 }

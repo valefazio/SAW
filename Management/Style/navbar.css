@@ -1,13 +1,13 @@
 @import url(constants.css);
 
-/* Header- - navbar */
+/* NAVBAR */
 nav {
 	position: sticky;
 	top: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 3% 10px 3%;
+    padding: 0 10px 0 10px;
 	width: 100%;
 	background-color: rgba(255, 255, 255, 0.87);
 }
@@ -46,4 +46,86 @@ nav {
     text-decoration: none;
     color: black;
     margin-top: -4.5px;
+}
+
+
+/********* SEARCH BAR ********/
+.search-bar {
+	background: rgba(255, 255, 255, 0.912);
+	margin: 30px auto;
+	padding: 10px 10px 10px 20px;
+	border-radius: 50px;
+	margin: 10px;
+	width: 50%;
+}
+.search-bar form {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+}
+
+/*Fields*/
+.search-bar form input,  .search-bar form select{
+	display: block;
+	border: 0;
+	outline: none;
+	background: transparent;
+}
+.field {
+	flex: 1;
+	min-width: 130px;
+	margin-left: 2%;
+}
+.search-bar form label {
+	font-weight: 600;
+}
+#location {
+	border-color: none;
+}
+
+/*Level*/
+.level, .reviews {
+	display: flex;
+	align-items: center;
+}
+.level span, .reviews span {
+	border:#000 1px solid;
+	border-radius: 100%;
+	font-size: medium;
+	cursor: pointer;
+	text-align: center;
+	user-select: none;
+}
+.g, .r {
+	width: 20px;
+	text-align: center;
+}
+#nLevel, #rLevel {
+	margin-top: -3px;
+	margin-left: 5px;
+	width: 10px;
+}
+
+/*Search button*/
+.search-bar form button {
+	background: var(--colorC);
+	width: 55px;
+	height: 55px;
+	border: 0;
+	border-radius: 50%;
+	outline: none;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+.search-bar form button span {
+	color: #fff;
+}
+#eye {
+	font-family: 'Monster AG', sans-serif;
+	font-size: 50px;
+	color:white;
+	margin-top: -5%;
 }

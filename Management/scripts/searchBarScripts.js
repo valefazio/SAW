@@ -1,14 +1,24 @@
+document.getElementsByTagName("form")[0].addEventListener("submit", function (event) {
+	event.preventDefault();
+	var location = document.getElementById("location").value;
+	var checkin = document.getElementById("calendar").value || "anytime"; //ERROR
+	var level = document.getElementById("nLevel").value || "0";
+	var url = "http://localhost/SAW/Pages/search.php?location=" + location + "&checkin=" + checkin + "&level=" + level;	//ERROR assoluto
+	window.location.href = url;
+	return;
+});
+
 /***************** LEVEL *****************/
 class Level {
 	constructor() {
 		this.level = document.getElementById('nLevel');
 		this.level.onload = this.level.value = 0;
 
-		const removeGuest = document.getElementsByClassName('g')[0];
-		removeGuest.addEventListener('click', () => this.updateLevel(-1));
+		const removeLevel = document.getElementsByClassName('g')[0];
+		removeLevel.addEventListener('click', () => this.updateLevel(-1));
 
-		const addGuest = document.getElementsByClassName('g')[2];
-		addGuest.addEventListener('click', () => this.updateLevel(1));
+		const addLevel = document.getElementsByClassName('g')[2];
+		addLevel.addEventListener('click', () => this.updateLevel(1));
 	}
 
 	updateLevel(change) {
@@ -17,6 +27,29 @@ class Level {
 
 		if (newValue >= 0 && newValue <= 5) {
 			this.level.value = newValue;
+		}
+	}
+}
+
+/***************** LEVEL *****************/
+class Reviews {
+	constructor() {
+		this.star = document.getElementById('rLevel');
+		this.star.onload = this.star.value = 0;
+
+		const removeStar = document.getElementsByClassName('r')[0];
+		removeStar.addEventListener('click', () => this.updateStar(-1));
+
+		const addStar = document.getElementsByClassName('g')[2];
+		addStar.addEventListener('click', () => this.updateStar(1));
+	}
+
+	updateStar(change) {
+		const currentValue = parseInt(this.star.value) || 0;
+		const newValue = currentValue + change;
+
+		if (newValue >= 0 && newValue <= 5) {
+			this.star.value = newValue;
 		}
 	}
 }
@@ -210,5 +243,6 @@ class Calendar {
 
 // Initialize the classes
 const levelInstance = new Level();
+const reviewsInstance = new Reviews();
 const submitInstance = new Submit();
 const calendarInstance = new Calendar();
