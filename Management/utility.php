@@ -19,4 +19,3 @@ function alert( $msg, $type = "info") { //shows an alert with $msg
 function writeLog($msg) {   //writes $msg in console
     echo "<script> console.log('$msg'); </script>";
 }
-?>

@@ -3,11 +3,10 @@
 	include("../../Management/utility.php");
     include("../../Management/Database/connection.php");
     $email = $_SESSION['logged'];
-    updateDb("remember_token", "NULL", "email = '$email'");
-    updateDb("remember_token_created_at", "NULL", "email = '$email'");
+    updateDb("users", ["remember_token"], ["NULL"], "email = '$email'");
+    updateDb("users", ["remember_token_created_at"], ["NULL"], "email = '$email'");
     unset($_COOKIE['remember-me']);
     setcookie('remember-me', '', time() - 3600, '/');
     unset($_SESSION['logged']);
     session_destroy();
-    header("Location: ../index.php");
-?>
+    header("Location: ../home.php");

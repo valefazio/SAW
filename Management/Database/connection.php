@@ -1,5 +1,10 @@
 <?php
-    include("credentials.php");
+    include "credentials.php";
+
+    function logs($msg) {   //writes $msg in console
+        echo "<script> console.log('$msg'); </script>";
+    }
+    
     function accessDb(): mysqli {
         global $dbhost, $dbuser, $dbpass, $dbname;
         $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
@@ -48,7 +53,7 @@
                 $stmt->execute();
                 $result = $stmt->get_result();
                 if($result->num_rows > 0) {
-                    echo "<script>console.log('record già presente con stessa chiave primaria');</script>";
+                    logs('record già presente con stessa chiave primaria');
                     return false;
                 }
             }
@@ -66,7 +71,7 @@
                 }
             }
             if(!$found) {
-                echo "<script>console.log('vuoi inserire ".$colToInsert." ma nel db non c'è');</script>";
+                logs("vuoi inserire ".$colToInsert." ma nel db non c'è");
                 return false;
             }
         }
@@ -102,7 +107,7 @@
                     }
                 }
                 if(!$found){
-                    echo "<script>console.log('vuoi inserire ".$colToInsert." ma nel db non c'è');</script>";
+                    logs("vuoi inserire ".$colToInsert." ma nel db non c'è");
                     return null;
                 }
             }
@@ -110,7 +115,6 @@
         $query = substr($query, 0, -1);	//rimuovo l'ultima virgola
         $condition = ($where != "") ? " WHERE {$where}" : "";
         $query.= " FROM {$table} " . $condition;
-    
         $stmt = $conn->prepare($query);
         $result = $stmt->execute();
     
@@ -135,7 +139,7 @@
                 }
             }
             if(!$found){
-                echo "<script>console.log('vuoi inserire ".$colToInsert." ma nel db non c'è');</script>";
+                logs("vuoi inserire ".$colToInsert." ma nel db non c'è");
                 return false;
             }
         }
@@ -166,7 +170,7 @@
                     }
                 }
                 if(!$found){
-                    echo "<script>console.log('vuoi inserire ".$colToInsert." ma nel db non c'è');</script>";
+                    logs("vuoi inserire ".$colToInsert." ma nel db non c'è'");
                     return null;
                 }
             }
@@ -182,7 +186,7 @@
                     }
                 }
                 if(!$found){
-                    echo "<script>console.log('vuoi inserire ".$colToInsert." ma nel db non c'è');</script>";
+                    logs("vuoi inserire ".$colToInsert." ma nel db non c'è");
                     return null;
                 }
             }
