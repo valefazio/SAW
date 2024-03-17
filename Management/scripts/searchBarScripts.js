@@ -8,6 +8,34 @@ document.getElementsByTagName("form")[0].addEventListener("submit", function (ev
 	return;
 });
 
+/***************** RECTANGLE *****************/
+rects = document.getElementsByClassName("rectangle");
+rects_title = document.getElementsByClassName("rect_title");
+rects[0].addEventListener("mouseenter", function () {
+	rects_title[0].style.color = "#c24757";
+	rects[0].setAttribute("style", "width: 35%");
+});
+rects[0].addEventListener("mouseleave", function () {
+	rects_title[0].style.color = "var(--colorB)";
+	rects[0].setAttribute("style", "width: 30%");
+});
+rects[1].addEventListener("mouseenter", function () {
+	rects_title[1].style.color = "#c24757";
+	rects[1].setAttribute("style", "width: 35%");
+});
+rects[1].addEventListener("mouseleave", function () {
+	rects_title[1].style.color = "var(--colorB)";
+	rects[1].setAttribute("style", "width: 30%");
+});
+rects[2].addEventListener("mouseenter", function () {
+	rects_title[2].style.color = "#c24757";
+	rects[2].setAttribute("style", "width: 35%");
+});
+rects[2].addEventListener("mouseleave", function () {
+	rects_title[2].style.color = "var(--colorB)";
+	rects[2].setAttribute("style", "width: 30%");
+});
+
 /***************** LEVEL *****************/
 class Level {
 	constructor() {
