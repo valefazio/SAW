@@ -1,36 +1,45 @@
 @import url(constants.css);
 
+body {
+	font-family: 'poppins', sans-serif;
+}
+
 /* NAVBAR */
 nav {
 	position: sticky;
 	top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px 0 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 10px 0 10px;
 	width: 100%;
 	background-color: rgba(255, 255, 255, 0.87);
 }
+
 .nav-links {
 	font-weight: bold;
-    width: 60%;
-    list-style: none;
-    display: inline-block;
-    margin: 10px auto 10px 50px;
+	width: 60%;
+	list-style: none;
+	display: inline-block;
+	margin: 10px auto 10px 50px;
 }
+
 .nav-links li {
 	display: inline;
 	padding: 0 5% 0 0;
 }
+
 .nav-links li a {
 	text-decoration: none;
 	color: var(--colorB);
 }
+
 .nav-links li a:hover {
 	color: var(--colorC);
 	font-size: large;
 }
-.register-btn {
+
+.account {
 	background-color: var(--colorC);
 	color: #fff;
 	padding: 8px 20px;
@@ -38,14 +47,16 @@ nav {
 	text-decoration: none;
 	font-size: 14px;
 	text-align: center;
+	font-family: 'poppins', sans-serif;
 }
 
-#logo, #logo:hover {
+#logo,
+#logo:hover {
 	font-family: 'Monster AG', sans-serif;
 	font-size: 50px;
-    text-decoration: none;
-    color: black;
-    margin-top: -4.5px;
+	text-decoration: none;
+	color: black;
+	margin-top: -4.5px;
 }
 
 
@@ -56,8 +67,11 @@ nav {
 	padding: 10px 10px 10px 20px;
 	border-radius: 50px;
 	margin: 10px;
-	width: 80%;
+	min-width: 410px;
+	width: 20%;
+	margin-right: 5%;
 }
+
 .search-bar form {
 	display: flex;
 	align-items: center;
@@ -67,65 +81,57 @@ nav {
 }
 
 /*Fields*/
-.search-bar form input,  .search-bar form select{
+.search-bar form input,
+.search-bar form select {
 	display: block;
 	border: 0;
 	outline: none;
 	background: transparent;
 }
+
 .field {
-	flex: 1;
-	min-width: 130px;
-	margin-left: 2%;
+	flex: 1;	
 }
+
 .search-bar form label {
 	font-weight: 600;
 }
+
 #location {
 	border-color: none;
-}
-
-/*Level*/
-.level, .reviews {
-	display: flex;
-	align-items: center;
-}
-.level span, .reviews span {
-	border:#000 1px solid;
-	border-radius: 100%;
-	font-size: medium;
-	cursor: pointer;
-	text-align: center;
-	user-select: none;
-}
-.g, .r {
-	width: 20px;
-	text-align: center;
-}
-#nLevel, #rLevel {
-	margin-top: -3px;
-	margin-left: 5px;
-	width: 10px;
 }
 
 /*Search button*/
 .search-bar form button {
 	background: var(--colorC);
-	width: 55px;
-	height: 55px;
+	width: 35px;
+	height: 35px;
 	border: 0;
 	border-radius: 50%;
 	outline: none;
 	cursor: pointer;
 	margin: 0;
+	margin-left: 10px;
 	padding: 0;
 }
+/* @media screen and (min-width: 1700px) {
+	.search-bar form button {
+		margin-left: 15px;
+	}
+} */
+
 .search-bar form button span {
 	color: #fff;
 }
+
 #eye {
 	font-family: 'Monster AG', sans-serif;
-	font-size: 50px;
-	color:white;
-	margin-top: -5%;
+	font-size: 35px;
+	color: white;
+	margin-top: -15%;
+}
+
+#sidebar {
+	margin-right: 20px;
+	margin-left: 10px;
 }

@@ -1,15 +1,16 @@
 document.getElementsByTagName("form")[0].addEventListener("submit", function (event) {
 	event.preventDefault();
 	var location = document.getElementById("location").value;
-	var checkin = document.getElementById("calendar").value || "anytime"; //ERROR
-	var level = document.getElementById("nLevel").value || "0";
-	var url = "http://localhost/SAW/Pages/search.php?location=" + location + "&checkin=" + checkin + "&level=" + level;	//ERROR assoluto
-	window.location.href = url;
+	var checkin = document.getElementById("calendar").value;
+	if(checkin == "Add date")
+		checkin = "anytime";
+	var level = document.getElementById("level").value;
+	window.location.href ="search.php?location=" + location + "&checkin=" + checkin + "&level=" + level;
 	return;
 });
 
 /***************** RECTANGLE *****************/
-rects = document.getElementsByClassName("rectangle");
+/* rects = document.getElementsByClassName("rectangle");
 rects_title = document.getElementsByClassName("rect_title");
 rects[0].addEventListener("mouseenter", function () {
 	rects_title[0].style.color = "#c24757";
@@ -34,7 +35,7 @@ rects[2].addEventListener("mouseenter", function () {
 rects[2].addEventListener("mouseleave", function () {
 	rects_title[2].style.color = "var(--colorB)";
 	rects[2].setAttribute("style", "width: 30%");
-});
+}); */
 
 /***************** LEVEL *****************/
 class Level {
@@ -55,29 +56,6 @@ class Level {
 
 		if (newValue >= 0 && newValue <= 5) {
 			this.level.value = newValue;
-		}
-	}
-}
-
-/***************** LEVEL *****************/
-class Reviews {
-	constructor() {
-		this.star = document.getElementById('rLevel');
-		this.star.onload = this.star.value = 0;
-
-		const removeStar = document.getElementsByClassName('r')[0];
-		removeStar.addEventListener('click', () => this.updateStar(-1));
-
-		const addStar = document.getElementsByClassName('g')[2];
-		addStar.addEventListener('click', () => this.updateStar(1));
-	}
-
-	updateStar(change) {
-		const currentValue = parseInt(this.star.value) || 0;
-		const newValue = currentValue + change;
-
-		if (newValue >= 0 && newValue <= 5) {
-			this.star.value = newValue;
 		}
 	}
 }
@@ -119,10 +97,9 @@ class Submit {
 /***************** CALENDAR *****************/
 class Calendar {
 	constructor() {
-		const checkIn = document.getElementById('calendar');
-		checkIn.value = "Add date";
-		checkIn.setAttribute('style', 'color: #858585;');
-		checkIn.addEventListener('click', () => this.showCalendar());
+		const calendar = document.getElementById('calendar');
+		calendar.value = "Add date";
+		calendar.addEventListener('click', () => this.showCalendar());
 
 		this.currentDate = new Date();
 		this.currentMonth = this.currentDate.getMonth();
@@ -139,6 +116,9 @@ class Calendar {
 
 		document.getElementById('prevMonth').addEventListener('click', () => this.prevMonthAction());
 		document.getElementById('nextMonth').addEventListener('click', () => this.nextMonthAction());
+
+		var $marginLeft = document.getElementById('calendar').offsetLeft - 100;
+		this.calendar.setAttribute("style", "margin-left:" + $marginLeft + "px");
 	}
 
 	createCalendar() {
@@ -179,13 +159,12 @@ class Calendar {
 		calendarDays.id = 'calendarDays';
 		calendar.appendChild(calendarDays);
 
-		document.getElementsByClassName("header")[0].appendChild(calendar);
+		document.getElementById("navbar").appendChild(calendar);
 
 		return calendar;
 	}
 
 	generateCalendar() {
-		const calendar = document.getElementById('calendar');
 		const currentMonthElement = document.getElementById('currentMonth');
 		const calendarDays = document.getElementById('calendarDays');
 
@@ -195,20 +174,24 @@ class Calendar {
 		const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay();
 		const daysInWeek = 7;
 
+		// Add empty days in the beginning of the month
 		for (let i = 0; i < (firstDayOfMonth + daysInWeek - 1) % daysInWeek; i++) {
 			const emptyDay = document.createElement('div');
 			emptyDay.className = 'day inactive';
 			calendarDays.appendChild(emptyDay);
 		}
-
+		// Add days
 		for (let i = 1; i <= new Date(this.currentYear, this.currentMonth + 1, 0).getDate(); i++) {
 			const day = document.createElement('div');
 			day.className = 'day';
 			day.innerText = i;
+			let today = new Date();
+			if(i < today.getDate() && this.currentMonth <= today.getMonth() && this.currentYear <= today.getFullYear())
+				day.setAttribute('style', 'background-color: #f1f1f1; cursor: not-allowed');
 			day.addEventListener('click', () => this.scrivi(i));
 			calendarDays.appendChild(day);
 		}
-
+		// Add empty days in the end of the month
 		if (!this.isLastDaySunday(this.currentMonth, this.currentYear)) {
 			for (let i = 0; i < daysInWeek - new Date(this.currentYear, this.currentMonth + 1, 0).getDay(); i++) {
 				const emptyDay = document.createElement('div');
@@ -245,13 +228,13 @@ class Calendar {
 	}
 
 	scrivi(i) {
-		if (document.getElementsByClassName('calendar')[0] != null) {
+		if (document.getElementById('calendar') != null) {
 			var checkIn = document.getElementById("calendar");
 
 			var selectedDate = new Date(this.currentYear, this.currentMonth, i);
 			if (selectedDate > this.currentDate || (this.currentYear == this.currentDate.getFullYear() && this.currentMonth == this.currentDate.getMonth() && i == this.currentDate.getDate())) {
 				checkIn.value = i + '/' + (this.currentMonth + 1) + '/' + this.currentYear;
-				checkIn.setAttribute('style', 'color: #000;');
+				checkIn.setAttribute('style', 'color: #000; width:70px; margin-left: 15px');
 				this.closeCalendar();
 			} else {
 				checkIn.value = "";
@@ -270,7 +253,5 @@ class Calendar {
 }
 
 // Initialize the classes
-const levelInstance = new Level();
-const reviewsInstance = new Reviews();
 const submitInstance = new Submit();
 const calendarInstance = new Calendar();

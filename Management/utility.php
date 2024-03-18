@@ -12,6 +12,11 @@ function timerRelocation($var) {    //redirects to $var after 2 seconds
     exit;
 }
 
+function relocation($var) { //redirects to $var
+    echo "<script> window.location.href = '$var'; </script>";
+    exit;
+}
+
 function alert( $msg, $type = "info") { //shows an alert with $msg
     echo "<script> alert('$msg', '$type'); </script>";
 }

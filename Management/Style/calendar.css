@@ -9,26 +9,30 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	user-select: none;
+    user-select: none;
     background-color: #fff;
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 70%;
 }
-@media (min-width: 1150px) {
-    .calendar {
-        position: static;
-        margin: -30px auto auto 40%;
-    }
+
+/* @media (min-width: 1150px) {
+    .calendar {}
 }
+
 @media (max-width: 1149px) {
     .calendar {
-        position: static;
         margin: -30px auto auto 35%;
     }
-}
+} */
+
 .month-header {
     display: flex;
     justify-content: space-between;
 }
-#prevMonth, #nextMonth {
+
+#prevMonth,
+#nextMonth {
     cursor: pointer;
 }
 

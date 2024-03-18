@@ -4,99 +4,15 @@
 </header>
 
 <body>
-    <div class="calendar" id="calendar">
+    <div class="calendar">
         <div class="month-header">
             <span id="prevMonth" style="visibility: hidden;">&#9666;</span>
             <span id="currentMonth"></span>
             <span id="nextMonth">&#9656;</span>
         </div>
-
         <div class="days-header">
-            <span>Mo</span>
-            <span>Tu</span>
-            <span>We</span>
-            <span>Th</span>
-            <span>Fr</span>
-            <span>Sa</span>
-            <span>Su</span>
         </div>
-
         <div class="calendar-days" id="calendarDays"></div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const calendar = document.getElementById('calendar');
-            const currentMonthElement = document.getElementById('currentMonth');
-            const calendarDays = document.getElementById('calendarDays');
-            const prevMonthButton = document.getElementById('prevMonth');
-            const nextMonthButton = document.getElementById('nextMonth');
-
-            let currentDate = new Date();
-            let currentMonth = currentDate.getMonth();
-            let currentYear = currentDate.getFullYear();
-        });
-
-        function generateCalendar() {
-            currentMonthElement.innerText = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
-
-            // Clear previous days
-            calendarDays.innerHTML = '';
-
-            // Get the first day of the month
-            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-            const daysInWeek = 7;
-
-            // Generate empty cells for days before the first day of the month
-            for (let i = 0; i < (firstDayOfMonth + daysInWeek - 1) % daysInWeek; i++) {
-                const emptyDay = document.createElement('div');
-                emptyDay.className = 'day inactive';
-                calendarDays.appendChild(emptyDay);
-            }
-
-            // Generate cells for each day of the month
-            for (let i = 1; i <= new Date(currentYear, currentMonth + 1, 0).getDate(); i++) {
-                const day = document.createElement('div');
-                day.className = 'day';
-                day.innerText = i;
-                day.addEventListener('click', function () {
-                    // Handle day selection logic here
-                    alert('Selected date: ' + (currentMonth + 1) + '/' + i + '/' + currentYear);
-                });
-                calendarDays.appendChild(day);
-            }
-        }
-
-        function updateCalendar() {
-            generateCalendar();
-        }
-
-        // Initial calendar generation
-        updateCalendar();
-
-        // Event listeners for navigating to the previous and next months
-        prevMonthButton.addEventListener('click', function () {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            if (currentMonth === currentDate.getMonth() && currentYear === currentDate.getFullYear())
-                prevMonthButton.setAttribute('style', 'visibility: hidden; pointer-events: none;');
-            updateCalendar();
-        });
-
-        nextMonthButton.addEventListener('click', function () {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            if ((currentYear > currentDate.getFullYear()) || (currentYear == currentDate.getFullYear() && currentMonth > currentDate.getMonth()))
-                prevMonthButton.setAttribute('style', 'visibility: visible; pointer-events: auto;');
-            updateCalendar();
-        });
-    </script>
 </body>
-
 </html>

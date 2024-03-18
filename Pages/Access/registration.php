@@ -39,7 +39,7 @@
 				<input type="submit" value="Registrati" id="register-button" disabled>
 
 				<div id="switchForm">
-					<br><a href="login.php">Already registered? Login here</a>
+					<br><a href="login.html">Already registered? Login here</a>
 				</div>
 			</form>
 		</div>
@@ -68,17 +68,16 @@
 			checkPasswordFormat();
 			checkPasswordMatch();
 			
-            if (usernameInput.value !== "" && passwordInput.value !== "" && confirmPasswordInput.value !== "" && emailInput.value !== "") {
+            if (usernameInput.value !== "" && passwordInput.value !== "" && confirmPasswordInput.value !== "" && emailInput.value !== "")
                 registerButton.removeAttribute("disabled");
-            } else {
+            else
                 registerButton.setAttribute("disabled", "disabled");
-            }
         }
     </script>
 	
 	<?php
 		if(isLogged()) {
-			echo "<script> window.location.href = '../Pages/index.php';</script>";
+			echo "<script> window.location.href = '../home.php';</script>";
 			exit;
 		}
 
@@ -88,7 +87,7 @@
 				alert("Compilare tutti i campi", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				timerRelocation("registration.php");
+				relocation("registration.html");
 			} 
 
 			$email = htmlspecialchars(trim($_POST['email']));
@@ -98,12 +97,12 @@
 				alert("Le password inserite non combaciano", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				timerRelocation("registration.php");
+				relocation("registration.html");
 			} else if(!preg_match($email_pattern, $email)) {
 				alert("Il campo email non rispetta il formato richiesto", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				timerRelocation("registration.php");
+					relocation("registration.html");
 			}
 
 			$res = selectDb("users", ["email"], "email = '$email'");
@@ -111,14 +110,14 @@
 				alert("Utente già registrato");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
-				timerRelocation("");
+					relocation("");
 				exit;
 			}
 			$username = htmlspecialchars(trim($_POST["username"]));
-			insertDb("users", ["username", "email", "password"], [$username, $email, $psw], "");
+			insertDb("users", ["username", "email", "password"], [$username, $email, $psw]);
 			
 			$_SESSION['logged'] = $email;
-			echo "<script> window.location.href = '../index.php';</script>";
+			relocation("../home.php");
 			exit;
 		}
 	?>
