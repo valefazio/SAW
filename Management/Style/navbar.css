@@ -2,18 +2,21 @@
 
 body {
 	font-family: 'poppins', sans-serif;
+	background-color: #ffffff;
 }
 
 /* NAVBAR */
 nav {
 	position: sticky;
+	z-index: 2;
 	top: 0;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 10px 0 10px;
 	width: 100%;
-	background-color: rgba(255, 255, 255, 0.87);
+	background-color: rgb(179, 222, 255);
+	height: 75px;
 }
 
 .nav-links {
@@ -36,14 +39,13 @@ nav {
 
 .nav-links li a:hover {
 	color: var(--colorC);
-	font-size: large;
+	/* font-size: large; */
 }
 
 .account {
-	background-color: var(--colorC);
+	background-color: var(--colorB);
 	color: #fff;
 	padding: 8px 20px;
-	border-radius: 20px;
 	text-decoration: none;
 	font-size: 14px;
 	text-align: center;
@@ -66,10 +68,10 @@ nav {
 	margin: 30px auto;
 	padding: 10px 10px 10px 20px;
 	border-radius: 50px;
-	margin: 10px;
 	min-width: 410px;
 	width: 20%;
 	margin-right: 5%;
+	/* border: solid 1px var(--colorC); */
 }
 
 .search-bar form {
@@ -90,7 +92,7 @@ nav {
 }
 
 .field {
-	flex: 1;	
+	flex: 1;
 }
 
 .search-bar form label {
@@ -99,6 +101,14 @@ nav {
 
 #location {
 	border-color: none;
+}
+
+#calendar_arrow, #calendar, #location, #level {
+	cursor: pointer;
+}
+
+option {
+	font-family: var(--defaultFont);
 }
 
 /*Search button*/

@@ -68,7 +68,7 @@ ul li ul:hover {
 }
 
 .material-icons-outlined {
-	color: #888888;
+	color: var(--colorB);
 	transition: all 0.3s ease-out;
 }
 

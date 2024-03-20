@@ -1,0 +1,78 @@
+@import url(constants.css);
+
+#boxes {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-top: 10px;
+	z-index: 1;
+}
+
+.box {
+	position: inherit;
+	text-align: center;
+	width: 15%;
+	height: fit-content;
+	background-color: rgba(204, 186, 255, 0.87);
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px;
+	cursor: pointer;
+}
+@media screen and (min-width: 1200px) and (max-width: 1600px){
+	.box {
+		width: 20%;
+	}
+}
+@media screen and (min-width: 860px) and (max-width: 1200px) {
+	.box {
+		width: 30%;
+	}
+}
+@media screen and (min-width: 640px) and (max-width: 860px) {
+	.box {
+		width: 40%;
+	}
+}
+@media screen and (max-width: 640px) {
+	.box {
+		width: 70%;
+	}
+}
+
+.box_text {
+	text-align: left;
+	padding: 10px;
+}
+
+.box h2 {
+	color: var(--colorB);
+	cursor: pointer;
+}
+
+.reviews {
+	position: absolute;
+	margin-top: -50px;
+	margin-left: 190px;
+}
+@media screen and (min-width: 1000px) {
+	.reviews {
+		margin-left: 170px;
+	}
+	
+}
+
+.doorPic {
+	width: 225px;
+
+}
+.heart,
+.heart_red {
+	width: 40px;
+	position: absolute;
+}
+.heart:hover,
+.heart_red:hover {
+	transform: scale(1.08) translateY(-2px);
+}

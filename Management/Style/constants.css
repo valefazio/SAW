@@ -17,6 +17,7 @@
 	--colorA: black;
     --colorB: #1a3a4e;
     --colorC: #c24757 /*#fe0758*/;
+	--defaultFont: 'poppins', sans-serif;
 }
 
 
@@ -24,5 +25,5 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-	font-family: 'poppins', sans-serif;
+	font-family: var(--defaultFont);
 }

@@ -12,7 +12,7 @@
 <nav id="navbar">
         <script>
             $(function () {
-                $("#navbar").load("../Management/navbar.php");
+                $("#navbar").load("../Management/navbar.html");
             });
         </script>
     </nav>

@@ -17,8 +17,10 @@ To fix:
 - dividere form login e registratione in html e php
 - aggiungere gli alt alle immagini
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?)
+- remember me non funziona
 
 - gestione degli errori
+- controlli valori di ritorno
 - togliere gli alert
     - fare pagine di errore
 - 

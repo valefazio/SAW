@@ -28,7 +28,7 @@
         echo "<script>createNewElement('../Pages/Access/logout.php', 'logout', 'Logout');</script>";
     } else {
         echo "<script>createNewElement('../Pages/Access/login.html', 'login', 'Login');</script>";
-        echo "<script>createNewElement('../Pages/Access/register.html', 'add_box', 'Register');</script>";
+        echo "<script>createNewElement('../Pages/Access/registration.html', 'add_box', 'Register');</script>";
     }
     ?>
 

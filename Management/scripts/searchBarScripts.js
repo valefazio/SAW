@@ -100,6 +100,7 @@ class Calendar {
 		const calendar = document.getElementById('calendar');
 		calendar.value = "Add date";
 		calendar.addEventListener('click', () => this.showCalendar());
+		document.getElementById("calendar_arrow").addEventListener('click', () => this.showCalendar());
 
 		this.currentDate = new Date();
 		this.currentMonth = this.currentDate.getMonth();
@@ -236,8 +237,6 @@ class Calendar {
 				checkIn.value = i + '/' + (this.currentMonth + 1) + '/' + this.currentYear;
 				checkIn.setAttribute('style', 'color: #000; width:70px; margin-left: 15px');
 				this.closeCalendar();
-			} else {
-				checkIn.value = "";
 			}
 		}
 	}
