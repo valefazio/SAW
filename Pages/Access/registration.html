@@ -1,18 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registration</title>
+	<link rel="stylesheet" type="text/css" href="../../Management/Style/style.css">
+    <link rel="stylesheet" type="text/css" href="../../Management/Style/forms.css">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+    <script src="checkFields.js"></script>
 </head>
 <body>
-    <!--LOGIN è già fatto: 
-        - sposta i tag html e js qui da registration.php, 
-        - includi checkFields.js qui come fatto in login.html,
-        - fai i due include che trovi in cima a login.php in registration.php
-        - occhio perché nel login mancava if(!session_start()) exit("Troubles starting session."); -->
+	<div id="form-sfondo">
+		<div id="form">
+			<form action="" method="POST">
+				<div id="form-dati">
+					<h1>Sign-up</h1>
+					<label for="username">Username:</label><br>
+					<input type="text" id="username" name="username" required><br><br>
+
+					<label for="email">Email:</label><br>
+					<input type="email" id="email" name="email" required><br><br>
+
+					<label for="pass">Password
+						<span class="help" title="La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero">
+							help_outline
+						</span>
+					:</label><br>
+					<input type="password" id="pass" name="pass" required><br><br>
+
+					<label for="confirm-password">Confirm Password:</label><br>
+					<input type="password" id="confirm-password" name="confirm-password" required><br><br>
+				</div>
+				<input type="submit" value="Registrati" id="register-button" disabled>
+
+				<div id="switchForm">
+					<br><a href="login.html">Already registered? Login here</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
     <script>
-        //window.location.href = "registration.php"; //l'ho messo momentaneamente, quando dividi i file lo togli
+        // Ottieni i riferimenti agli elementi del modulo
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("pass");
+        const confirmPasswordInput = document.getElementById("confirm-password");
+        const emailInput = document.getElementById("email");
+        const registerButton = document.getElementById("register-button");
+
+        // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
+        usernameInput.addEventListener("input", toggleRegisterButton);
+        emailInput.addEventListener("input", toggleRegisterButton);
+        passwordInput.addEventListener("input", toggleRegisterButton);
+        confirmPasswordInput.addEventListener("input", toggleRegisterButton);
+
+        function toggleRegisterButton() {
+			checkEmailFormat();
+			checkPasswordFormat();
+			checkPasswordMatch();
+			
+            if (usernameInput.value !== "" && passwordInput.value !== "" && confirmPasswordInput.value !== "" && emailInput.value !== "")
+                registerButton.removeAttribute("disabled");
+            else
+                registerButton.setAttribute("disabled", "disabled");
+        }
     </script>
 </body>
 </html>
+
+    <!--LOGIN è già fatto: 
+        - includi checkFields.js qui come fatto in login.php,
