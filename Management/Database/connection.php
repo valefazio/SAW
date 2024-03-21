@@ -66,7 +66,7 @@ function insertDb(string $table, array $columns, array $values): bool
     } */
 
     $query = "INSERT INTO {$table} (";
-logs("entro"); sleep(5000);
+
     //check if columns are valid
     foreach ($columns as $colToInsert) {
         $found = false;
@@ -81,7 +81,7 @@ logs("entro"); sleep(5000);
             return false;
         }
     }
-logs("qui"); sleep(1000);
+
     $query = substr($query, 0, -1);	//rimuovo l'ultima virgola
     $query .= ") VALUES (";
     for ($i = 0; $i < count($columns); $i++)
