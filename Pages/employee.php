@@ -32,17 +32,18 @@
     */
 
     // Query per ottenere i top 3 impiegati
-    $sql = "SELECT * FROM users ORDER BY punteggio DESC LIMIT 3";
+    $conn = accessDb();
+    $sql = "SELECT * FROM users ORDER BY reviews DESC LIMIT 3";
     $result = $conn->query($sql);
 
     // Generazione dei card dei dipendenti
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             echo '<div class="employee-card">';
-            echo '<img src="' . $row["immagine"] . '" alt="Foto Profilo ' . $row["nome"] . ' ' . $row["cognome"] . '">';
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($row["profile_picture"]) . '" alt="Foto Profilo ' . $row["firstname"] . ' ' . $row["lastname"] . '">';
             echo '<div class="employee-info">';
-            echo '<h2>' . $row["nome"] . ' ' . $row["cognome"] . '</h2>';
-            echo '<p>Punteggio: ' . $row["punteggio"] . '</p>';
+            echo '<h2>' . $row["firstname"] . ' ' . $row["lastname"] . '</h2>';
+            echo '<p>Punteggio: ' . $row["reviews"] . '</p>';
             echo '</div>';
             echo '</div>';
         }
