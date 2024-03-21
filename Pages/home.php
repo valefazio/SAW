@@ -12,11 +12,14 @@
 
 <body id="top">
 	<nav id="navbar">
-		<script>
+		<!-- <script>
 			$(function () {
 				$("#navbar").load("../Management/navbar.html");
 			});
-		</script>
+		</script> -->
+		<?php
+		include("../Management/navbar.html");
+		?>
 	</nav>
 	<div class="header">
 		<div class="text">
@@ -25,11 +28,14 @@
 		</div>
 	</div>
 	<div id="door_home">
-		<script>
+		<!-- <script>
 			$(function () {
 				$("#door_home").load("../Management/showHouses.php");
 			});
-		</script>
+		</script> -->
+		<?php
+		include("../Management/showHouses.php");
+		?>
 	</div>
 	<div class="website_description">
 		<div class="description">
@@ -49,11 +55,11 @@
 				users.</p>
 		</div>
 		<div id="footer">
-			<script>
-				$(function () {
-					$("#footer").load("../Management/footer.html");
-				});
-			</script>
+			<?php
+			include("../Management/footer.html");
+			?>
+		</div>
+
 	</div>
 </body>
 

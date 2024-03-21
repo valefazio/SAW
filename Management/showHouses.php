@@ -59,7 +59,7 @@
                     this.setAttribute("class", "heart_red");
                     redHearts = document.getElementsByClassName("red_heart");
 					$door = selectDb("doors", ["id"], "name = " + this.parentElement.children[0].innerHTML);
-					if(insertDb("favorites", ["monster", "door"], [$_SESSION["user"], ]))
+					//if(insertDb("favorites", ["monster", "door"], [$_SESSION["user"], ]))
                 } else {
                     this.src = "../Management/Images/heart.png";
                     this.setAttribute("class", "heart");

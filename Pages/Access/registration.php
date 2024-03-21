@@ -54,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$stmt->close();
 	disconnectDb($conn);
 
-	//$_SESSION['logged'] = $email;
+	$_SESSION['logged'] = $email;
 	relocation("../home.php");
 	exit;
 }
+
