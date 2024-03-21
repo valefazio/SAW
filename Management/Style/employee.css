@@ -1,4 +1,4 @@
-
+@import url(constants.css);
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -29,6 +29,6 @@ body {
 }
 
 h1 {
-    font-family: 'Monster AG', sans-serif;
+    font-family: var(--defaultFont);
     text-align: center;
 }   
