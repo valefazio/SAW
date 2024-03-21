@@ -1,17 +1,11 @@
 	<?php
 		include("../../Management/utility.php");
 		include("../../Management/Database/connection.php");
-		include("../../Management/accessControl.php");//??
 		if(!session_start()) exit("Troubles starting session.");
-		
-		if(isLogged()) {
-			echo "<script> window.location.href = '../home.php';</script>";
-			exit;
-		}
 
 		$email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			if(!isFilled("username") && !isFilled("email") && !isFilled("pass") && !isFilled("confirm-password")) {
+			if(!isFilled("firstname") && !isFilled("lastname") && !isFilled("email") && !isFilled("pass") && !isFilled("confirm-password")) {
 				alert("Compilare tutti i campi", "warning");
 				if(session_status() == PHP_SESSION_ACTIVE)
 					session_abort();
@@ -41,12 +35,14 @@
 					relocation("");
 				exit;
 			}
-			$username = htmlspecialchars(trim($_POST["username"]));
-			insertDb("users", ["username", "email", "password"], [$username, $email, $psw]);
+			$firstname = htmlspecialchars(trim($_POST["firstname"]));
+			$lastname = htmlspecialchars(trim($_POST["lastname"]));
+			echo "ok";
+			/*insertDb("users", ["firstname", "lastname", "email", "password"], [$firstname, $lastname, $email, $psw]);
 			
 			$_SESSION['logged'] = $email;
 			relocation("../home.php");
-			exit;
+			exit;*/
 		}
 	?>
 </body>

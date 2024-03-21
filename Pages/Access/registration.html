@@ -14,11 +14,14 @@
 <body>
 	<div id="form-sfondo">
 		<div id="form">
-			<form action="" method="POST">
+			<form action="registration.php" method="POST">
 				<div id="form-dati">
 					<h1>Sign-up</h1>
-					<label for="username">Username:</label><br>
-					<input type="text" id="username" name="username" required><br><br>
+					<label for="firstname">Firstname:</label><br>
+					<input type="text" id="firstname" name="firstname" required><br><br>
+
+                    <label for="lastname">Lastname:</label><br>
+					<input type="text" id="lastname" name="lastname" required><br><br>
 
 					<label for="email">Email:</label><br>
 					<input type="email" id="email" name="email" required><br><br>
@@ -44,24 +47,26 @@
 
     <script>
         // Ottieni i riferimenti agli elementi del modulo
-        const usernameInput = document.getElementById("username");
+        const firstnameInput = document.getElementById("firstname");
+        const lastnameInput = document.getElementById("lastname");
         const passwordInput = document.getElementById("pass");
         const confirmPasswordInput = document.getElementById("confirm-password");
         const emailInput = document.getElementById("email");
         const registerButton = document.getElementById("register-button");
 
         // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
-        usernameInput.addEventListener("input", toggleRegisterButton);
+        firstnameInput.addEventListener("input", toggleRegisterButton);
+        lastnameInput.addEventListener("input", toggleRegisterButton);
         emailInput.addEventListener("input", toggleRegisterButton);
         passwordInput.addEventListener("input", toggleRegisterButton);
         confirmPasswordInput.addEventListener("input", toggleRegisterButton);
 
         function toggleRegisterButton() {
-			checkEmailFormat();
-			checkPasswordFormat();
+			//checkEmailFormat();
+			//checkPasswordFormat();
 			checkPasswordMatch();
 			
-            if (usernameInput.value !== "" && passwordInput.value !== "" && confirmPasswordInput.value !== "" && emailInput.value !== "")
+            if (firstnameInput.value !== "" && lastnameInput.value !== "" && passwordInput.value !== "" && confirmPasswordInput.value !== "" && emailInput.value !== "")
                 registerButton.removeAttribute("disabled");
             else
                 registerButton.setAttribute("disabled", "disabled");
@@ -69,6 +74,3 @@
     </script>
 </body>
 </html>
-
-    <!--LOGIN è già fatto: 
-        - includi checkFields.js qui come fatto in login.php,
