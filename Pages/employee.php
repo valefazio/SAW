@@ -6,15 +6,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Management/Style/employee.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 <nav id="navbar">
-        <script>
-            $(function () {
-                $("#navbar").load("../Management/navbar.html");
-            });
-        </script>
+        <?php
+            include("../Management/navbar.html");
+        ?>
     </nav>
 <h1>IMPIEGATI DEL MESE</h1>
 
