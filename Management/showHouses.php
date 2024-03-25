@@ -21,14 +21,42 @@
 		$i = 0;
 		if(isset($_GET['usersFavorites'])){
 			unset($_GET['usersFavorites']);
-			$doors = selectQuery("SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id WHERE D.reviews >= 2 ORDER BY D.reviews DESC");
+			$doors = selectQuery(
+				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
+				WHERE D.reviews >= 2 ORDER BY D.reviews DESC");
 		}
 		else if(isset($_GET['saved'])) {
 			if(!isLogged())	header("Location: ../Pages/Access/login.html");
 			unset($_GET['saved']);
-			$doors = selectQuery("SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id WHERE D.address IN (SELECT door FROM preferites WHERE monster = '" . $_SESSION['logged'] . "') ORDER BY D.name ASC");
+			$doors = selectQuery(
+				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
+				WHERE D.address IN (
+					SELECT door FROM preferites WHERE monster = '" . $_SESSION['logged'] . "') 
+				ORDER BY D.name ASC");
 			if($doors->num_rows == 0) {
 				echo "<h3 style='text-align: center'> There are no destinations saved</h3>";
+				return;
+			}
+		} else if(isset($_GET['search'])) {
+			unset($_GET['search']);
+			
+			if($doors->num_rows == 0) {
+				echo "<h3 style='text-align: center'> No results found</h3>";
+				return;
+			}
+		} else if(isset($_GET['bookings'])) {
+			if(!isLogged())	header("Location: ../Pages/Access/login.html");
+			unset($_GET['bookings']);
+			$doors = selectQuery(
+				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
+					RIGHT JOIN calendar AS Ca ON D.address = Ca.door AND Ca.monster = '" . $_SESSION['logged'] . "'
+				WHERE Ca.date >= CURDATE()
+				ORDER BY Ca.date ASC");
+			if($doors->num_rows == 0) {
+				echo "<h3 style='text-align: center'> There are no bookings</h3>";
 				return;
 			}
 		} else 

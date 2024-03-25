@@ -72,7 +72,7 @@ INSERT INTO countries (name) VALUES ('United States');
 INSERT INTO countries (name) VALUES ('Canada');
 INSERT INTO countries (name) VALUES ('Mexico');
 
-/* INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Alice', '1234567890', 'Management/Images/kids/alice.jpg', 'Goblin, Spiders, Dark');
+INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Alice', '1234567890', 'Management/Images/kids/alice.jpg', 'Goblin, Spiders, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Boo', '1234567890', 'Management/Images/kids/boo.jpg', 'Orc, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Charlie', '1234567890', 'Management/Images/kids/charlie.jpg', 'Troll, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Daisy', '1234567890', 'Management/Images/kids/daisy.jpg', 'Clown, Dark');
@@ -97,8 +97,8 @@ INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Violet',
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('William', '1234567890', 'Management/Images/kids/william.jpg', 'Goblin, Spiders, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Xavier', '1234567890', 'Management/Images/kids/xavier.jpg', 'Orc, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Yara', '1234567890', 'Management/Images/kids/yara.jpg', '');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Zane', '1234567890', 'Management/Images/kids/zane.jpg', 'Clown, Dark'); */
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Alice', '1234567890', 'Goblin, Spiders, Dark');
+INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Zane', '1234567890', 'Management/Images/kids/zane.jpg', 'Clown, Dark');
+/* INSERT INTO kids (name, phone, scaredOf) VALUES ('Alice', '1234567890', 'Goblin, Spiders, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Boo', '1234567890', 'Management/Images/kids/boo.jpg', 'Orc, Dark');
 INSERT INTO kids (name, phone, scaredOf) VALUES ('Charlie', '1234567890', 'Troll, Dark');
 INSERT INTO kids (name, phone, scaredOf) VALUES ('Daisy', '1234567890', 'Clown, Dark');
@@ -123,7 +123,7 @@ INSERT INTO kids (name, phone, scaredOf) VALUES ('Violet', '1234567890', 'Clown,
 INSERT INTO kids (name, phone, scaredOf) VALUES ('William', '1234567890', 'Goblin, Spiders, Dark');
 INSERT INTO kids (name, phone, scaredOf) VALUES ('Xavier', '1234567890', 'Orc, Dark');
 INSERT INTO kids (name, phone, scaredOf) VALUES ('Yara', '1234567890', '');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Zane', '1234567890', 'Clown, Dark');
+INSERT INTO kids (name, phone, scaredOf) VALUES ('Zane', '1234567890', 'Clown, Dark'); */
 
 
 INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Princess', 'Stanza Principessa tutta rosa', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 1, 'Management/Images/doors/door1.jpg', 4.5);
@@ -171,3 +171,8 @@ INSERT INTO resides (kid, door) VALUES (23, '112 Sussex Dr, Ottawa, ON K1A 0A1, 
 INSERT INTO resides (kid, door) VALUES (24, 'Paseo de la Reforma, 2, 06000 Ciudad de México, CDMX, Mexico');
 INSERT INTO resides (kid, door) VALUES (25, 'Calle de la Sirena, 3, 28008 Madrid, Spain');
 
+
+
+
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2021-01-01', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 'vale.fazio.2002@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2021-01-01', 'Rue du Pirate, 1, 75001 Paris, France', 'vale.fazio.2002@gmail.com', NULL, NULL);
