@@ -5,19 +5,29 @@ body {
     /* padding: 20px; */
 }
 
+.employee-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    z-index: 1;
+
+}
+
 .employee-card {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    margin-inline: 15%;
+    margin: 10px;
     overflow: hidden;
-    display: flex;
     align-items: center;
     padding: 20px;
+    width: 350px;
 }
 
-.employee-card img {
+.images {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -31,4 +41,11 @@ body {
 h1 {
     font-family: var(--defaultFont);
     text-align: center;
-}   
+} 
+
+.medals {
+    position: absolute;
+    margin-top: -30px;
+    margin-left: -30px;
+    width: 45px;
+}

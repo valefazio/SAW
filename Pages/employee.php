@@ -15,10 +15,7 @@
     </nav>
 <h1>IMPIEGATI DEL MESE</h1>
 
-
-</body>
-</html>
-
+<div class="employee-box">
 <?php
     include("../Management/accessControl.php");
     
@@ -32,19 +29,38 @@
     $conn = accessDb();
     $sql = "SELECT * FROM users ORDER BY reviews DESC LIMIT 3";
     $result = $conn->query($sql);
+    $i = 1;
 
     // Generazione dei card dei dipendenti
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             echo '<div class="employee-card">';
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($row["profile_picture"]) . '" alt="Foto Profilo ' . $row["firstname"] . ' ' . $row["lastname"] . '">';
+            if($i == 1) {
+                echo '<img src="../Management/Images/gold.png" alt="#1" class="medals">';
+            } else if($i == 2) {
+                echo '<img src="../Management/Images/silver.png" alt="#2" class="medals">';
+            } else {
+                echo '<img src="../Management/Images/bronze.png" alt="#3" class="medals">';
+            }
+            echo '<img class="images" src="data:image/jpeg;base64,' . base64_encode($row["profile_picture"]) . '" alt="Foto Profilo ' . $row["firstname"] . ' ' . $row["lastname"] . '">';
             echo '<div class="employee-info">';
             echo '<h2>' . $row["firstname"] . ' ' . $row["lastname"] . '</h2>';
             echo '<p>Punteggio: ' . $row["reviews"] . '</p>';
             echo '</div>';
             echo '</div>';
+            $i++;
         }
     } else {
         echo "Nessun risultato trovato";
     }
 ?>
+</div>
+
+<footer id="footer">
+        <?php
+            include("../Management/footer.html");
+        ?>
+</footer>
+
+</body>
+</html>
