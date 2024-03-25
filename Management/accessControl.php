@@ -7,7 +7,7 @@
 		
 		if(isset($_COOKIE['remember-me']) && $_COOKIE['remember-me']) { //utente già loggato dal remember-me
 			$cookie = hash("sha256", $_COOKIE['remember-me']);
-			$res = selectDb("users", ["email"], "remember_token = '$cookie'");
+			$res = selectDb("users", ["email"], ["remember_token"], [$cookie]);
 			if ($res->num_rows == 1) {	//cookie di remember-me corrisponde
 				$logged = 1;
 				if(!isset($_SESSION['logged']))	//se non è già presente una sessione attiva setto la variabile di sessione
@@ -24,7 +24,7 @@
     }
 
 	function isAdmin() {
-		$res = selectDb("users", ["admin"], "email = '$_SESSION[logged]'");
+		$res = selectDb("users", ["admin"], ["email"], [$_SESSION['logged']]);
 			
 		if($res) {
 			if ($res->num_rows > 0) {

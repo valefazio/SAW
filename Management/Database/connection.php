@@ -98,8 +98,12 @@ function insertDb(string $table, array $columns, array $values): bool
     return true;
 }
 
-function selectDb(string $table, array $columns, string $where): ?mysqli_result
+function selectDb(string $table, array $columns, array $whereCol, array $whereVal): ?mysqli_result
 {
+    if(count($whereCol) != count($whereVal)) {
+        logs("numero colonne e valori non corrispondono");
+        return null;
+    }
     $conn = accessDb();
     $infoTab = getTableInfoDb($table);
 
@@ -123,11 +127,26 @@ function selectDb(string $table, array $columns, string $where): ?mysqli_result
         }
     }
     $query = substr($query, 0, -1);	//rimuovo l'ultima virgola
-    $condition = ($where != "") ? " WHERE {$where}" : "";
-    $query .= " FROM {$table} " . $condition;
+    $query .= " FROM {$table}";
+    if(count($whereCol) > 0) {
+        $query .= " WHERE ";
+        for ($i = 0; $i < count($whereCol); $i++) {
+            $found = false;
+            foreach ($infoTab["columnName"] as $col) {
+                if (strtolower($col) == strtolower($whereCol[$i])) {
+                    $query .= "{$col} = ? AND ";
+                    $found = true;
+                }
+            }
+            if (!$found) {
+                logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
+                return null;
+            }
+        }
+        $query = substr($query, 0, -4);	//rimuovo l'ultima virgola
+    }
     $stmt = $conn->prepare($query);
-    $result = $stmt->execute();
-
+    $result = $stmt->execute($whereVal);
     if (!$result)
         return null;
     $result = $stmt->get_result();
@@ -136,11 +155,11 @@ function selectDb(string $table, array $columns, string $where): ?mysqli_result
     return $result;
 }
 
-function updateDb(string $table, array $columns, array $values, string $where): bool
+function updateDb(string $table, array $columns, array $values, array $whereCol, array $whereVal): bool
 {
     $conn = accessDb();
 
-    if (count($columns) != count($values)) {
+    if ((count($columns) != count($values)) || (count($whereCol) != count($whereVal))){
         logs("numero colonne e valori non corrispondono");
         return false;
     }
@@ -161,10 +180,26 @@ function updateDb(string $table, array $columns, array $values, string $where): 
         }
     }
     $query = substr($query, 0, -1);	//rimuovo l'ultima virgola
-    $condition = ($where != "") ? " WHERE {$where}" : "";
-    $query .= $condition;
+    if(count($whereCol) > 0) {
+        $query .= " WHERE ";
+        for ($i = 0; $i < count($whereCol); $i++) {
+            $found = false;
+            foreach ($infoTab["columnName"] as $col) {
+                if (strtolower($col) == strtolower($whereCol[$i])) {
+                    $query .= "{$col} = ? AND ";
+                    $found = true;
+                }
+            }
+            if (!$found) {
+                logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
+                return false;
+            }
+        }
+        $query = substr($query, 0, -4);	//rimuovo l'ultimo AND
+    }
     $stmt = $conn->prepare($query);
-    $result = $stmt->execute(array_values($values));
+    $newValues = array_merge(array_values($values), array_values($whereVal));
+    $result = $stmt->execute($newValues);
     if (!$result)
         return false;
     disconnectDb($conn);
@@ -189,10 +224,10 @@ function selectWholeDb() {
 }
 
 function getUserProfileData(string $table, string $email): ?mysqli_result {
-    return selectDb($table, ["username", "email"], "email = '$email'");
+    return selectDb($table, ["username", "email"], ["email"], [$email]);
 }
 function getUsers(string $table, string $email): ?mysqli_result {
-    return selectDb($table, ["username", "email", "admin"], "");
+    return selectDb($table, ["username", "email", "admin"], [], []);
 }
 
 function removeDb(string $table, string $where): bool   //ERROR: da migliorare

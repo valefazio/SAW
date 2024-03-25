@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		relocation("registration.html");
 	}
 
-	$res = selectDb("users", ["email"], "email = '$email'");
+	$res = selectDb("users", ["email"], ["email"], [$email]);
 	if ($res->num_rows != 0) {
 		alert("Utente già registrato");
 		if (session_status() == PHP_SESSION_ACTIVE)

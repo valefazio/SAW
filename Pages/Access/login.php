@@ -6,7 +6,7 @@ if(!session_start()) exit("Troubles starting session.");
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass")) {	//ha inserito i dati
 	$email = htmlspecialchars($_POST['email']);
 
-	$res = selectDb("users", ["email", "password"], "email = '$email'");
+	$res = selectDb("users", ["email", "password"], ["email"], [$email]);
 	if ($res->num_rows == 0) {
 		alert("L\'email o la password non sono corrette", "warning");
 		if (session_status() == PHP_SESSION_ACTIVE)
@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 	if (isset ($_POST['remember-me'])) {
 		rememberMe($email, $bytes);
 		setcookie("remember-me", $bytes, time() + (86400 * 30), "/");
-		updateDb("users", ["remember_token"], [hash('sha256', $bytes)], "email = '$email'");
-		updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], "email = '$email'");
+		updateDb("users", ["remember_token"], [hash('sha256', $bytes)], ["email"], [$email]);
+		updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], ["email"], [$email]);
 	}
 
 	header("Location: ../home.php");
@@ -50,8 +50,8 @@ function rememberMe($email, $bytes)
 		$bytes = random_bytes(12);
 		$conn->begin_transaction();
 
-		updateDb("users", ["remember_token"], [hash('sha256', $bytes)], "email = '$email'");
-		updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], "email = '$email'");
+		updateDb("users", ["remember_token"], [hash('sha256', $bytes)], ["email"], [$email]);
+		updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], ["email"], [$email]);
 
 		$conn->commit();
 

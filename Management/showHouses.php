@@ -27,7 +27,7 @@
 				
 				$heart = "<p class='heart";
 				if(isLogged()) {
-					$res = selectDb("preferites", ["monster", "door"], "monster = '$_SESSION[logged]' AND door = '$row[address]'");
+					$res = selectDb("preferites", ["monster", "door"], ["monster", "door"], [$_SESSION['logged'], $row["address"]]);
 					if($res->num_rows > 0)
 						$heart .= " heart_red";
 				}
