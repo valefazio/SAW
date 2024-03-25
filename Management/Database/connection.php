@@ -195,43 +195,14 @@ function getUsers(string $table, string $email): ?mysqli_result {
     return selectDb($table, ["username", "email", "admin"], "");
 }
 
-function testInsertDb() {
-    $table = "users";
-    $columns = ["username", "email", "pass_hash", "admin"];
-    $values = ["test1", "test1@test.test", "test1", 0];
-    $result = insertDb($table, $columns, $values);
-    if ($result)
-        echo "<br>Inserimento riuscito";
-    else
-        echo "<br>Inserimento fallito";
-}
-
-function testSelectDb()
+function removeDb(string $table, string $where): bool   //ERROR: da migliorare
 {
-    $table = "users";
-    $columns = [];//["username", "email", "admin"];
-    $result = selectDb($table, $columns, "email = 'test@test.test'");
-    if ($result) {
-        echo "<br>Selezione riuscita";
-        while ($row = $result->fetch_assoc()) {
-            echo "<br>Username: " . $row["username"] . " Email: " . $row["email"] . " Admin: " . $row["admin"];
-        }
-    } else
-        echo "<br>Selezione fallita";
+    $conn = accessDb();
+    $query = "DELETE FROM {$table} WHERE {$where}";
+    $stmt = $conn->prepare($query);
+    $result = $stmt->execute();
+    if (!$result)
+        return false;
+    disconnectDb($conn);
+    return true;
 }
-
-function testUpdateDb()
-{
-    $table = "users";
-    $columns = ["username", "email", "pass_hash", "admin"];
-    $values = ["test2", "test2@test.test", "test2", 0];
-    $result = updateDb($table, $columns, $values, "email = 'test1@test.test'");
-    if ($result)
-        echo "<br>Aggiornamento riuscito";
-    else
-        echo "<br>Aggiornamento fallito";
-}
-
-//testInsertDb();
-//testSelectDb();
-//testUpdateDb();

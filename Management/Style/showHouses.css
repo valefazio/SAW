@@ -3,8 +3,8 @@
 #boxes {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
+/* 	align-items: center;
+ */	flex-wrap: wrap;
 	margin-top: 10px;
 	z-index: 1;
 }
@@ -60,19 +60,36 @@
 	.reviews {
 		margin-left: 170px;
 	}
-	
 }
 
 .doorPic {
 	width: 225px;
 
 }
-.heart,
+/* .heart,
 .heart_red {
 	width: 40px;
 	position: absolute;
 }
 .heart:hover,
 .heart_red:hover {
+	transform: scale(1.08) translateY(-2px);
+} */
+.heart, .heart_red {
+	position: absolute;
+	margin-left: 200px;
+	margin-top: -15px;
+	font-size: 40px;
+	user-select: none;
+}
+.heart {
+	color: rgba(0, 0, 0, 0);
+	-webkit-text-stroke: 2px #000000;
+}
+.heart_red {
+	color: red;
+	-webkit-text-stroke: 2px #000000;
+}
+.heart:hover {
 	transform: scale(1.08) translateY(-2px);
 }

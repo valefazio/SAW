@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     reviews FLOAT NOT NULL DEFAULT 0 CHECK (reviews >= 0.0 AND reviews <= 5.0),
 	remember_token VARCHAR(255) NULL,
 	remember_token_created_at TIMESTAMP NULL,
-    profile_picture LONGBLOB NULL
+    profile_picture MEDIUMBLOB NULL
 );
 CREATE TABLE IF NOT EXISTS kids (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

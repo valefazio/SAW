@@ -7,16 +7,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../Management/Style/home.css">
 	<link rel="stylesheet" href="../Management/Style/calendar.css">
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
 <body id="top">
 	<nav id="navbar">
-		<!-- <script>
-			$(function () {
-				$("#navbar").load("../Management/navbar.html");
-			});
-		</script> -->
 		<?php
 		include("../Management/navbar.html");
 		?>
@@ -28,11 +22,6 @@
 		</div>
 	</div>
 	<div id="door_home">
-		<!-- <script>
-			$(function () {
-				$("#door_home").load("../Management/showHouses.php");
-			});
-		</script> -->
 		<?php
 		include("../Management/showHouses.php");
 		?>
