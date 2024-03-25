@@ -17,6 +17,7 @@
 	--colorA: black;
     --colorB: #1a3a4e;
     --colorC: #c24757 /*#fe0758*/;
+	--colorD: rgba(204, 186, 255, 0.87);
 	--defaultFont: 'poppins', sans-serif;
 }
 

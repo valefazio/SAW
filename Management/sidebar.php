@@ -23,7 +23,7 @@
     if(isLogged()) {
         echo "<script>createNewElement('../Pages/profile.php', 'manage_accounts', 'Profile');</script>";
         echo "<script>createNewElement('../Pages/bookings.php', 'door_front', 'Your bookings');</script>";
-        echo "<script>createNewElement('../Pages/saved.php', 'favorite', 'Saved');</script>";
+        echo "<script>createNewElement('../Pages/showDestinations.php?saved', 'favorite', 'Saved');</script>";
         echo "<script>createNewElement('../Pages/calendar.php', 'calendar_month', 'Calendar');</script>";
         echo "<script>createNewElement('../Pages/Access/logout.php', 'logout', 'Logout');</script>";
     } else {

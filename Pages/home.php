@@ -43,13 +43,9 @@
 				vacation. You can also find the best employees of the month and the most liked destinations by other
 				users.</p>
 		</div>
-		<div id="footer">
 			<?php
 			include("../Management/footer.html");
 			?>
-		</div>
-
 	</div>
 </body>
-
 </html>
