@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS countries (
 );
 CREATE TABLE IF NOT EXISTS doors (
     name VARCHAR(255) NOT NULL,
-    description TEXT NULL,
     address VARCHAR(255) NOT NULL PRIMARY KEY,
     country INT NOT NULL,
     door_picture_path VARCHAR(255) NULL,
@@ -87,7 +86,7 @@ INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Liam', '
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Mia', '1234567890', 'Management/Images/kids/mia.jpg', 'Orc, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Noah', '1234567890', 'Management/Images/kids/noah.jpg', 'Troll, Dad ');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Olivia', '1234567890', 'Management/Images/kids/olivia.jpg', 'Clown, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Parker', '1234567890', 'Management/Images/kids/parker.jpg', 'Wolfs');
+INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Parker', '1234567890', 'Management/Images/kids/parker.jpg', 'Homeworks, Wolfs');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Quinn', '1234567890', 'Management/Images/kids/quinn.jpg', 'Cats, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Ryan', '1234567890', 'Management/Images/kids/ryan.jpg', 'Zombies, Spiders');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Sophia', '1234567890', 'Management/Images/kids/sophia.jpg', 'Wolfs, Dogs');
@@ -98,52 +97,44 @@ INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('William'
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Xavier', '1234567890', 'Management/Images/kids/xavier.jpg', 'Orc, Dark');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Yara', '1234567890', 'Management/Images/kids/yara.jpg', '');
 INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Zane', '1234567890', 'Management/Images/kids/zane.jpg', 'Clown, Dark');
-/* INSERT INTO kids (name, phone, scaredOf) VALUES ('Alice', '1234567890', 'Goblin, Spiders, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Boo', '1234567890', 'Management/Images/kids/boo.jpg', 'Orc, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Charlie', '1234567890', 'Troll, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Daisy', '1234567890', 'Clown, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Eva', '1234567890', 'Wolfs');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Finn', '1234567890', 'Ghosts, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Gina', '1234567890', 'Zombies, Spiders');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Hugo', '1234567890', 'Wolfs, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Ivy', '1234567890', 'Ghosts, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Jack', '1234567890', 'Zombies, Spiders');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Katie', '1234567890', 'Clown, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Liam', '1234567890', 'Goblin, Spiders, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Mia', '1234567890', 'Orc, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Noah', '1234567890', 'Troll, Dad ');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Olivia', '1234567890', 'Clown, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Parker', '1234567890', 'Wolfs');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Quinn', '1234567890', 'Cats, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Ryan', '1234567890', 'Zombies, Spiders');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Sophia', '1234567890', 'Wolfs, Dogs');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Thomas', '1234567890', 'Ghosts, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Uma', '1234567890', 'Zombies, Spiders');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Violet', '1234567890', 'Clown, His aunt');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('William', '1234567890', 'Goblin, Spiders, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Xavier', '1234567890', 'Orc, Dark');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Yara', '1234567890', '');
-INSERT INTO kids (name, phone, scaredOf) VALUES ('Zane', '1234567890', 'Clown, Dark'); */
 
+INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Princesa, 1, 28008 Madrid, Spain', 'Management/Images/rooms/11_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Rue du Pirate, 1, 75001 Paris, France', 'Management/Images/rooms/9_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Ritterstraße, 1, 10178 Berlin, Germany', 'Management/Images/rooms/6_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Via della Principessa, 1, 00100 Roma, Italy', 'Management/Images/rooms/10_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Queen Street, 1, London W1B 5PW, United Kingdom', 'Management/Images/rooms/12_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('1600 Pennsylvania Ave NW, Washington, DC 20500, United States', 'Management/Images/rooms/5_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('111 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 'Management/Images/rooms/1_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Paseo de la Reforma, 1, 06000 Ciudad de México, CDMX, Mexico', 'Management/Images/rooms/15_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Sirena, 2, 28008 Madrid, Spain', 'Management/Images/rooms/7_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Rue de la Fée, 2, 75001 Paris, France', 'Management/Images/rooms/3_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Ritterstraße, 2, 10178 Berlin, Germany', 'Management/Images/rooms/2_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Via della Principessa, 2, 00100 Roma, Italy', 'Management/Images/rooms/4_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Queen Street, 2, London W1B 5PW, United Kingdom', 'Management/Images/rooms/8_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('1601 Pennsylvania Ave NW, Washington, DC 20500, United States', 'Management/Images/rooms/14_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('112 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 'Management/Images/rooms/17_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Paseo de la Reforma, 2, 06000 Ciudad de México, CDMX, Mexico', 'Management/Images/rooms/18_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Sirena, 3, 28008 Madrid, Spain', 'Management/Images/rooms/13_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Rue de la Fée, 3, 75001 Paris, France', 'Management/Images/rooms/16_1.jpg');
 
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Princess', 'Stanza Principessa tutta rosa', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 1, 'Management/Images/doors/door1.jpg', 4.5);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Pirate', 'Stanza Pirata tutta nera', 'Rue du Pirate, 1, 75001 Paris, France', 2, 'Management/Images/doors/door2.jpg', 4.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Knight', 'Stanza Cavaliere tutta grigia', 'Ritterstraße, 1, 10178 Berlin, Germany', 3, 'Management/Images/doors/door3.jpg', 3.5);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Prince', 'Stanza Principe tutta azzurra', 'Via della Principessa, 1, 00100 Roma, Italy', 4, 'Management/Images/doors/door4.jpg', 3.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Queen', 'Stanza Regina tutta viola', 'Queen Street, 1, London W1B 5PW, United Kingdom', 5, 'Management/Images/doors/door5.jpg', 2.5);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('King', 'Stanza Re tutta gialla', '1600 Pennsylvania Ave NW, Washington, DC 20500, United States', 6, 'Management/Images/doors/door6.jpg', 2.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Dragon', 'Stanza Drago tutta rossa', '111 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 7, 'Management/Images/doors/door7.jpg', 1.5);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Unicorn', 'Stanza Unicorno multicolor', 'Paseo de la Reforma, 1, 06000 Ciudad de México, CDMX, Mexico', 8, 'Management/Images/doors/door8.jpg', 1.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Mermaid', 'Stanza Sirena tutta azzurra', 'Calle de la Sirena, 2, 28008 Madrid, Spain', 1, 'Management/Images/doors/door9.jpg', 0.5);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Fairy', 'Stanza Fata tutta verde', 'Rue de la Fée, 2, 75001 Paris, France', 2, 'Management/Images/doors/door10.jpg', 0.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Elf', 'Stanza Elfo tutta marrone', 'Ritterstraße, 2, 10178 Berlin, Germany', 3, 'Management/Images/doors/door11.jpg', 0.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Goblin', 'Stanza Goblin tutta grigia', 'Via della Principessa, 2, 00100 Roma, Italy', 4, 'Management/Images/doors/door12.jpg', 0.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Orc', 'Stanza Orco tutta nera', 'Queen Street, 2, London W1B 5PW, United Kingdom', 5, 'Management/Images/doors/door13.jpg', 0.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Troll', 'Stanza Troll tutta marrone', '1601 Pennsylvania Ave NW, Washington, DC 20500, United States', 6, 'Management/Images/doors/door14.jpg', 0.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Witch', 'Stanza Strega tutta viola', '112 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 7, 'Management/Images/doors/door15.jpg', 0.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Wizard', 'Stanza Mago tutta blu', 'Paseo de la Reforma, 2, 06000 Ciudad de México, CDMX, Mexico', 8, 'Management/Images/doors/door16.jpg', 0.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Sorcerer', 'Stanza Stregone tutta nera', 'Calle de la Sirena, 3, 28008 Madrid, Spain', 1, 'Management/Images/doors/door17.jpg', 0.0);
-INSERT INTO doors (name, description, address, country, door_picture_path, reviews) VALUES ('Warlock', 'Stanza Mago Nero tutta nera', 'Rue de la Fée, 3, 75001 Paris, France', 2, 'Management/Images/doors/door18.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Princess', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 1, 'Management/Images/doors/door1.jpg', 4.5);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Pirate', 'Rue du Pirate, 1, 75001 Paris, France', 2, 'Management/Images/doors/door2.jpg', 4.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Knight', 'Ritterstraße, 1, 10178 Berlin, Germany', 3, 'Management/Images/doors/door3.jpg', 3.5);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Prince', 'Via della Principessa, 1, 00100 Roma, Italy', 4, 'Management/Images/doors/door4.jpg', 3.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Queen', 'Queen Street, 1, London W1B 5PW, United Kingdom', 5, 'Management/Images/doors/door5.jpg', 2.5);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('King', '1600 Pennsylvania Ave NW, Washington, DC 20500, United States', 6, 'Management/Images/doors/door6.jpg', 2.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Dragon', '111 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 7, 'Management/Images/doors/door7.jpg', 1.5);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Unicorn', 'Paseo de la Reforma, 1, 06000 Ciudad de México, CDMX, Mexico', 8, 'Management/Images/doors/door8.jpg', 1.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Mermaid', 'Calle de la Sirena, 2, 28008 Madrid, Spain', 1, 'Management/Images/doors/door9.jpg', 0.5);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Fairy', 'Rue de la Fée, 2, 75001 Paris, France', 2, 'Management/Images/doors/door10.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Elf', 'Ritterstraße, 2, 10178 Berlin, Germany', 3, 'Management/Images/doors/door11.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Goblin', 'Via della Principessa, 2, 00100 Roma, Italy', 4, 'Management/Images/doors/door12.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Orc', 'Queen Street, 2, London W1B 5PW, United Kingdom', 5, 'Management/Images/doors/door13.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Troll', '1601 Pennsylvania Ave NW, Washington, DC 20500, United States', 6, 'Management/Images/doors/door14.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Witch', '112 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 7, 'Management/Images/doors/door15.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Wizard', 'Paseo de la Reforma, 2, 06000 Ciudad de México, CDMX, Mexico', 8, 'Management/Images/doors/door16.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Sorcerer', 'Calle de la Sirena, 3, 28008 Madrid, Spain', 1, 'Management/Images/doors/door17.jpg', 0.0);
+INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Warlock', 'Rue de la Fée, 3, 75001 Paris, France', 2, 'Management/Images/doors/door18.jpg', 0.0);
 
 INSERT INTO resides (kid, door) VALUES (1, 'Calle de la Princesa, 1, 28008 Madrid, Spain');
 INSERT INTO resides (kid, door) VALUES (2, 'Calle de la Princesa, 1, 28008 Madrid, Spain');
@@ -170,7 +161,6 @@ INSERT INTO resides (kid, door) VALUES (22, '1601 Pennsylvania Ave NW, Washingto
 INSERT INTO resides (kid, door) VALUES (23, '112 Sussex Dr, Ottawa, ON K1A 0A1, Canada');
 INSERT INTO resides (kid, door) VALUES (24, 'Paseo de la Reforma, 2, 06000 Ciudad de México, CDMX, Mexico');
 INSERT INTO resides (kid, door) VALUES (25, 'Calle de la Sirena, 3, 28008 Madrid, Spain');
-
 
 
 

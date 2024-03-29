@@ -49,11 +49,7 @@
 .box_text {
 	text-align: left;
 	padding: 10px;
-}
-
-.box h2 {
 	color: var(--colorB);
-	cursor: pointer;
 }
 
 .reviews {
@@ -70,7 +66,8 @@
 
 .doorPic {
 	width: 225px;
-
+	height: 390px;
+	object-fit: cover;
 }
 
 .heart,
@@ -104,6 +101,7 @@
 	user-select: none;
 	border-radius: 50%;
 	border: 1px solid var(--colorB);
+	/* cursor: default; */
 }
 
 .scaredOf {
