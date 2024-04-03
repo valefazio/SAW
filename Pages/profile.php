@@ -26,6 +26,11 @@
         $conn = accessDb();
         $sql = "SELECT * FROM users WHERE email = " . $_SESSION["email"];
         $result = $conn->query($sql);
+        /*-----------------------------
+         Vale:      usa la funzione in connection: niente accessDb, e tutto il resto
+                    $result = selectDb("users", [], ["email"], [$_SESSION["email"]]);
+                    e ti restituisce direttamente quello da ispezionare
+        --------------------------------*/
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

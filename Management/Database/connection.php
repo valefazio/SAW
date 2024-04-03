@@ -98,8 +98,7 @@ function insertDb(string $table, array $columns, array $values): bool
     return true;
 }
 
-function selectDb(string $table, array $columns, array $whereCol, array $whereVal): ?mysqli_result
-{
+function selectDb(string $table, array $columns, array $whereCol, array $whereVal): ?mysqli_result {
     if(count($whereCol) != count($whereVal)) {
         logs("numero colonne e valori non corrispondono");
         return null;
