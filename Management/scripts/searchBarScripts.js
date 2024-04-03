@@ -1,15 +1,15 @@
-document.getElementsByTagName("form")[0].addEventListener("submit", function (event) {
+/* document.getElementsByTagName("form")[0].addEventListener("submit", function (event) {
 	event.preventDefault();
 	var location = document.getElementById("location").value;
 	if(location == "Add location")
-		location = NULL;
+		location = "";
 	var checkin = document.getElementById("calendar").value;
 	if(checkin == "Add date")
-		checkin = NULL;
+		checkin = "";
 	var level = document.getElementById("level").value;
 	//window.location.href ="search.php?location=" + location + "&checkin=" + checkin + "&level=" + level;
 	return;
-});
+}); */
 
 /***************** LEVEL *****************/
 class Level {
@@ -92,8 +92,8 @@ class Calendar {
 		document.getElementById('prevMonth').addEventListener('click', () => this.prevMonthAction());
 		document.getElementById('nextMonth').addEventListener('click', () => this.nextMonthAction());
 
-		var $marginLeft = document.getElementById('calendar').offsetLeft - 100;
-		this.calendar.setAttribute("style", "margin-left:" + $marginLeft + "px");
+		/* var $marginLeft = document.getElementById('calendar').offsetLeft - 100;
+		this.calendar.setAttribute("style", "margin-left:" + $marginLeft + "px"); */
 	}
 
 	createCalendar() {

@@ -12,8 +12,7 @@ CREATE TABLE IF NOT EXISTS kids (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NULL,
-    profile_picture_path VARCHAR(255) NULL, 
-    scaredOf VARCHAR(500) NULL
+    profile_picture_path VARCHAR(255) NULL
 );
 CREATE TABLE IF NOT EXISTS countries (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -60,6 +59,29 @@ CREATE TABLE IF NOT EXISTS preferites (
     FOREIGN KEY (door) REFERENCES doors(address) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS scaredOf (
+    scare VARCHAR(255),
+    kid INT NOT NULL,
+    PRIMARY KEY (scare, kid),
+    FOREIGN KEY (kid) REFERENCES kids(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+DELIMITER //
+CREATE TRIGGER check_scaredOf_limit
+BEFORE INSERT ON scaredOf
+FOR EACH ROW
+BEGIN
+    DECLARE num_fears INT;
+    SET num_fears = (SELECT COUNT(*) FROM scaredOf WHERE kid = NEW.kid);
+    
+    IF num_fears >= 5 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot insert more than 5 fears for a kid';
+    END IF;
+END //
+DELIMITER ;
+
+
 
 
 INSERT INTO countries (name) VALUES ('Spain');
@@ -71,32 +93,99 @@ INSERT INTO countries (name) VALUES ('United States');
 INSERT INTO countries (name) VALUES ('Canada');
 INSERT INTO countries (name) VALUES ('Mexico');
 
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Alice', '1234567890', 'Management/Images/kids/alice.jpg', 'Goblin, Spiders, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Boo', '1234567890', 'Management/Images/kids/boo.jpg', 'Orc, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Charlie', '1234567890', 'Management/Images/kids/charlie.jpg', 'Troll, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Daisy', '1234567890', 'Management/Images/kids/daisy.jpg', 'Clown, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Eva', '1234567890', 'Management/Images/kids/eva.jpg', 'Wolfs');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Finn', '1234567890', 'Management/Images/kids/finn.jpg', 'Ghosts, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Gina', '1234567890', 'Management/Images/kids/gina.jpg', 'Zombies, Spiders');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Hugo', '1234567890', 'Management/Images/kids/hugo.jpg', 'Wolfs, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Ivy', '1234567890', 'Management/Images/kids/ivy.jpg', 'Ghosts, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Jack', '1234567890', 'Management/Images/kids/jack.jpg', 'Zombies, Spiders');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Katie', '1234567890', 'Management/Images/kids/katie.jpg', 'Clown, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Liam', '1234567890', 'Management/Images/kids/liam.jpg', 'Goblin, Spiders, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Mia', '1234567890', 'Management/Images/kids/mia.jpg', 'Orc, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Noah', '1234567890', 'Management/Images/kids/noah.jpg', 'Troll, Dad ');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Olivia', '1234567890', 'Management/Images/kids/olivia.jpg', 'Clown, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Parker', '1234567890', 'Management/Images/kids/parker.jpg', 'Homeworks, Wolfs');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Quinn', '1234567890', 'Management/Images/kids/quinn.jpg', 'Cats, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Ryan', '1234567890', 'Management/Images/kids/ryan.jpg', 'Zombies, Spiders');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Sophia', '1234567890', 'Management/Images/kids/sophia.jpg', 'Wolfs, Dogs');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Thomas', '1234567890', 'Management/Images/kids/thomas.jpg', 'Ghosts, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Uma', '1234567890', 'Management/Images/kids/uma.jpg', 'Zombies, Spiders');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Violet', '1234567890', 'Management/Images/kids/violet.jpg', 'Clown, His aunt');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('William', '1234567890', 'Management/Images/kids/william.jpg', 'Goblin, Spiders, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Xavier', '1234567890', 'Management/Images/kids/xavier.jpg', 'Orc, Dark');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Yara', '1234567890', 'Management/Images/kids/yara.jpg', '');
-INSERT INTO kids (name, phone, profile_picture_path, scaredOf) VALUES ('Zane', '1234567890', 'Management/Images/kids/zane.jpg', 'Clown, Dark');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Alice', '1234567890', 'Management/Images/kids/alice.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Boo', '1234567890', 'Management/Images/kids/boo.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Charlie', '1234567890', 'Management/Images/kids/charlie.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Daisy', '1234567890', 'Management/Images/kids/daisy.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Eva', '1234567890', 'Management/Images/kids/eva.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Finn', '1234567890', 'Management/Images/kids/finn.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Gina', '1234567890', 'Management/Images/kids/gina.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Hugo', '1234567890', 'Management/Images/kids/hugo.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Ivy', '1234567890', 'Management/Images/kids/ivy.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Jack', '1234567890', 'Management/Images/kids/jack.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Katie', '1234567890', 'Management/Images/kids/katie.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Liam', '1234567890', 'Management/Images/kids/liam.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Mia', '1234567890', 'Management/Images/kids/mia.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Noah', '1234567890', 'Management/Images/kids/noah.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Olivia', '1234567890', 'Management/Images/kids/olivia.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Parker', '1234567890', 'Management/Images/kids/parker.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Quinn', '1234567890', 'Management/Images/kids/quinn.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Ryan', '1234567890', 'Management/Images/kids/ryan.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Sophia', '1234567890', 'Management/Images/kids/sophia.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Thomas', '1234567890', 'Management/Images/kids/thomas.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Uma', '1234567890', 'Management/Images/kids/uma.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Violet', '1234567890', 'Management/Images/kids/violet.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('William', '1234567890', 'Management/Images/kids/william.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Xavier', '1234567890', 'Management/Images/kids/xavier.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Yara', '1234567890', 'Management/Images/kids/yara.jpg');
+INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Zane', '1234567890', 'Management/Images/kids/zane.jpg');
+
+INSERT INTO scaredOf (scare, kid) VALUES ('Orc', 2);
+INSERT INTO scaredOf (scare, kid) VALUES ('Troll', 3);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 3);
+INSERT INTO scaredOf (scare, kid) VALUES ('Clown', 4);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 4);
+INSERT INTO scaredOf (scare, kid) VALUES ('Wolfs', 4);
+INSERT INTO scaredOf (scare, kid) VALUES ('Ghosts', 5);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 5);
+INSERT INTO scaredOf (scare, kid) VALUES ('Zombies', 5);
+INSERT INTO scaredOf (scare, kid) VALUES ('Spiders', 5);
+INSERT INTO scaredOf (scare, kid) VALUES ('Goblin', 6);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 6);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dad', 6);
+INSERT INTO scaredOf (scare, kid) VALUES ('Clowns', 6);
+INSERT INTO scaredOf (scare, kid) VALUES ('Aunt', 6);
+INSERT INTO scaredOf (scare, kid) VALUES ('Wolfs', 8);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dogs', 8);
+INSERT INTO scaredOf (scare, kid) VALUES ('Ghosts', 9);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 9);
+INSERT INTO scaredOf (scare, kid) VALUES ('Aunt', 9);
+INSERT INTO scaredOf (scare, kid) VALUES ('Sun', 10);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 10);
+INSERT INTO scaredOf (scare, kid) VALUES ('Clown', 10);
+INSERT INTO scaredOf (scare, kid) VALUES ('Goblin', 11);
+INSERT INTO scaredOf (scare, kid) VALUES ('Spiders', 11);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 11);
+INSERT INTO scaredOf (scare, kid) VALUES ('Orc', 12);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 12);
+INSERT INTO scaredOf (scare, kid) VALUES ('Troll', 13);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 13);
+INSERT INTO scaredOf (scare, kid) VALUES ('Ghosts', 14);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 14);
+INSERT INTO scaredOf (scare, kid) VALUES ('Zombies', 15);
+INSERT INTO scaredOf (scare, kid) VALUES ('Spiders', 15);
+INSERT INTO scaredOf (scare, kid) VALUES ('Wolfs', 15);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 15);
+INSERT INTO scaredOf (scare, kid) VALUES ('Ghosts', 16);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 16);
+INSERT INTO scaredOf (scare, kid) VALUES ('Zombies', 16);
+INSERT INTO scaredOf (scare, kid) VALUES ('Spiders', 16);
+INSERT INTO scaredOf (scare, kid) VALUES ('Clown', 16);
+INSERT INTO scaredOf (scare, kid) VALUES ('Goblin', 18);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 18);
+INSERT INTO scaredOf (scare, kid) VALUES ('Aunt', 18);
+INSERT INTO scaredOf (scare, kid) VALUES ('Snakes', 18);
+INSERT INTO scaredOf (scare, kid) VALUES ('Sun', 19);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 19);
+INSERT INTO scaredOf (scare, kid) VALUES ('Clown', 19);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dad', 20);
+INSERT INTO scaredOf (scare, kid) VALUES ('Heights', 20);
+INSERT INTO scaredOf (scare, kid) VALUES ('Goblin', 21);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 21);
+INSERT INTO scaredOf (scare, kid) VALUES ('Aunt', 22);
+INSERT INTO scaredOf (scare, kid) VALUES ('Snakes', 22);
+INSERT INTO scaredOf (scare, kid) VALUES ('Sun', 23);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 23);
+INSERT INTO scaredOf (scare, kid) VALUES ('Clown', 24);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 24);
+INSERT INTO scaredOf (scare, kid) VALUES ('Goblin', 24);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dad', 25);
+INSERT INTO scaredOf (scare, kid) VALUES ('Clowns', 25);
+INSERT INTO scaredOf (scare, kid) VALUES ('Goblin', 25);
+INSERT INTO scaredOf (scare, kid) VALUES ('Spiders', 25);
+INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 25);
+INSERT INTO scaredOf (scare, kid) VALUES ('Aunt', 26);
+INSERT INTO scaredOf (scare, kid) VALUES ('Heights', 26);
 
 INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Princesa, 1, 28008 Madrid, Spain', 'Management/Images/rooms/11_1.jpg');
 INSERT INTO room_pics (room_id, filename) VALUES ('Rue du Pirate, 1, 75001 Paris, France', 'Management/Images/rooms/9_1.jpg');
@@ -164,5 +253,5 @@ INSERT INTO resides (kid, door) VALUES (25, 'Calle de la Sirena, 3, 28008 Madrid
 
 
 
-INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2021-01-01', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 'vale.fazio.2002@gmail.com', NULL, NULL);
-INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2021-01-01', 'Rue du Pirate, 1, 75001 Paris, France', 'vale.fazio.2002@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-01', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 'vale.fazio.2002@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2025-01-01', 'Rue du Pirate, 1, 75001 Paris, France', 'vale.fazio.2002@gmail.com', NULL, NULL);

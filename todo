@@ -2,19 +2,17 @@ To fix:
 - nel calendario mettere non selezionabili i giorni passati @done
 - MODIFICARE connection.php -> PREPARED STATEMENT @done
 - quando accedi controllare che il cookie non sia scaduto
-- accessControl: aggiungere che le pagine possono essere riservate per admin o user loggati
+- visualizza password
 - password dimenticata
 - mettere placeholders nei form
 - controllo js form + campo rosso se vuoto nei form
 - fare la trim nel login
 - gestione scadenza remember-me nel db
-- visualizza password
-- fare logo
+- fare logo @done
 - privacy e cookies
 - cancella profilo
-- togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali)
-- pulisci cookies in db da pagina admin?
-- dividere form login e registratione in html e php
+- togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali) @done
+- dividere form login e registratione in html e php @done
 - aggiungere gli alt alle immagini
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?)
 - remember me non funziona

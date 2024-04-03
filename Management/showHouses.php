@@ -43,7 +43,42 @@
 			}
 		} else if (isset($_GET['search'])) {
 			unset($_GET['search']);
-			//da fare
+			 $query = /* "	SELECT DISTINCT D.name, D.address, D.door_picture_path AS 'doorPic', C.name AS 'country', D.reviews 
+						FROM doors AS D 
+						LEFT JOIN countries AS C ON D.country = C.id
+						JOIN resides AS R ON D.address = R.door
+						JOIN kids AS K ON R.kid = K.id
+						JOIN scaredOf AS S ON K.id = S.kid"; */
+						"SELECT DISTINCT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+						FROM doors AS D 
+						LEFT JOIN countries AS C ON D.country = C.id 
+						JOIN resides AS R ON D.address = R.door 
+						JOIN kids AS K ON R.kid = K.id ";
+			if(isset($_POST['location']) || isset($_POST['calendar']) || isset($_POST['level'])){
+				$query .= " WHERE ";
+				$ands = false;
+				if(isset($_POST['location'])) {
+					$query .= "C.name = '" . strtolower($_POST['location']) . "'";
+					$ands = true;
+				}
+				if(isset($_POST['calendar'])) {
+					if($ands)
+						$query .= " AND ";
+					else
+						$ands = true;
+					$query .= "D.address NOT IN (SELECT DISTINCT door FROM calendar WHERE calendar.date = STR_TO_DATE('" . $_POST['calendar'] . "', '%d/%m/%Y') AND calendar.door = D.address)";
+					$ands = true;
+				}
+				if(isset($_POST['level'])) {
+					if($ands)
+						$query .= " AND ";
+					$levelScare = array(5,4,3,2,1,0);
+					$query .= "(SELECT COUNT(*) FROM scaredOf WHERE scaredOf.kid = K.id) = " . $levelScare[intval($_POST['level'])] . " GROUP BY K.id";
+				}
+			}
+ 
+			$query .= " ORDER BY D.name ASC";
+			$doors = selectQuery($query);
 			if ($doors->num_rows == 0) {
 				echo "<h3 style='text-align: center'> No results found</h3>";
 				return;
@@ -55,7 +90,7 @@
 			$doors = selectQuery(
 				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
-					RIGHT JOIN calendar AS Ca ON D.address = Ca.door AND Ca.monster = '" . $_SESSION['logged'] . "'
+								RIGHT JOIN calendar AS Ca ON D.address = Ca.door AND Ca.monster = '" . $_SESSION['logged'] . "'
 				WHERE Ca.date >= CURDATE()
 				ORDER BY Ca.date ASC"
 			);
@@ -65,19 +100,17 @@
 			}
 		} else
 			$doors = selectQuery("SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id ORDER BY D.name ASC");
+		
 
 
-
-
+		/* DISPLAY ROOMS */
 		if ($doors->num_rows > 0) {
 			while ($row = $doors->fetch_assoc()) {
 				echo "<div class='box'>";
-
-
-				$kid = selectQuery("SELECT K.name, K.profile_picture_path, K.scaredOf FROM kids AS K JOIN resides AS R ON K.id = R.kid WHERE R.door = '" . $row["address"] . "'");
-
-				$scaredOf = "";
+				$kid = selectQuery("SELECT K.name, K.profile_picture_path FROM kids AS K JOIN resides AS R ON K.id = R.kid WHERE R.door = '" . $row["address"] . "'");
 				if ($kid->num_rows > 0) {	//se ci sono bimbi che vivono in quella stanza
+					$scaredOf = "";
+
 					/* HEART - SAVED */
 					$heart = "<p class='heart";
 					if (isLogged()) {	//se l'utente è loggato controllo se la stanza è nei preferiti
@@ -94,8 +127,6 @@
 					/* KIDS - images */
 					$kids = 0;
 					while ($kiddo = $kid->fetch_assoc()) {
-						if ($scaredOf != "" && $kids > 0)
-							$scaredOf .= "<br> ";
 						$kids++;
 						if ($kiddo["profile_picture_path"] == NULL)
 							echo "<img class='kid' style=' margin-left: " . $kids * (-50) . "px' 
@@ -103,9 +134,43 @@
 						else
 							echo "<img class='kid'  style=' margin-left: " . $kids * (-50) . "px' 
 									src='../" . $kiddo["profile_picture_path"] . "' title='" . $kiddo["name"] . "'>";
-						$scaredOf .= "<b>" . $kiddo["name"] . "</b> is scared of " . $kiddo["scaredOf"];
+						$scareQuery = selectQuery("SELECT S.scare FROM kids AS K JOIN scaredOf AS S ON K.id = S.kid WHERE K.name = '" . $kiddo["name"] . "'");
+						if ($scareQuery->num_rows > 0) {
+							$scaredOf .= $kiddo["name"] . " is scared of ";
+							$scare = $scareQuery->fetch_assoc();
+							while ($scare) {
+								$scaredOf .= $scare["scare"];
+								$scare = $scareQuery->fetch_assoc();
+								if ($scare)
+									$scaredOf .= ", ";
+								else
+									$scaredOf .= "<br>";
+							}
+						} else
+							$scaredOf .= $kiddo["name"] . " is scared of nothing<br>";
+
+						/* LEVEL */
+						$query = "SELECT COUNT(S.scare) as 'level' FROM kids AS K LEFT JOIN scaredOf AS S ON K.id = S.kid WHERE K.name = '" . $kiddo["name"] . "' GROUP BY K.name";
+						$level = selectQuery($query);
+						if ($level->num_rows > 0) {
+							$level = $level->fetch_assoc();
+							switch($level["level"]){
+								case 5:
+								case 4:
+									echo "<p class='level' title='level: Easy' style=' margin-left: " . (250) + $kids * (-50) . "px' >🟢</p>";
+									break;
+								case 3:
+								case 2:
+									echo "<p class='level' title='level: Medium' style=' margin-left: " . (250) + $kids * (-50) . "px' >🟡</p>";
+									break;
+								case 1:
+								case 0:
+									echo "<p class='level' title='level: Hard' style=' margin-left: " . (250) + $kids * (-50) . "px' >🔴</p>";
+									break;
+							}
+						}
 					}
-				}
+					}
 				echo "<div class='box_text'>";
 				/* NOME STANZA */
 				echo "<h2>" . $row["name"] . "</h2>";
@@ -119,7 +184,6 @@
 				echo "<p style='font-size: 13px' class='address'><i>" . $row["address"];
 				if (!str_contains(strtolower($row["address"]), strtolower($row["country"])))
 					echo ", " . $row["country"];
-				
 				echo "</i></p>";
 				echo "</div></div>";
 				$i++;

@@ -73,7 +73,7 @@
 .heart,
 .heart_red {
 	position: absolute;
-	margin-left: 200px;
+	margin-left: 12%;
 	margin-top: -15px;
 	font-size: 40px;
 	user-select: none;
@@ -95,15 +95,17 @@
 
 .kid {
 	position: absolute;
-	margin: 350px 0px auto -50px;
+	margin: 350px 0px auto -100px;
 	width: 60px;
 	height: 60px;
 	user-select: none;
 	border-radius: 50%;
 	border: 1px solid var(--colorB);
-	/* cursor: default; */
 }
-
 .scaredOf {
 	font-size: 13;
+}
+.level {
+	position: absolute;
+	margin: 0px;
 }

@@ -68,7 +68,7 @@ for (let i = 0; i < doors.length; i++) {
 const scares = document.getElementsByClassName('scaredOf');
 for (let i = 0; i < scares.length; i++) {
 	let text = scares[i].innerText;
-	if (text.length > 70) {
+	scares[i].setAttribute('title', text);
+	if (text.length > 70)
 		scares[i].innerText = text.substr(0, 70) + '...';
-	}
 }

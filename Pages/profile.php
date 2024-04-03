@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-    <title>Door Page</title> <!-- qui già si potrebbe mettere il nome della porta -->
+    <title>Profile</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -15,7 +15,7 @@
     </nav>
 
     <div id="door_page">
-        <h1 style="text-align: center; margin: 20px">Door</h1>   <!-- Prova -->
+        <h1 style="text-align: center; margin: 20px">Profile</h1>   <!-- Prova -->
     </div>
 
     <?php
