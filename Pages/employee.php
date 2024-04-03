@@ -2,19 +2,19 @@
 <html lang="en">
 
 <head>
-    <title>Top 3 Impiegati del Mese</title>
+    <title>Employees of the month</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Management/Style/employee.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-    <nav id="navbar">
-        <?php
-        include ("../Management/navbar.html");
-        ?>
-    </nav>
-    <h1>IMPIEGATI DEL MESE</h1>
+    <body>
+        <nav id="navbar">
+            <?php
+            include ("../Management/navbar.html");
+            ?>
+        </nav>
+        <h1>IMPIEGATI DEL MESE</h1>
 
     <div class="employee-box">
         <?php
