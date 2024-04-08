@@ -218,7 +218,7 @@ function selectQuery(string $query): ?mysqli_result {
 }
 
 function getUsers(string $email): ?mysqli_result {
-    return selectDb("users", [], ["email"], $email);
+    return selectDb("users", [], ["email"], [$email]);
 }
 
 function removeDb(string $table, string $where): bool   //ERROR: da migliorare
