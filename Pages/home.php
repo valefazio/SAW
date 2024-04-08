@@ -44,12 +44,9 @@
 				users.</p>
 		</div>
 	</div>
-	<footer id="footer">
-		<script>
-			$(function () {
-				$("#footer").load("../Management/footer.html");
-			});
-		</script>
-	</footer>
+	<?php
+	include ("../Management/footer.html");
+	?>
 </body>
+
 </html>
