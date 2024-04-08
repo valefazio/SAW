@@ -21,7 +21,7 @@
         include ("../Management/accessControl.php");
 
         /*if(!isLogged()) {
-            echo "<script> window.location.href = 'Access/login.php';</script>";
+            echo "<script> window.location.html = 'Access/login.php';</script>";
             exit;
         } //Accessibile solo a chi loggato per privacy?
         */
