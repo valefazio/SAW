@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 		updateDb("users", ["remember_token"], [hash('sha256', $bytes)], ["email"], [$email]);
 		updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], ["email"], [$email]);
 	}
-
 	header("Location: ../home.php");
 	exit;
 } else {
