@@ -217,16 +217,8 @@ function selectQuery(string $query): ?mysqli_result {
     return $result;
 }
 
-function selectWholeDb() {
-    $conn = accessDb();
-    $query = "SELECT * FROM athletes LEFT JOIN managers ON managers.id = athletes.manager_id; ";
-}
-
-function getUserProfileData(string $table, string $email): ?mysqli_result {
-    return selectDb($table, ["username", "email"], ["email"], [$email]);
-}
-function getUsers(string $table, string $email): ?mysqli_result {
-    return selectDb($table, ["username", "email", "admin"], [], []);
+function getUsers(string $email): ?mysqli_result {
+    return selectDb("users", [], ["email"], $email);
 }
 
 function removeDb(string $table, string $where): bool   //ERROR: da migliorare
