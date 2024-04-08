@@ -16,6 +16,7 @@ To fix:
 - aggiungere gli alt alle immagini
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?)
 - remember me non funziona
+- foto profilo di default
 
 - gestione degli errori
 - controlli valori di ritorno
