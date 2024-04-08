@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 	}
 
 	//impostazione variabili di sessione e cookies
-	$_SESSION['logged'] = $email;
+	$_SESSION['email'] = $email;
 	if (isset ($_POST['remember-me'])) {
 		rememberMe($email, $bytes);
 		setcookie("remember-me", $bytes, time() + (86400 * 30), "/");

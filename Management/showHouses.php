@@ -34,7 +34,7 @@
 				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
 				WHERE D.address IN (
-					SELECT door FROM preferites WHERE monster = '" . $_SESSION['logged'] . "') 
+					SELECT door FROM preferites WHERE monster = '" . $_SESSION['email'] . "') 
 				ORDER BY D.name ASC"
 			);
 			if ($doors->num_rows == 0) {
@@ -90,7 +90,7 @@
 			$doors = selectQuery(
 				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
-								RIGHT JOIN calendar AS Ca ON D.address = Ca.door AND Ca.monster = '" . $_SESSION['logged'] . "'
+								RIGHT JOIN calendar AS Ca ON D.address = Ca.door AND Ca.monster = '" . $_SESSION['email'] . "'
 				WHERE Ca.date >= CURDATE()
 				ORDER BY Ca.date ASC"
 			);
@@ -114,7 +114,7 @@
 					/* HEART - SAVED */
 					$heart = "<p class='heart";
 					if (isLogged()) {	//se l'utente è loggato controllo se la stanza è nei preferiti
-						$res = selectDb("preferites", ["monster", "door"], ["monster", "door"], [$_SESSION['logged'], $row["address"]]);
+						$res = selectDb("preferites", ["monster", "door"], ["monster", "door"], [$_SESSION['email'], $row["address"]]);
 						if ($res->num_rows > 0)
 							$heart .= " heart_red";
 					}

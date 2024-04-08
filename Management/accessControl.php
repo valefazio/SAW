@@ -10,12 +10,12 @@
 			$res = selectDb("users", ["email"], ["remember_token"], [$cookie]);
 			if ($res->num_rows == 1) {	//cookie di remember-me corrisponde
 				$logged = 1;
-				if(!isset($_SESSION['logged']))	//se non è già presente una sessione attiva setto la variabile di sessione
-					$_SESSION['logged'] = $res->fetch_assoc()['email'];
+				if(!isset($_SESSION['email']))	//se non è già presente una sessione attiva setto la variabile di sessione
+					$_SESSION['email'] = $res->fetch_assoc()['email'];
 			} else {	//cookie remember-me non trovato nel db
 				$logged = 0;
 			}
-		} else if (isset($_SESSION['logged'])) {	//utente appena loggato -> sessione attiva
+		} else if (isset($_SESSION['email'])) {	//utente appena loggato -> sessione attiva
 			$logged = 1;
 		} else {	//utente non ancora loggato
 			$logged = 0;
@@ -24,7 +24,7 @@
     }
 
 	function isAdmin() {
-		$res = selectDb("users", ["admin"], ["email"], [$_SESSION['logged']]);
+		$res = selectDb("users", ["admin"], ["email"], [$_SESSION['email']]);
 			
 		if($res) {
 			if ($res->num_rows > 0) {

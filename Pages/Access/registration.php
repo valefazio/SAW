@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$lastname = htmlspecialchars(trim($_POST["lastname"]));
 	insertDb("users", ["firstname", "lastname", "email", "password"], [$firstname, $lastname, $email, $psw]);
 
-	$_SESSION['logged'] = $email;
+	$_SESSION['email'] = $email;
 	relocation("../home.php");
 	exit;
 }

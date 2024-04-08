@@ -4,12 +4,12 @@ include "../Management/accessControl.php";
 if ($_POST['to_do'] == "heart") {
     if (isLogged()) {
         if ($_POST['action'] == 'add') {
-            if (insertDb("preferites", ["monster", "door"], [$_SESSION['logged'], $_POST['room']]))
+            if (insertDb("preferites", ["monster", "door"], [$_SESSION['email'], $_POST['room']]))
                 echo true;
             else
                 echo false;   //ERROR
         } else {    //remove
-            if (removeDb("preferites", "monster = '" . $_SESSION['logged'] . "' AND door = '" . $_POST['room'] . "'"))
+            if (removeDb("preferites", "monster = '" . $_SESSION['email'] . "' AND door = '" . $_POST['room'] . "'"))
                 echo true;
             else
                 echo false;   //ERROR
