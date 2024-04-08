@@ -51,7 +51,7 @@ function insertDb(string $table, array $columns, array $values): bool
     $infoTab = getTableInfoDb($table);
 
     //determine if query is already present in the db
-    /* foreach ($infoTab["columnName"] as $col) {
+    foreach ($infoTab["columnName"] as $col) {
         if ($infoTab["is_primary_key"]) {
             $query = "SELECT * FROM {$table} WHERE {$col} = ?";
             $stmt = $conn->prepare($query);
@@ -63,7 +63,7 @@ function insertDb(string $table, array $columns, array $values): bool
                 return false;
             }
         }
-    } */
+    }
 
     $query = "INSERT INTO {$table} (";
 

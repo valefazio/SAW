@@ -12,7 +12,7 @@
 <body id="top">
 	<nav id="navbar">
 		<?php
-		include("../Management/navbar.html");
+		include ("../Management/navbar.html");
 		?>
 	</nav>
 	<div class="header">
@@ -23,7 +23,7 @@
 	</div>
 	<div id="door_home">
 		<?php
-		include("../Management/showHouses.php");
+		include ("../Management/showHouses.php");
 		?>
 	</div>
 	<div class="website_description">
@@ -43,9 +43,13 @@
 				vacation. You can also find the best employees of the month and the most liked destinations by other
 				users.</p>
 		</div>
-			<?php
-			include("../Management/footer.html");
-			?>
 	</div>
+	<footer id="footer">
+		<script>
+			$(function () {
+				$("#footer").load("../Management/footer.html");
+			});
+		</script>
+	</footer>
 </body>
 </html>
