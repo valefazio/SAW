@@ -187,25 +187,6 @@ INSERT INTO scaredOf (scare, kid) VALUES ('Dark', 25);
 INSERT INTO scaredOf (scare, kid) VALUES ('Aunt', 26);
 INSERT INTO scaredOf (scare, kid) VALUES ('Heights', 26);
 
-INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Princesa, 1, 28008 Madrid, Spain', 'Management/Images/rooms/11_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Rue du Pirate, 1, 75001 Paris, France', 'Management/Images/rooms/9_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Ritterstraße, 1, 10178 Berlin, Germany', 'Management/Images/rooms/6_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Via della Principessa, 1, 00100 Roma, Italy', 'Management/Images/rooms/10_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Queen Street, 1, London W1B 5PW, United Kingdom', 'Management/Images/rooms/12_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('1600 Pennsylvania Ave NW, Washington, DC 20500, United States', 'Management/Images/rooms/5_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('111 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 'Management/Images/rooms/1_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Paseo de la Reforma, 1, 06000 Ciudad de México, CDMX, Mexico', 'Management/Images/rooms/15_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Sirena, 2, 28008 Madrid, Spain', 'Management/Images/rooms/7_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Rue de la Fée, 2, 75001 Paris, France', 'Management/Images/rooms/3_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Ritterstraße, 2, 10178 Berlin, Germany', 'Management/Images/rooms/2_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Via della Principessa, 2, 00100 Roma, Italy', 'Management/Images/rooms/4_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Queen Street, 2, London W1B 5PW, United Kingdom', 'Management/Images/rooms/8_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('1601 Pennsylvania Ave NW, Washington, DC 20500, United States', 'Management/Images/rooms/14_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('112 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 'Management/Images/rooms/17_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Paseo de la Reforma, 2, 06000 Ciudad de México, CDMX, Mexico', 'Management/Images/rooms/18_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Sirena, 3, 28008 Madrid, Spain', 'Management/Images/rooms/13_1.jpg');
-INSERT INTO room_pics (room_id, filename) VALUES ('Rue de la Fée, 3, 75001 Paris, France', 'Management/Images/rooms/16_1.jpg');
-
 INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Princess', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 1, 'Management/Images/doors/door1.jpg', 4.5);
 INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Pirate', 'Rue du Pirate, 1, 75001 Paris, France', 2, 'Management/Images/doors/door2.jpg', 4.0);
 INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Knight', 'Ritterstraße, 1, 10178 Berlin, Germany', 3, 'Management/Images/doors/door3.jpg', 3.5);
@@ -224,6 +205,25 @@ INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('
 INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Wizard', 'Paseo de la Reforma, 2, 06000 Ciudad de México, CDMX, Mexico', 8, 'Management/Images/doors/door16.jpg', 0.0);
 INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Sorcerer', 'Calle de la Sirena, 3, 28008 Madrid, Spain', 1, 'Management/Images/doors/door17.jpg', 0.0);
 INSERT INTO doors (name, address, country, door_picture_path, reviews) VALUES ('Warlock', 'Rue de la Fée, 3, 75001 Paris, France', 2, 'Management/Images/doors/door18.jpg', 0.0);
+
+INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Princesa, 1, 28008 Madrid, Spain', 'Management/Images/rooms/11_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Rue du Pirate, 1, 75001 Paris, France', 'Management/Images/rooms/9_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Ritterstraße, 1, 10178 Berlin, Germany', 'Management/Images/rooms/6_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Via della Principessa, 1, 00100 Roma, Italy', 'Management/Images/rooms/10_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Queen Street, 1, London W1B 5PW, United Kingdom', 'Management/Images/rooms/12_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('1600 Pennsylvania Ave NW, Washington, DC 20500, United States', 'Management/Images/rooms/5_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('111 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 'Management/Images/rooms/1_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Paseo de la Reforma, 1, 06000 Ciudad de México, CDMX, Mexico', 'Management/Images/rooms/15_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Sirena, 2, 28008 Madrid, Spain', 'Management/Images/rooms/7_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Rue de la Fée, 2, 75001 Paris, France', 'Management/Images/rooms/3_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Ritterstraße, 2, 10178 Berlin, Germany', 'Management/Images/rooms/2_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Via della Principessa, 2, 00100 Roma, Italy', 'Management/Images/rooms/4_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Queen Street, 2, London W1B 5PW, United Kingdom', 'Management/Images/rooms/8_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('1601 Pennsylvania Ave NW, Washington, DC 20500, United States', 'Management/Images/rooms/14_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('112 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 'Management/Images/rooms/17_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Paseo de la Reforma, 2, 06000 Ciudad de México, CDMX, Mexico', 'Management/Images/rooms/18_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Calle de la Sirena, 3, 28008 Madrid, Spain', 'Management/Images/rooms/13_1.jpg');
+INSERT INTO room_pics (room_id, filename) VALUES ('Rue de la Fée, 3, 75001 Paris, France', 'Management/Images/rooms/16_1.jpg');
 
 INSERT INTO resides (kid, door) VALUES (1, 'Calle de la Princesa, 1, 28008 Madrid, Spain');
 INSERT INTO resides (kid, door) VALUES (2, 'Calle de la Princesa, 1, 28008 Madrid, Spain');
