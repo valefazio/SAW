@@ -33,7 +33,7 @@
 					return false;
 				} else return true;
 			}
-		} else header("Location: login.php");	/* MANAGE: mandiamo al login??? */
+		} else header("Location: login.html");	/* MANAGE: mandiamo al login??? */
 	}
 
 	function checkAccess() {
