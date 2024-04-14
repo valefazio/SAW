@@ -43,7 +43,11 @@
                 } else {
                     echo '<img src="../Management/Images/bronze.png" alt="#3" class="medals">';
                 }
-                echo '<img class="images" src="data:image/jpeg;base64,' . base64_encode($row["profile_picture"]) . '" alt="Foto Profilo ' . $row["firstname"] . ' ' . $row["lastname"] . '">';
+                if ($row["profile_picture"]) {
+                    echo '<img class="images" src="data:image/jpeg;base64,' . base64_encode($row["profile_picture"]) . '" alt="Foto profilo">';
+                } else {
+                    echo '<img class="images" src="../Management/Images/users/00.jpg" alt="Default Profile Picture">';
+                }
                 echo '<div class="employee-info">';
                 echo '<h2>' . $row["firstname"] . ' ' . $row["lastname"] . '</h2>';
                 echo '<p>Punteggio: ' . $row["reviews"] . '</p>';
