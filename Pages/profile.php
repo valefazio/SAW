@@ -30,7 +30,10 @@
                 <div class="col-md-4 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src=
                     <?php
-                        echo "data:image/jpeg;base64," . base64_encode($row["profile_picture"]);
+                        if ($row["profile_picture"])
+                            echo "data:image/jpeg;base64," . base64_encode($row["profile_picture"]);
+                        else
+                            echo "../Management/Images/users/00.jpg";
                     ?>
                     width="90"><span class="font-weight-bold">
                     <?php
