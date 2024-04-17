@@ -15,8 +15,7 @@ function accessDb(): mysqli
     return $conn;
 }
 
-function disconnectDb(mysqli $conn): void
-{
+function disconnectDb(mysqli $conn): void {
     $conn->close();
 }
 
@@ -99,6 +98,10 @@ function insertDb(string $table, array $columns, array $values): bool
 }
 
 function selectDb(string $table, array $columns, array $whereCol, array $whereVal): ?mysqli_result {
+    return selectWithFinalConditions($table, $columns, $whereCol, $whereVal, "");
+}
+
+function selectWithFinalConditions(string $table, array $columns, array $whereCol, array $whereVal, string $conds): ?mysqli_result {
     if(count($whereCol) != count($whereVal)) {
         logs("numero colonne e valori non corrispondono");
         return null;
@@ -144,6 +147,7 @@ function selectDb(string $table, array $columns, array $whereCol, array $whereVa
         }
         $query = substr($query, 0, -4);	//rimuovo l'ultima virgola
     }
+    $query .= " " . $conds;
     $stmt = $conn->prepare($query);
     $result = $stmt->execute($whereVal);
     if (!$result)
@@ -151,7 +155,7 @@ function selectDb(string $table, array $columns, array $whereCol, array $whereVa
     $result = $stmt->get_result();
     disconnectDb($conn);
     $stmt->close();
-    return $result;
+    return $result; 
 }
 
 function updateDb(string $table, array $columns, array $values, array $whereCol, array $whereVal): bool

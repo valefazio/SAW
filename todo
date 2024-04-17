@@ -17,6 +17,7 @@ To fix:
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?)
 - remember me non funziona
 - foto profilo di default
+- cambiare PK in 'countries' da automatic num a codice a tre lettere
 
 - gestione degli errori
 - controlli valori di ritorno

@@ -6,7 +6,6 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../Management/Style/home.css">
-	<link rel="stylesheet" href="../Management/Style/calendar.css">
 </head>
 
 <body id="top">

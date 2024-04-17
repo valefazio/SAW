@@ -253,5 +253,30 @@ INSERT INTO resides (kid, door) VALUES (25, 'Calle de la Sirena, 3, 28008 Madrid
 
 
 
-INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-01', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 'vale.fazio.2002@gmail.com', NULL, NULL);
-INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2025-01-01', 'Rue du Pirate, 1, 75001 Paris, France', 'vale.fazio.2002@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-01', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-01', 'Ritterstraße, 1, 10178 Berlin, Germany', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-01', 'Via della Principessa, 1, 00100 Roma, Italy', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2025-01-01', 'Rue du Pirate, 1, 75001 Paris, France', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-02', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-03', 'Rue du Pirate, 1, 75001 Paris, France', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-04', 'Ritterstraße, 1, 10178 Berlin, Germany', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-05', 'Via della Principessa, 1, 00100 Roma, Italy', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-06', 'Queen Street, 1, London W1B 5PW, United Kingdom', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-07', '1600 Pennsylvania Ave NW, Washington, DC 20500, United States', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-08', '111 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-09', 'Paseo de la Reforma, 1, 06000 Ciudad de México, CDMX, Mexico', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-10', 'Calle de la Sirena, 2, 28008 Madrid, Spain', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-04-11', 'Rue de la Fée, 2, 75001 Paris, France', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-01', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-01', 'Ritterstraße, 1, 10178 Berlin, Germany', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-01', 'Via della Principessa, 1, 00100 Roma, Italy', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2025-05-01', 'Rue du Pirate, 1, 75001 Paris, France', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-02', 'Calle de la Princesa, 1, 28008 Madrid, Spain', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-03', 'Rue du Pirate, 1, 75001 Paris, France', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-04', 'Ritterstraße, 1, 10178 Berlin, Germany', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-05', 'Via della Principessa, 1, 00100 Roma, Italy', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-06', 'Queen Street, 1, London W1B 5PW, United Kingdom', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-07', '1600 Pennsylvania Ave NW, Washington, DC 20500, United States', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-08', '111 Sussex Dr, Ottawa, ON K1A 0A1, Canada', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-09', 'Paseo de la Reforma, 1, 06000 Ciudad de México, CDMX, Mexico', 'vale@gmail.com', NULL, NULL);
+INSERT INTO calendar (date, door, monster, review, review_text) VALUES ('2024-05-10', 'Calle de la Sirena, 2, 28008 Madrid, Spain', 'vale@gmail.com', NULL, NULL);
