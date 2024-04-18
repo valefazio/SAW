@@ -16,7 +16,7 @@ nav {
 	justify-content: space-between;
 	padding: 0 10px 0 10px;
 	width: 100%;
-	background-color: rgb(179, 222, 255);
+	background-color: var(--colorE);
 	height: 75px;
 }
 

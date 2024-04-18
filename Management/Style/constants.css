@@ -18,7 +18,8 @@
     --colorB: #1a3a4e;
     --colorC: #c24757 /*#fe0758*/;
 	--colorD: rgba(221, 209, 254, 0.87);
-	--defaultFont: 'poppins', sans-serif;
+	--colorE: rgb(179, 222, 255);
+	--defaultFont: 'poppins', sans-serif;	
 }
 
 
