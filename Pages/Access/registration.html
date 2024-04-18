@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../Management/Style/forms.css">
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
     <title>Sign-up</title>
     <script src="checkFields.js"></script>
 </head>
+
 <body>
-	<div id="form-sfondo">
-		<div id="form">
-			<form action="registration.php" method="POST">
-				<div id="form-dati">
-					<h1>Sign-up</h1>
-					<label for="firstname">Firstname:</label><br>
-					<input type="text" id="firstname" name="firstname" required><br><br>
+    <div id="form-sfondo">
+        <div id="form">
+            <form action="registration.php" method="POST" class="register">
+                <div id="form-dati">
+                    <h1>Sign-up</h1>
+                    <label for="firstname">Firstname:</label>
+                    <input type="text" id="firstname" name="firstname" required>
 
-                    <label for="lastname">Lastname:</label><br>
-					<input type="text" id="lastname" name="lastname" required><br><br>
+                    <label for="lastname">Lastname:</label>
+                    <input type="text" id="lastname" name="lastname" required>
 
-					<label for="email">Email:</label><br>
-					<input type="email" id="email" name="email" required><br><br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
 
-					<label for="pass">Password
-						<span class="help" title="La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero">
-							help_outline
-						</span>
-					:</label><br>
-					<input type="password" id="pass" name="pass" required><br><br>
+                    <label for="pass">Password
+                        <span class="help"
+                            title="La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero">
+                            help_outline
+                        </span>
+                        :</label>
+                    <input type="password" id="pass" name="pass" required>
 
-					<label for="confirm-password">Confirm Password:</label><br>
-					<input type="password" id="confirm-password" name="confirm-password" required><br><br>
-				</div>
-				<input type="submit" value="Registrati" id="register-button" disabled>
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <input type="submit" value="Registrati" id="register-button" disabled>
 
-				<div id="switchForm">
-					<br><a href="login.html">Already registered? Login here</a>
-				</div>
-			</form>
-		</div>
-	</div>
+                <div id="switchForm">
+                    <a href="login.html">Already registered? Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script>
         // Ottieni i riferimenti agli elementi del modulo
@@ -61,10 +61,10 @@
         confirmPasswordInput.addEventListener("input", toggleRegisterButton);
 
         function toggleRegisterButton() {
-			//checkEmailFormat();
-			//checkPasswordFormat();
-			checkPasswordMatch();
-			
+            //checkEmailFormat();
+            //checkPasswordFormat();
+            checkPasswordMatch();
+
             if (firstnameInput.value !== "" && lastnameInput.value !== "" && passwordInput.value !== "" && confirmPasswordInput.value !== "" && emailInput.value !== "")
                 registerButton.removeAttribute("disabled");
             else
@@ -72,4 +72,5 @@
         }
     </script>
 </body>
+
 </html>
