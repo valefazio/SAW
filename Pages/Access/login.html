@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="checkFields.js"></script>
+    <script src="checkFields.js"></script>
     <link rel="stylesheet" type="text/css" href="../../Management/Style/forms.css">
     <title>Login</title>
 </head>
+
 <body>
     <div id="form-sfondo">
-        <form action="login.php" method="POST">
-			<div id="form-dati">
-        		<h1>Login</h1>
-				<label for="email">Email:</label><br>
-				<input type="email" id="email" name="email" required><br><br>
+        <form action="login.php" method="POST" class="login">
+            <div id="form-dati">
+                <h1>lOgin</h1>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
 
-				<label for="pass">Password:</label><br>
-				<input type="password" id="pass" name="pass" required><br>
-				<input type="checkbox" id="show-pass" onclick="togglePassword()">
-				<label for="show-pass" id="show-pass">Mostra Password</label> <br><br>
+                <label for="pass">Password</label>
+                <input type="password" id="pass" name="pass" required>
+                <div class="checkboxes">
+                <input type="checkbox" id="show-pass" onclick="togglePassword()" style="width:10%;">Mostra Password
+                </div>
+                <div class="checkboxes">
+                <input type="checkbox" id="remember-me" style="width:10%;">Ricordati di me
+                </div>
+            </div>
+            <input type="submit" value="Login" id="login-button" disabled>
 
-				<input type="checkbox" id="remember-me" name="remember-me">
-				<label for="remember-me" id="remember-me-text">Ricordati di me</label><br>
-			</div>
-           	<input type="submit" value="Login" id="login-button" disabled>
-
-			<div id="switchForm">
-				<br><a href="registration.html">Not registered yet? Sign up here</a>
-			</div>
+            <div id="switchForm">
+                <br><a href="registration.html">Non sei ancora registrato? registrati qui</a>
+            </div>
         </form>
-	</div>
+    </div>
 
 
     <script>
@@ -42,8 +45,8 @@
         emailInput.addEventListener("input", toggleLoginButton);
         passwordInput.addEventListener("input", togglePassword);
         function toggleLoginButton() {
-			checkEmailFormat();
-			//checkPasswordFormat();	//DEBUG
+            checkEmailFormat();
+            //checkPasswordFormat();	//DEBUG
 
             if (emailInput.value !== "" && passwordInput.value !== "") {
                 loginButton.removeAttribute("disabled");
@@ -52,7 +55,7 @@
             }
         }
 
-		function togglePassword() {	//show password in plain text or not
+        function togglePassword() {	//show password in plain text or not
             var passField = document.getElementById("pass");
             var showPassCheckbox = document.getElementById("show-pass");
 
@@ -61,8 +64,9 @@
             } else {
                 passField.type = "password";
             }
-			toggleLoginButton();
+            toggleLoginButton();
         }
     </script>
 </body>
+
 </html>
