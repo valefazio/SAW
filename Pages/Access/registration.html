@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <button id="back-button" onclick="goBack()" style="position: absolute; top: 10px; left: 10px;">Back</button>
     <div id="form-sfondo">
         <div id="form">
             <form action="registration.php" method="POST" class="register">
@@ -45,6 +46,11 @@
     </div>
 
     <script>
+         // Funzione per tornare indietro
+         function goBack() {
+            window.location.href = "../home.php";
+        }
+
         // Ottieni i riferimenti agli elementi del modulo
         const firstnameInput = document.getElementById("firstname");
         const lastnameInput = document.getElementById("lastname");

@@ -91,6 +91,11 @@ h1 {
     margin-top: 20px;
 }
 
+#login-button:hover, #register-button:hover {
+    cursor: default;
+    background-color: #a03a47;
+}
+
 #toggle-pass label {
     display: inline-block;
     vertical-align: middle;
@@ -118,4 +123,18 @@ h1 {
 #switchForm {
     margin-top: 15px;
     text-align: center;
+}
+
+#back-button {
+    padding: 10px 20px;
+    background-color: var(--colorC);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#back-button:hover {
+    cursor: default;
+    background-color: #a03a47;
 }

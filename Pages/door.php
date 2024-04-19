@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Villa Lovran Mansion</title>
-    <link rel="stylesheet" type="text/css" href="../../Management/Style/door.css">
+    <link rel="stylesheet" type="text/css" href="../Management/Style/door.css">
     <link rel="stylesheet" href="../Management/Style/home.css">
 </head>
 

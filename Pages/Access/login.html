@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <button id="back-button" onclick="goBack()" style="position: absolute; top: 10px; left: 10px;">Back</button>
     <div id="form-sfondo">
         <form action="login.php" method="POST" class="login">
             <div id="form-dati">
@@ -36,6 +37,12 @@
 
 
     <script>
+
+         // Funzione per tornare indietro
+         function goBack() {
+            window.location.href = "../home.php";
+        }
+
         // Ottieni i riferimenti agli elementi del modulo
         const emailInput = document.getElementById("email");
         const passwordInput = document.getElementById("pass");
