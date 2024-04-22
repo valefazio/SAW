@@ -43,13 +43,7 @@
 			}
 		} else if (isset($_GET['search'])) {
 			unset($_GET['search']);
-			 $query = /* "	SELECT DISTINCT D.name, D.address, D.door_picture_path AS 'doorPic', C.name AS 'country', D.reviews 
-						FROM doors AS D 
-						LEFT JOIN countries AS C ON D.country = C.id
-						JOIN resides AS R ON D.address = R.door
-						JOIN kids AS K ON R.kid = K.id
-						JOIN scaredOf AS S ON K.id = S.kid"; */
-						"SELECT DISTINCT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+			 $query =  "SELECT DISTINCT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 						FROM doors AS D 
 						LEFT JOIN countries AS C ON D.country = C.id 
 						JOIN resides AS R ON D.address = R.door 
@@ -101,7 +95,6 @@
 		} else
 			$doors = selectQuery("SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id ORDER BY D.name ASC");
 		
-
 
 		/* DISPLAY ROOMS */
 		if ($doors->num_rows > 0) {
@@ -185,7 +178,13 @@
 				if (!str_contains(strtolower($row["address"]), strtolower($row["country"])))
 					echo ", " . $row["country"];
 				echo "</i></p>";
+				//Add link to the door page
+				echo "<script>";
+				echo "document.getElementsByClassName('box_text')[".$i."].addEventListener('click', function () {window.location.href = 'room.php?' + '" . $row['address'] . "';});";
+				echo "document.getElementsByClassName('doorPic')[".$i."].addEventListener('click', function () {window.location.href = 'room.php?' + '" . $row['address'] . "';});";
+				echo "</script>";
 				echo "</div></div>";
+
 				$i++;
 			}
 		}

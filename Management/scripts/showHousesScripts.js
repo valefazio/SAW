@@ -1,18 +1,3 @@
-//Add link to the door page
-var boxes = document.getElementsByClassName("box_text");
-for (var i = 0; i < boxes.length; i++) {
-	boxes[i].addEventListener("click", function () {
-		window.location.href = "room.php?" + i;
-	});
-}
-var doors = document.getElementsByClassName("doorPic");
-for (var i = 0; i < doors.length; i++) {
-	doors[i].addEventListener("click", function () {
-		window.location.href = "room.php?" + i;
-	});
-}
-
-
 /* HEARTS - FAVS */
 const heart = document.getElementsByClassName('heart');
 function hearts(i) {
