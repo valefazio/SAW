@@ -180,7 +180,7 @@
 				echo "</i></p>";
 				//Add link to the door page
 				echo "<script>";
-				$row_id = selectQuery("SELECT id FROM doors JOIN doors_id WHERE doors.address = '" . $row["address"] . "'")->fetch_assoc();
+				$row_id = selectQuery("SELECT id FROM doors_id WHERE address = '" . $row["address"] . "'")->fetch_assoc();
 				echo "document.getElementsByClassName('box_text')[".$i."].addEventListener('click', function () {window.location.href = 'room.php?' + '" . $row_id['id'] . "';});";
 				echo "document.getElementsByClassName('doorPic')[".$i."].addEventListener('click', function () {window.location.href = 'room.php?' + '" . $row_id['id'] . "';});";
 				echo "</script>";
