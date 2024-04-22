@@ -1,72 +1,53 @@
-/* ---------------- REGISTRATION AND LOGIN ---------------- */
-#form-sfondo {
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    color: #555;
-}
-form {
-    width: 350px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-}
-#form-dati {
-    padding-left: 18%;
-}
+/* CSS for Login Page */
+@import url(constants.css);
 
-#remember-me-text {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    margin-top: -1px;
-}
-
-#switchForm {
-    text-align: center;
-    padding-bottom: 5%;
+body {
+    background-image: url(../Images/backgroundLogin.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: var(--defaultFont);
+    height: 100%;
+    
 }
 
 h1 {
-    padding-top: 5%;
+    text-align: center;
+    margin-bottom: 20px;
+	font-family: 'Monster AG';
+	font-size: 70px;
 }
 
-.label {
+.login, .register {
+    margin-bottom: 10px;
+}
+
+.login label, .register label{
     display: block;
-    color: #555;
-    text-align: left;
+    font-weight: bold;
+    margin-bottom: 1px;
+    font-size: 18px;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-    width: 80%;
+.login input, .register input {
+    width: 100%;
     padding: 10px;
-    margin: 5px 0 0 0;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
+    border: 1px solid #000000;
 }
 
-input[type="submit"] {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 50%;
-    margin: auto;
-    display: flex;
+.btn:hover {
+    background-color: #45a049;
 }
 
-input[type="submit"]:hover {
-    background-color: #258cd1;
+.checkboxes {
+    width:100%;
 }
 
-input[type="submit"]:disabled {
-    background-color: grey;
+.checkboxes #show-pass {
+    margin-top: 20px;
+}
+
+.checkboxes #remember-me {
+    margin-top: 20px;
 }
 
 .help {
@@ -86,4 +67,74 @@ input[type="submit"]:disabled {
 
 .help:hover{
     cursor: default;
+}
+
+#email, #pass, #firstname, #lastname, #confirm-password {
+    border-radius: 10px;
+	border-radius: 10px;
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.20);
+}
+
+#login-button, #register-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--colorC);
+    color: #fff;
+	font-size: 17px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#login-button:hover, #register-button:hover {
+    cursor: default;
+    background-color: #a03a47;
+}
+
+#toggle-pass label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#toggle-pass input[type="checkbox"] {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#form-dati h1, #form-dati label, #form-dati input {
+    margin-top: 10px;
+}
+
+#form-sfondo {
+    max-width: 400px;
+    margin: 140px auto;
+    padding: 20px;
+    background-color: rgba(221, 209, 254, 1);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.20);
+    color: #362F52;
+}
+
+#switchForm {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#back-button {
+    padding: 10px 20px;
+    background-color: var(--colorC);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#back-button:hover {
+    cursor: default;
+    background-color: #a03a47;
 }
