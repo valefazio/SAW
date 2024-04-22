@@ -14,7 +14,7 @@ include ("../Management/Database/connection.php");
 </head>
 
 <?php
-$roomID = "111 Sussex Dr, Ottawa, ON K1A 0A1, Canada";
+$roomID = $_SERVER['QUERY_STRING'];
 $res = selectDb("doors", [], ["address"], [$roomID]);
 if ($res->num_rows != 0) {
     $row = $res->fetch_assoc();
