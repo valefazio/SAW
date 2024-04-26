@@ -34,7 +34,7 @@
                             echo "../Management/Images/users/00.jpg";
                     ?>
                     width="90">
-                    <input type="file" name="profile_picture" accept="image/*">
+                    <input type="file" name="profile_picture" accept=".jpg, .jpeg, .png">
                 </div>
             </div>
             <div class="col-md-8">
@@ -54,8 +54,10 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="pass" class="form-control">
-                    <button type="submit" id="update-button">Update Profile</button>
+                    </div>
+                    <button type="submit" id="update-button">Confirm Changes</button>
                 </div>
+                
             </div>
         </div>
     </div>
