@@ -14,7 +14,8 @@ include ("../Management/Database/connection.php");
 </head>
 
 <?php
-$roomID = $_SERVER['QUERY_STRING'];
+
+$roomID = selectDb("doors_id", [], ["id"], [$_SERVER['QUERY_STRING']])->fetch_assoc()['address'];
 $res = selectDb("doors", [], ["address"], [$roomID]);
 if ($res->num_rows != 0) {
     $row = $res->fetch_assoc();
@@ -72,30 +73,32 @@ if ($resRoomPicture->num_rows != 0) {
                 print ($picture); ?>" alt="Room Picture">
             </div>
         </div>
-        <div id="RoomKids">
-            <h2>Kids</h2>
-            <p>Here you can find information about the kids</p>
-            <p><?php print ("kid name: ");
-            print ($kidsName); ?></p>
-            <p><?php print ("kid phone number: ");
-            print ($kidsPhone); ?></p>
-            <p><?php print ("Scared of: ");
-            print ($scaredOf); ?></p>
-            <img src="<?php print ("../");
-            print ($kidsPicture); ?>" alt="Kids Picture">
-        </div>
-        <div id="bookingArea">
-            <div id="RoomDescription">
-                <h2>Description</h2>
-                <p>Here you can find a description of the room</p>
+        <div id="RoomDescription">
+                    <h2>Description</h2>
+                    <p>Here you can find a description of the room</p>
+                </div>
+                <div id="RoomReviews">
+                    <h2>Reviews</h2>
+                    <p><?php print ($reviews); ?></p>
+                </div>
+        <div id="HorizontalZone">
+            <div id="RoomKids">
+                <h2>Kids</h2>
+                <p>Here you can find information about the kids</p>
+                <p><?php print ("kid name: ");
+                print ($kidsName); ?></p>
+                <p><?php print ("kid phone number: ");
+                print ($kidsPhone); ?></p>
+                <p><?php print ("Scared of: ");
+                print ($scaredOf); ?></p>
+                <img src="<?php print ("../");
+                print ($kidsPicture); ?>" alt="Kids Picture">
             </div>
-            <div id="RoomReviews">
-                <h2>Reviews</h2>
-                <p><?php print ($reviews); ?></p>
-            </div>
-            <div id="RoomButtons">
-                <button id="RoomBookButton" onclick="window.location.href='book.php'">Book</button>
-                <button id="RoomReviewButton" onclick="window.location.href='review.php'">Review</button>
+            <div id="bookingArea">
+                <div id="RoomButtons">
+                    <button id="RoomBookButton" onclick="window.location.href='book.php'">Book</button>
+                    <button id="RoomReviewButton" onclick="window.location.href='review.php'">Review</button>
+                </div>
             </div>
         </div>
     </div>

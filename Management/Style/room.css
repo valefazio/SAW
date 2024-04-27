@@ -12,9 +12,7 @@ h1 {
 }
 
 #main {
-    margin-top: 5px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 5px 10%
  }
 
  #presentationArea {
