@@ -4,8 +4,6 @@ include("../Management/Database/connection.php");
 
 if (!session_start())
     exit("Troubles starting session.");
-if(!isLogged())
-    header("Location: Access/checkAccess.php?login");
 
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 
