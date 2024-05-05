@@ -74,7 +74,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             relocation("profile.php");
             exit;
         }
-    } else {
+    } else if($_FILES["profile_picture"]["error"] == 0){
         alert("Errore durante il caricamento del file");
         relocation("profile.php");
         exit;

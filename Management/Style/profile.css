@@ -91,7 +91,7 @@ input {
     margin-top: 20px;
 }
 
-#update-button, #delete-button:hover {
+#update-button:hover, #delete-button:hover {
     cursor: default;
     background-color: #a03a47;
 }
