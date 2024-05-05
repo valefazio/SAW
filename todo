@@ -2,12 +2,13 @@ To fix:
 - nel calendario mettere non selezionabili i giorni passati @done
 - MODIFICARE connection.php -> PREPARED STATEMENT @done
 - quando accedi controllare che il cookie non sia scaduto
-- visualizza password
+- gestione scadenza remember-me nel db
+- remember me non funziona
+- visualizza password @done
 - password dimenticata
 - mettere placeholders nei form
-- controllo js form + campo rosso se vuoto nei form
+- controllo js form + campo rosso se vuoto nei form @done
 - fare la trim nel login
-- gestione scadenza remember-me nel db
 - fare logo @done
 - privacy e cookies
 - cancella profilo
@@ -15,8 +16,10 @@ To fix:
 - dividere form login e registratione in html e php @done
 - aggiungere gli alt alle immagini
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?) @done
-- remember me non funziona
 - cambiare PK in 'countries' da automatic num a codice a tre lettere
+- dopo modifica dare avviso o scrivi sotto del successo
+    - non vogliamo fare un CONFIRM magari prima di cambiare?
+- mettere votazioni a caso a utenti
 
 - controlli valori di ritorno
 - gestione degli errori
