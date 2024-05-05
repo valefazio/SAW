@@ -24,18 +24,61 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         relocation("profile.php");
     }
 
-    //Se non volessi cambiare mail?
     //controllo in caso di email già registrata
-    /*
-    $res = selectDb("users", ["email"], ["email"], [$email]);
-	if ($res->num_rows != 0) {
-		alert("Utente già registrato");
-		if (session_status() == PHP_SESSION_ACTIVE)
-			session_abort();
-		relocation("");
-		exit;
-	}
-    */
+    if ($email != $_SESSION['email']) {
+        $res = selectDb("users", ["email"], ["email"], [$email]);
+        if ($res->num_rows != 0) {
+            alert("Utente già registrato");
+            if (session_status() == PHP_SESSION_ACTIVE)
+                session_abort();
+            relocation("");
+            exit;
+        }
+    }
+
+    //gestione upload di foto profilo
+    if(isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 0) {
+        $file = $_FILES["profile_picture"];
+        $file_name = $file["name"];
+        $file_tmp = $file["tmp_name"];
+        $file_size = $file["size"];
+        $file_error = $file["error"];
+        $file_type = $file["type"];
+        $file_ext = explode(".", $file_name);
+        $file_actual_ext = strtolower(end($file_ext));
+        $allowed = ["jpg", "jpeg", "png"];
+        if (in_array($file_actual_ext, $allowed)) {
+            if ($file_error === 0) {
+                if ($file_size < 1000000) {
+                    $file_name_new = uniqid("", true) . "." . $file_actual_ext;
+                    $file_destination = "../Management/Images/users/" . $file_name_new;
+                    move_uploaded_file($file_tmp, $file_destination);
+                    $file = file_get_contents($file_destination);
+                    updateDb("users", ["profile_picture"], [$file], ["email"], [$_SESSION["email"]]);
+                } else {
+                    alert("File troppo grande");
+                    if (session_status() == PHP_SESSION_ACTIVE)
+                        session_abort();
+                    relocation("profile.php");
+                    exit;
+                }
+            } else {
+                alert("Errore durante il caricamento del file");
+                relocation("profile.php");
+                exit;
+            }
+        } else {
+            alert("Formato file non supportato");
+            relocation("profile.php");
+            exit;
+        }
+    } else {
+        alert("Errore durante il caricamento del file");
+        relocation("profile.php");
+        exit;
+    }
+
+    
 
     $firstname = htmlspecialchars(trim($_POST["firstname"]));
     $lastname = htmlspecialchars(trim($_POST["lastname"]));

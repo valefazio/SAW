@@ -1,33 +1,103 @@
 @import url(constants.css);
-/* profile.css */
 
-/* Stile generale */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    font-family: var(--defaultFont);
+    height: 100%;
 }
 
-.container {
+.profile {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+	font-family: 'Monster AG';
+	font-size: 70px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 1px;
+    font-size: 18px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000000;
+}
+
+#form-totale {
+    flex: 1;
+    margin-top: 20px;
     max-width: 800px;
-    background-color: #1a3a4e36;
-    border-radius: 10px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
+    background-color: rgba(221, 209, 254, 1);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.20);
+    color: #362F52;
 }
 
-/* Stile per l'immagine del profilo */
-.rounded-circle {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+.profile-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.ProfilePicture {
+    float: left;
+    margin-right: 80px;
+    margin-left: 80px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.ProfilePicture img {
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
 }
 
-/* Stile per il form di modifica */
-.form-control {
-    margin-bottom: 10px;
+#email, #pass, #firstname, #lastname {
+    border-radius: 10px;
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.20);
 }
 
-.profile-button {
-    width: 150px;
+#update-button, #delete-button {
+    display: block;
+    width: auto;
+    padding: 10px 20px;
+    background-color: var(--colorC);
+    color: #fff;
+	font-size: 17px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    height: 80px;
+}
+
+#update-button, #delete-button {
+    flex: 1;
+    margin-top: 20px;
+}
+
+#update-button, #delete-button:hover {
+    cursor: default;
+    background-color: #a03a47;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }

@@ -12,12 +12,11 @@ h1 {
 }
 
 #main {
-    margin-top: 5px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 5px 10%
  }
 
- #presentationArea {
+ #firstArea {
+    margin-right: 20px;
     margin-bottom: 20px;
     background-color: var(--colorD);
     border-radius: 20px;
@@ -42,6 +41,7 @@ h1 {
 
 #RoomKids {
     margin-bottom: 20px;
+    margin-right: 20px;
     background-color: var(--colorD);
     border-radius: 20px;
     padding: 10px;
@@ -72,7 +72,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-#RoomButtons button {
+#RoomBookButton, #RoomReviewButton {
     padding: 10px 20px;
     background-color: var(--colorC);
     color: white;
@@ -82,12 +82,21 @@ h1 {
     margin-right: 10px;
 }
 
-#RoomButtons button:hover {
+#RoomBookButton button:hover, #RoomReviewButton button:hover {
     background-color: #a03a47;
 }
 
-#RoomButtons #RoomBookButton {
+#RoomReviewButton, #RoomBookButton {
     margin-right: 0;
     margin-top: 20px;
+}
+
+#info {
+    display: flex;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
 }
 
