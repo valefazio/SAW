@@ -62,7 +62,7 @@
                 <input type="password" name="pass" id="pass" class="form-control">
                 <div class="button-container">
                     <button type="submit" id="update-button">Confirm Changes</button>
-                    <button type="button" id="delete-button" onclick="window.location.href = 'delete.php'">Delete Account</button>
+                    <button type="button" id="delete-button" onclick="window.location.href = 'delete_account.php'">Delete Account</button>
                 </div>
             </div>
         </form>
