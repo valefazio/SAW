@@ -14,35 +14,29 @@ To fix:
 - togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali) @done
 - dividere form login e registratione in html e php @done
 - aggiungere gli alt alle immagini
-- trigger: nuovo utente -> foto profilo di default (o basta che returni null?)
+- trigger: nuovo utente -> foto profilo di default (o basta che returni null?) @done
 - remember me non funziona
-- foto profilo di default
 - cambiare PK in 'countries' da automatic num a codice a tre lettere
 
-- gestione degli errori
 - controlli valori di ritorno
+- gestione degli errori
 - togliere gli alert
     - fare pagine di errore
-- 
-
-Notes
-- programma del giorno
-- riservato admin?
-- nel profilo avere un motto?
+- COSA VOGLIAMO FARE DELLA HOME - PRIMA PARTE?
 
 
 HOME:
     - chi shiamo/cosa facciamo
     - lasciati ispirare
     BARRA DI RICERCA:
-        - IMPIEGATO DEL MESE
-        - DESTINAZIONI PREFERITE
-        - LOGIN
-            - Registrati
+        - IMPIEGATO DEL MESE @done
+        - DESTINAZIONI PREFERITE @done
+        - LOGIN @done
+            - Registrati @done
           che diventa PROFILO:
             - show profile
                 - modifica profilo
-            - le tue prenotazioni
+            - le tue prenotazioni @done
             - i tuoi salvati/preferiti --> carrello
             - calendario degli impegni
                 - mostra a elenco
