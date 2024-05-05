@@ -23,7 +23,6 @@
     ?>
     <div id="form-totale" class="profile-container">
         <form action="update_profile.php" method="post" enctype="multipart/form-data" class="profile">
-            <!-- Da bootstrap -->
             <div class="ProfilePicture">
                 <img id="profilePicture" class="rounded-circle mt-5" src=<?php
                 if ($row["profile_picture"])
