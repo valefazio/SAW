@@ -62,7 +62,7 @@ function createListCalendar() {
 					event.appendChild(door);
 					event.className = 'event_list';
 					event.addEventListener('click', function() {
-						document.location.href = 'door.php?address=' + row.door;
+						document.location.href = 'room.php?' + row.num;
 					});
 					box.appendChild(event);
 				});
@@ -181,7 +181,7 @@ function generateCalendar() {
 						event.innerHTML = row.name;
 						event.className = 'event';
 						event.addEventListener('click', function() {
-							document.location.href = 'door.php?address=' + row.door;
+							document.location.href = 'room.php?' + row.num;
 						});
 						document.getElementById('events-day-box_' + row.date).appendChild(event);
 					});

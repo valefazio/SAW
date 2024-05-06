@@ -9,7 +9,7 @@
 	<?php
 	include "../Management/accessControl.php";
 	if(!isLogged())
-		header("Location: checkAccess.php?login");
+		header("Location: Access/checkAccess.php?login");
 	?>
 </head>
 
