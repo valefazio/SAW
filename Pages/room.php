@@ -13,7 +13,7 @@ include ("../Management/Database/connection.php");
     <link rel="stylesheet" href="../Management/Style/home.css">
     <link rel="stylesheet" href="../Management/Style/calendarSelect.css">
     <link rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <?php
@@ -117,16 +117,15 @@ if ($resRoomPicture->num_rows != 0) {
                         <span class="material-symbols-outlined" id="calendar_arrow"
                             style="font-size: 18px">expand_more</span>
                     </div>
+                    <button id="RoomBookButton" onclick="window.location.href='book.php'">Book</button>
+                    <button id="RoomReviewButton" onclick="window.location.href='review.php'">Review</button>
                 </div>
-                <button id="RoomBookButton" onclick="window.location.href='book.php'">Book</button>
-                <button id="RoomReviewButton" onclick="window.location.href='review.php'">Review</button>
             </div>
-        </div>
 
-    </div>
-    <?php
-    include ("../Management/footer.html");
-    ?>
+        </div>
+        <?php
+        include ("../Management/footer.html");
+        ?>
 
 </body>
 
