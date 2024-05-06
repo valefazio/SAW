@@ -22,7 +22,7 @@
         $row = $result->fetch_assoc();
     ?>
     <div id="form-totale" class="profile-container">
-        <form action="update_profile.php" method="post" enctype="multipart/form-data" class="profile">
+        <form action="../Management/update_profile.php" method="post" enctype="multipart/form-data" class="profile">
             <div class="ProfilePicture">
                 <img id="profilePicture" class="rounded-circle mt-5" src=<?php
                 if ($row["profile_picture"])
@@ -30,7 +30,7 @@
                 else
                     echo "../Management/Images/users/00.jpg";
                 ?> width="90">
-                <input id="fileInput" type="file" name="profile_picture" accept=".jpg, .jpeg, .png"
+                <input id="fileInput" type="file"name="profile_picture" accept=".jpg, .jpeg, .png"
                     style="display: none;">
             </div>
 
@@ -61,15 +61,28 @@
                 <label for="password">Password</label>
                 <input type="password" name="pass" id="pass" class="form-control">
                 <div class="button-container">
-                    <button type="submit" id="update-button">Confirm Changes</button>
-                    <button type="button" id="delete-button" onclick="window.location.href = 'delete_account.php'">Delete Account</button>
+                    <button type="submit" id="update-button" style="cursor: pointer">Confirm Changes</button>
+                    <button type="button" id="delete-button" style="cursor: pointer"">Delete Account</button>
+                    <script>
+                        document.getElementById("delete-button").addEventListener("click", function () {
+                            if (confirm("Are you sure you want to delete your account?")) {
+                                window.location.href = "../Management/delete_account.php";
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </form>
     </div>
 </body>
+<script>
+    document.getElementById("update-button").addEventListener("click", function () {
+        if (!confirm("Are you sure you want to update your profile?")) {
+            event.preventDefault();
+        }
+    });
 
+</script>
 </html>
 
 
-<!-- da fare: aggiungere un bottone per eliminare l'account, form orizzontale con i dati a sinistra della foto profiloì -->

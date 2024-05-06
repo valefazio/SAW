@@ -1,6 +1,6 @@
 <?php
-include("../Management/utility.php");
-include("../Management/Database/connection.php");
+include("utility.php");
+include("Database/connection.php");
 
 if (!session_start())
     exit("Troubles starting session.");
@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         alert("Compilare tutti i campi", "warning");
         if (session_status() == PHP_SESSION_ACTIVE)
             session_abort();
-        relocation("profile.php");
+        relocation("../Pages/profile.php");
     }
 
     $email = htmlspecialchars(trim($_POST['email']));
@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         alert("Il campo email non rispetta il formato richiesto", "warning");
         if (session_status() == PHP_SESSION_ACTIVE)
             session_abort();
-        relocation("profile.php");
+        relocation("../Pages/profile.php");
     }
 
     //controllo in caso di email già registrata
@@ -59,22 +59,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     alert("File troppo grande");
                     if (session_status() == PHP_SESSION_ACTIVE)
                         session_abort();
-                    relocation("profile.php");
+                    relocation("../Pages/profile.php");
                     exit;
                 }
             } else {
                 alert("Errore durante il caricamento del file");
-                relocation("profile.php");
+                relocation("../Pages/profile.php");
                 exit;
             }
         } else {
             alert("Formato file non supportato");
-            relocation("profile.php");
+            relocation("../Pages/profile.php");
             exit;
         }
     } else if($_FILES["profile_picture"]["error"] == 0){
         alert("Errore durante il caricamento del file");
-        relocation("profile.php");
+        relocation("../Pages/profile.php");
         exit;
     }
 
@@ -85,6 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     updateDb("users", ["firstname", "lastname", "email", "password"], [$firstname, $lastname, $email, $psw], ["email"], [$_SESSION["email"]]);
 
     $_SESSION['email'] = $email;
-    relocation("profile.php");
+    relocation("../Pages/profile.php");
     exit;
 }
