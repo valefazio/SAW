@@ -37,10 +37,13 @@ if ($resKids->num_rows != 0) {
 $resKidsInfo = selectDb("kids", [], ["id"], [$kids]);
 if ($resKidsInfo->num_rows != 0) {
     $rowKidsInfo = $resKidsInfo->fetch_assoc();
-    $kidsName = $rowKidsInfo['name'];
-    $kidsPhone = $rowKidsInfo['phone'];
-    $kidsPicture = $rowKidsInfo['profile_picture_path'];
+    for ($i = 0; $i < $resKidsInfo->num_rows; $i++) {
+        $kidsName[$i] = $rowKidsInfo['name'];
+        $kidsPhone[$i] = $rowKidsInfo['phone'];
+        $kidsPicture[$i] = $rowKidsInfo['profile_picture_path'];
+    }
 }
+
 
 $resScaredOf = selectDb("scaredOf", [], ["kid"], [$kids]);
 if ($resScaredOf->num_rows != 0) {
@@ -95,6 +98,7 @@ if ($resRoomPicture->num_rows != 0) {
                 <div id="RoomKids">
                     <h2>Kids</h2>
                     <p>Here you can find information about the kids</p>
+
                     <p><?php print ("kid name: ");
                     print ($kidsName); ?></p>
                     <p><?php print ("kid phone number: ");
@@ -121,12 +125,11 @@ if ($resRoomPicture->num_rows != 0) {
                     <button id="RoomReviewButton" onclick="window.location.href='review.php'">Review</button>
                 </div>
             </div>
-
         </div>
-        <?php
-        include ("../Management/footer.html");
-        ?>
-
+    </div>
+    <?php
+    include ("../Management/footer.html");
+    ?>
 </body>
 
 </html>
