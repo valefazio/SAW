@@ -5,6 +5,12 @@ include("Database/connection.php");
 if (!session_start())
     exit("Troubles starting session.");
 
+    // Check if the user is logged in
+    if (!isset($_SESSION['email'])) {
+        // User is not logged in
+        echo "You must be logged in to delete your account.";
+        relocation("../Pages/login.php");
+    }
 
     // Get the user ID from the session
     $email = $_SESSION['email'];
@@ -24,3 +30,6 @@ if (!session_start())
         echo "Failed to delete account.";
         relocation("../Pages/404.php");//ERROR
     }
+
+//Da fixare: se l'utente non è loggato, non può accedere a questa pagina
+//Da fixare: se non c'è alcun where, non eliminare nulla

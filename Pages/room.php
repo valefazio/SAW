@@ -63,9 +63,9 @@ function notBooked(string $roomID, string $date): bool
     return false;
 }
 
-function hasBookedBefore(string $roomID, string $monsterID): bool
+function hasBookedBefore(string $roomID): bool
 {
-    $res = selectDb("calendar", [], ["door", "monster"], [$roomID, $monsterID]);
+    $res = selectDb("calendar", [], ["door", "monster"], [$roomID, $_SESSION['email']]);
     if ($res->num_rows != 0) {
         return true;
     }
@@ -138,8 +138,6 @@ function hasBookedBefore(string $roomID, string $monsterID): bool
                                 $date = $_POST['calendar'];
                                 if(insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['id']])){
                                     print("room booked");
-                                    //AGOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-                                    //L'ho messo per fare l'errore, fanne quello che vuoi
                                 }
                                 else {
                                     relocation("404.php");
@@ -156,12 +154,10 @@ function hasBookedBefore(string $roomID, string $monsterID): bool
                     <input id="RoomReviewButton" method="POST" type="submit" value="Review">
                     <?php
                     if (isset($_POST['submit'])) {
-                        if(hasBookedBefore($roomID, $_SESSION['id'])) {
+                        if(hasBookedBefore($roomID)) {
                             $review = $_POST['review'];
                             if(insertDb("reviews", ["review", "door", "monster"], [$review, $roomID, $_SESSION['id']])){
                                 print("review added");
-                                //AGOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-                                //L'ho messo per fare l'errore, fanne quello che vuoi
                             }
                             else {
                                 relocation("404.php");

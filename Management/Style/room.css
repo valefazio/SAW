@@ -82,6 +82,10 @@ h1 {
     margin-right: 10px;
 }
 
+#headerbtns {
+    margin-top: 15px;
+}
+
 #RoomBookButton button:hover, #RoomReviewButton button:hover, #save button:hover, #share button:hover {
     background-color: #a03a47;
 }
@@ -93,6 +97,7 @@ h1 {
 
 #info {
     display: flex;
+    justify-content: center;
 }
 
 #header {
@@ -104,3 +109,6 @@ h1 {
     display: flex;
 }
 
+#RoomInfos {
+    /*margin-right: 225px;*/
+}
