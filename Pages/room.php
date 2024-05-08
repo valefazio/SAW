@@ -63,9 +63,9 @@ function notBooked(string $roomID, string $date): bool
     return false;
 }
 
-function hasBookedBefore(string $roomID, string $monsterID): bool
+function hasBookedBefore(string $roomID): bool
 {
-    $res = selectDb("calendar", [], ["door", "monster"], [$roomID, $monsterID]);
+    $res = selectDb("calendar", [], ["door", "monster"], [$roomID, $_SESSION['email']]);
     if ($res->num_rows != 0) {
         return true;
     }
@@ -136,7 +136,7 @@ function hasBookedBefore(string $roomID, string $monsterID): bool
                             if(notBooked($date, $roomID)) {
                                 print("ciao");
                                 $date = $_POST['calendar'];
-                                insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['id']]);
+                                insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['email']]);
                             }
                             else {
                                 print("the room  is already booked for that day");
@@ -149,7 +149,7 @@ function hasBookedBefore(string $roomID, string $monsterID): bool
                     <input id="RoomReviewButton" method="POST" type="submit" value="Review">
                     <?php
                     if (isset($_POST['submit'])) {
-                        if(hasBookedBefore($roomID, $_SESSION['id'])) {
+                        if(hasBookedBefore($roomID)) {
                             $review = $_POST['review'];
                             insertDb("reviews", ["review", "door", "monster"], [$review, $roomID, $_SESSION['id']]);
                         }
