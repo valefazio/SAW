@@ -81,8 +81,12 @@
             event.preventDefault();
         }
     });
-
 </script>
+
+<?php
+include ("../Management/footer.html");
+?>
+
 </html>
 
 

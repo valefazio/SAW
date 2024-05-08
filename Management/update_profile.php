@@ -5,6 +5,13 @@ include("Database/connection.php");
 if (!session_start())
     exit("Troubles starting session.");
 
+// Check if the user is logged in
+if (!isset($_SESSION['email'])) {
+    // User is not logged in
+    echo "You must be logged in to update your account.";
+    relocation("../Pages/Access/login.html");
+}
+
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
