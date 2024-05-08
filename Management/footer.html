@@ -20,11 +20,28 @@
 
 <body>
     <footer>
-        <p>&copy; 2024 Monster & Co. All rights reserved. Contact us at
+        <p>
+            <a href="aboutUs.php">ABOUT US</a> - <a href="ourStory.php">OUR STORY</a> - <a href="404.php">PRIVACY & TERMS</a> - <a href="404.php">CONTACT</a><br>
+            &copy; 2024 Monster & Co. All rights reserved. Contact us at
             <a href="mailto:info@monsterandco.com">info@monsterandco.com</a>
         </p>
-        <!-- AGGIUNGERE PRIVACY -->
     </footer>
 </body>
 
+<script>
+    // Set the year in the footer
+    document.querySelector('footer p').innerHTML = document.querySelector('footer p').innerHTML.replace('2024', new Date().getFullYear());
+
+    const footer = document.querySelector("footer");
+	const footerRect = footer.getBoundingClientRect();
+	const footerTopViewport = footerRect.top;
+	const footerBottomViewport = footerRect.bottom;
+    if (footerTopViewport >= 0 && footerBottomViewport <= window.innerHeight) {
+        footer.style.position = "fixed";
+        footer.style.bottom = "0";
+        footer.style.width = "100%";
+    } else {
+        footer.style.position = "relative";
+    }
+</script>
 </html>

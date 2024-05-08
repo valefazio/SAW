@@ -136,7 +136,14 @@ function hasBookedBefore(string $roomID): bool
                             if(notBooked($date, $roomID)) {
                                 print("ciao");
                                 $date = $_POST['calendar'];
-                                insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['email']]);
+                                if(insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['id']])){
+                                    print("room booked");
+                                    //AGOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                                    //L'ho messo per fare l'errore, fanne quello che vuoi
+                                }
+                                else {
+                                    relocation("404.php");
+                                }
                             }
                             else {
                                 print("the room  is already booked for that day");
@@ -151,7 +158,14 @@ function hasBookedBefore(string $roomID): bool
                     if (isset($_POST['submit'])) {
                         if(hasBookedBefore($roomID)) {
                             $review = $_POST['review'];
-                            insertDb("reviews", ["review", "door", "monster"], [$review, $roomID, $_SESSION['id']]);
+                            if(insertDb("reviews", ["review", "door", "monster"], [$review, $roomID, $_SESSION['id']])){
+                                print("review added");
+                                //AGOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                                //L'ho messo per fare l'errore, fanne quello che vuoi
+                            }
+                            else {
+                                relocation("404.php");
+                            }
                         }
                         else {
                             print("you have to book the room before reviewing it");

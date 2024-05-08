@@ -38,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 	$firstname = htmlspecialchars(trim($_POST["firstname"]));
 	$lastname = htmlspecialchars(trim($_POST["lastname"]));
-	insertDb("users", ["firstname", "lastname", "email", "password"], [$firstname, $lastname, $email, $psw]);
+	if(insertDb("users", ["firstname", "lastname", "email", "password"], [$firstname, $lastname, $email, $psw]) == false)
+		relocation("../404.php");
 
 	$_SESSION['email'] = $email;
 	relocation("../home.php");

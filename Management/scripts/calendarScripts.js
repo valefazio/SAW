@@ -27,7 +27,7 @@ function createListCalendar() {
 	box.id = 'listaEventiBox';
 	calendar.appendChild(box);
 
-	var nextEl = null;
+	/* var nextEl = null; */
 	var nextDate = null;
 	$(document).ready(function() {
 		$.ajax({
@@ -47,7 +47,7 @@ function createListCalendar() {
 					date.innerHTML = formattedDate;
 					date.style = 'font-style: italic';
 					event.appendChild(date);
-					if ((year > today.getFullYear() || (year == today.getFullYear() && (parseInt(month)-1) > today.getMonth()) || (year == today.getFullYear() && (today.getMonth()-1) == today.getMonth() && day >= today.getDate())) && (nextEl==null || row.date<nextDate)) {
+					if ((year > today.getFullYear() || (year == today.getFullYear() && (parseInt(month)-1) > today.getMonth()) || (year == today.getFullYear() && (today.getMonth()-1) == today.getMonth() && day >= today.getDate())) /* && (nextEl==null || row.date<nextDate) */) {
 						nextEl = event;
 						nextDate = row.date;
 					}
@@ -66,8 +66,8 @@ function createListCalendar() {
 					});
 					box.appendChild(event);
 				});
-				if(nextEl!=null)
-					nextEl.scrollIntoView({behavior: "smooth", block: "center"});
+				/* if(nextEl!=null)
+					nextEl.scrollIntoView({behavior: "smooth", block: "center"}); */
 			},
 			error: function(xhr, status, error) {
 				console.error(error);

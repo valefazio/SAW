@@ -11,26 +11,24 @@ To fix:
 - fare la trim nel login
 - fare logo @done
 - privacy e cookies
-- cancella profilo
+- cancella profilo @done
 - togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali) @done
 - dividere form login e registratione in html e php @done
-- aggiungere gli alt alle immagini
+- aggiungere gli alt alle immagini @done
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?) @done
-- cambiare PK in 'countries' da automatic num a codice a tre lettere
-- dopo modifica dare avviso o scrivi sotto del successo
-    - non vogliamo fare un CONFIRM magari prima di cambiare?
+- dopo modifica dare avviso o scrivi sotto del successo @done
 - mettere votazioni a caso a utenti
 
 - controlli valori di ritorno
 - gestione degli errori
-- togliere gli alert
-    - fare pagine di errore
-- COSA VOGLIAMO FARE DELLA HOME - PRIMA PARTE?
+- togliere gli alert @done
+    - fare pagine di errore @done
+- COSA VOGLIAMO FARE DELLA HOME - PRIMA PARTE? @done
 
 
 HOME:
-    - chi shiamo/cosa facciamo
-    - lasciati ispirare
+    - chi shiamo/cosa facciamo @done
+    - lasciati ispirare @done
     BARRA DI RICERCA:
         - IMPIEGATO DEL MESE @done
         - DESTINAZIONI PREFERITE @done
@@ -40,11 +38,11 @@ HOME:
             - show profile
                 - modifica profilo
             - le tue prenotazioni @done
-            - i tuoi salvati/preferiti --> carrello
-            - calendario degli impegni
-                - mostra a elenco
+            - i tuoi salvati/preferiti --> carrello @done
+            - calendario degli impegni @done
+                - mostra a elenco @done
                 - valutazione
-            - logout
+            - logout @done
 
 Debugging
 - TOGLIERE --> pagine da togliere

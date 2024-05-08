@@ -225,14 +225,30 @@ function getUsers(string $email): ?mysqli_result {
     return selectDb("users", [], ["email"], [$email]);
 }
 
-function removeDb(string $table, string $where): bool   //ERROR: da migliorare
+function removeDb(string $table, array $whereCol, array $whereVal): bool
 {
-    $conn = accessDb();
-    $query = "DELETE FROM {$table} WHERE {$where}";
-    $stmt = $conn->prepare($query);
-    $result = $stmt->execute();
-    if (!$result)
-        return false;
-    disconnectDb($conn);
-    return true;
+	$conn = accessDb();
+	$infoTab = getTableInfoDb($table);
+	$query = "DELETE FROM {$table} WHERE ";
+
+	for ($i = 0; $i < count($whereCol); $i++) {
+		$found = false;
+		foreach ($infoTab["columnName"] as $col) {
+			if (strtolower($col) == strtolower($whereCol[$i])) {
+				$query .= "{$col} = ? AND ";
+				$found = true;
+			}
+		}
+		if (!$found) {
+			logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
+			return false;
+		}
+	}
+	$query = substr($query, 0, -4);	//rimuovo l'ultimo AND
+	$stmt = $conn->prepare($query);
+	$result = $stmt->execute($whereVal);
+	if (!$result)
+		return false;
+	disconnectDb($conn);
+	return true;
 }
