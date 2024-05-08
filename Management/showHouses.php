@@ -123,10 +123,10 @@
 						$kids++;
 						if ($kiddo["profile_picture_path"] == NULL)
 							echo "<img class='kid' style=' margin-left: " . $kids * (-50) . "px' 
-									src='../Management/Images/00.jpg' title='" . $kiddo["name"] . "'>";
+									src='../Management/Images/00.jpg' title='" . $kiddo["name"] . "' alt='image of " . $kiddo["name"] . "'>";
 						else
 							echo "<img class='kid'  style=' margin-left: " . $kids * (-50) . "px' 
-									src='../" . $kiddo["profile_picture_path"] . "' title='" . $kiddo["name"] . "'>";
+									src='../" . $kiddo["profile_picture_path"] . "' title='" . $kiddo["name"] . "' alt='image of " . $kiddo["name"] . "'>";
 						$scareQuery = selectQuery("SELECT S.scare FROM kids AS K JOIN scaredOf AS S ON K.id = S.kid WHERE K.name = '" . $kiddo["name"] . "'");
 						if ($scareQuery->num_rows > 0) {
 							$scaredOf .= $kiddo["name"] . " is scared of ";

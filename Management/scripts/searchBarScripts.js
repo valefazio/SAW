@@ -51,6 +51,8 @@ class Submit {
 			img.src = '../Management/Images/occhio_chiuso.png';
 			img.setAttribute("id", "eye-closed");
 			img.setAttribute("style", "margin-top: 5%; width: 50%");
+			img.setAttribute("alt", "search");
+			img.setAttribute("title", "search");
 			this.btn.append(img);
 		}
 	}

@@ -31,8 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 	if (isset ($_POST['remember-me'])) {
 		rememberMe($email, $bytes);
 		setcookie("remember-me", $bytes, time() + (86400 * 30), "/");
-		updateDb("users", ["remember_token"], [hash('sha256', $bytes)], ["email"], [$email]);
-		updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], ["email"], [$email]);
+		if(updateDb("users", ["remember_token"], [hash('sha256', $bytes)], ["email"], [$email]) == false)
+			relocation("../404.php");
+		if(updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], ["email"], [$email]) == false)
+			relocation("../404.php");
 	}
 	header("Location: ../home.php");
 	exit;
@@ -49,8 +51,10 @@ function rememberMe($email, $bytes)
 		$bytes = random_bytes(12);
 		$conn->begin_transaction();
 
-		updateDb("users", ["remember_token"], [hash('sha256', $bytes)], ["email"], [$email]);
-		updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], ["email"], [$email]);
+		if(updateDb("users", ["remember_token"], [hash('sha256', $bytes)], ["email"], [$email]) == false)
+			relocation("../404.php");
+		if(updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], ["email"], [$email]) == false)
+			relocation("../404.php");
 
 		$conn->commit();
 

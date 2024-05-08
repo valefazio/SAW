@@ -7,12 +7,12 @@ if ($_POST['to_do'] == "heart") {
             if (insertDb("preferites", ["monster", "door"], [$_SESSION['email'], $_POST['room']]))
                 echo true;
             else
-                echo false;   //ERROR
+                echo false;
         } else {    //remove
-            if (removeDb("preferites", "monster = '" . $_SESSION['email'] . "' AND door = '" . $_POST['room'] . "'"))
+            if (removeDb("preferites", ["monster", "door"], [$_SESSION['email'], $_POST['room']]))
                 echo true;
             else
-                echo false;   //ERROR
+                echo false;
         }
     } else {
         echo false;

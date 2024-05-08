@@ -10,8 +10,7 @@ if (!session_start())
     $email = $_SESSION['email'];
 
     // Delete the account from the database
-    $where = "email = '$email'";
-    $result = removeDb("users", $where);
+    $result = removeDb("users", ["email"], [$email]);
 
     if ($result) {
         // Account deleted successfully
@@ -23,4 +22,5 @@ if (!session_start())
     } else {
         // Failed to delete account
         echo "Failed to delete account.";
+        relocation("../Pages/404.php");//ERROR
     }

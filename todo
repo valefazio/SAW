@@ -14,7 +14,7 @@ To fix:
 - cancella profilo
 - togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali) @done
 - dividere form login e registratione in html e php @done
-- aggiungere gli alt alle immagini
+- aggiungere gli alt alle immagini @done
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?) @done
 - cambiare PK in 'countries' da automatic num a codice a tre lettere
 - dopo modifica dare avviso o scrivi sotto del successo

@@ -3,8 +3,10 @@
 	include("../../Management/utility.php");
     include("../../Management/Database/connection.php");
     $email = $_SESSION['email'];
-    updateDb("users", ["remember_token"], [NULL], ["email"], [$email]);
-    updateDb("users", ["remember_token_created_at"], [NULL], ["email"], [$email]);
+    if(updateDb("users", ["remember_token"], [NULL], ["email"], [$email]) == false)
+        relocation("../404.php");
+    if(updateDb("users", ["remember_token_created_at"], [NULL], ["email"], [$email]) == false)
+        relocation("../404.php");
     unset($_COOKIE['remember-me']);
     setcookie('remember-me', '', time() - 3600, '/');
     unset($_SESSION['email']);

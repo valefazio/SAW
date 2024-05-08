@@ -23,16 +23,16 @@
         <?php
         $queryParam = $_SERVER['QUERY_STRING'];
         if ($queryParam === 'usersFavorites') {
-			echo "<h1 class='title'>Best reviewed destinations</h1>";
+			echo "<h1 class='title'>BEST REViEWED DESTinATiOn</h1>";
             $_GET['usersFavorites'] = true;
         } else if ($queryParam === 'saved') {
-            echo "<h1 class='title'>Your saved destinations</h1>";
+            echo "<h1 class='title'>YOuR SAVED DESTinATiOn</h1>";
             $_GET['saved'] = true;
         } else if ($queryParam === 'search') {
-            echo "<h1  class='title'>Search results</h1>";
+            echo "<h1  class='title'>SEARcH RESuLTS</h1>";
             $_GET['search'] = true;
         } else if ($queryParam === 'bookings') {
-            echo "<h1 class='title'>Your bookings</h1>";
+            echo "<h1 class='title'>YOuR BOOkinGs</h1>";
 			echo "<p style='text-align: right; margin-right: 30px'>Go to CALENDAR to see the bookings per day</p><br>";
             $_GET['bookings'] = true;
         }

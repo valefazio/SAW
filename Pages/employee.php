@@ -14,7 +14,7 @@
             include ("../Management/navbar.html");
             ?>
         </nav>
-        <h1>IMPIEGATI DEL MESE</h1>
+        <h1>iMPieGati DEL MESE</h1>
 
     <div class="employee-box">
         <?php

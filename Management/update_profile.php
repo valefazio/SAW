@@ -54,7 +54,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $file_destination = "../Management/Images/users/" . $file_name_new;
                     move_uploaded_file($file_tmp, $file_destination);
                     $file = file_get_contents($file_destination);
-                    updateDb("users", ["profile_picture"], [$file], ["email"], [$_SESSION["email"]]);
+                    if(updateDb("users", ["profile_picture"], [$file], ["email"], [$_SESSION["email"]])) {
+                        unlink($file_destination);
+                    } else {
+                        alert("Errore durante il caricamento del file");
+                        relocation("../Pages/404.php");
+                        exit;
+                    }
                 } else {
                     alert("File troppo grande");
                     if (session_status() == PHP_SESSION_ACTIVE)
@@ -82,9 +88,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $firstname = htmlspecialchars(trim($_POST["firstname"]));
     $lastname = htmlspecialchars(trim($_POST["lastname"]));
-    updateDb("users", ["firstname", "lastname", "email", "password"], [$firstname, $lastname, $email, $psw], ["email"], [$_SESSION["email"]]);
-
-    $_SESSION['email'] = $email;
-    relocation("../Pages/profile.php");
-    exit;
+    if(updateDb("users", ["firstname", "lastname", "email", "password"], [$firstname, $lastname, $email, $psw], ["email"], [$_SESSION["email"]])) {
+        $_SESSION["email"] = $email;
+        alert("Modifiche effettuate con successo", "success");
+        relocation("../Pages/profile.php");
+        exit;
+    } else {
+        alert("Errore durante l'aggiornamento del profilo");
+        relocation("../Pages/404.php");
+        exit;
+    }
 }
