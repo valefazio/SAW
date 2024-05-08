@@ -37,13 +37,10 @@ if ($resKids->num_rows != 0) {
 $resKidsInfo = selectDb("kids", [], ["id"], [$kids]);
 if ($resKidsInfo->num_rows != 0) {
     $rowKidsInfo = $resKidsInfo->fetch_assoc();
-    for ($i = 0; $i < $resKidsInfo->num_rows; $i++) {
-        $kidsName[$i] = $rowKidsInfo['name'];
-        $kidsPhone[$i] = $rowKidsInfo['phone'];
-        $kidsPicture[$i] = $rowKidsInfo['profile_picture_path'];
-    }
+    $kidsName = $rowKidsInfo['name'];
+    $kidsPhone = $rowKidsInfo['phone'];
+    $kidsPicture = $rowKidsInfo['profile_picture_path'];
 }
-
 
 $resScaredOf = selectDb("scaredOf", [], ["kid"], [$kids]);
 if ($resScaredOf->num_rows != 0) {
@@ -57,6 +54,23 @@ if ($resRoomPicture->num_rows != 0) {
     $picture = $rowRoomPicture['filename'];
 }
 
+function notBooked(string $roomID, string $date): bool
+{
+    $res = selectDb("calendar", [], ["door", "date"], [$roomID, $date]);
+    if ($res->num_rows == 0) {
+        return true;
+    }
+    return false;
+}
+
+function hasBookedBefore(string $roomID, string $monsterID): bool
+{
+    $res = selectDb("calendar", [], ["door", "monster"], [$roomID, $monsterID]);
+    if ($res->num_rows != 0) {
+        return true;
+    }
+    return false;
+}
 
 ?>
 
@@ -88,7 +102,8 @@ if ($resRoomPicture->num_rows != 0) {
                     </div>
                     <div id="RoomReviews">
                         <h2>Reviews</h2>
-                        <p><?php print ($reviews); ?></p>
+                        <p><?php print ($reviews);
+                        print ("⭐️"); ?></p>
                     </div>
                     <div id="RoomDescription">
                         <h2>Description</h2>
@@ -112,17 +127,37 @@ if ($resRoomPicture->num_rows != 0) {
             <div id="bookingArea">
                 <div id="RoomBooking">
                     <h2>Booking</h2>
-                    <p>Here you can find information about the booking</p>
                 </div>
                 <div id="RoomCalendar">
-                    <div class="field" style="max-width: 70px; display: contents; align-items: center">
-                        <input type="text" id="calendar" readonly style="max-width:70px; margin-left: 15px"
-                            name="calendar">
-                        <span class="material-symbols-outlined" id="calendar_arrow"
-                            style="font-size: 18px">expand_more</span>
-                    </div>
-                    <button id="RoomBookButton" onclick="window.location.href='book.php'">Book</button>
-                    <button id="RoomReviewButton" onclick="window.location.href='review.php'">Review</button>
+                    <input type="text" id="calendar" name="calendar">
+                    <input method="POST" type="submit" id="RoomBookButton" value="Book">
+                    <?php
+                    if (isset($_POST['submit'])) {
+                            if(notBooked($date, $roomID)) {
+                                print("ciao");
+                                $date = $_POST['calendar'];
+                                insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['id']]);
+                            }
+                            else {
+                                print("the room  is already booked for that day");
+                            }
+                    }
+                    ?>
+                </div>
+                <div id="ReviewArea">
+                    <input type="text" id="review" name="review">
+                    <input id="RoomReviewButton" method="POST" type="submit" value="Review">
+                    <?php
+                    if (isset($_POST['submit'])) {
+                        if(hasBookedBefore($roomID, $_SESSION['id'])) {
+                            $review = $_POST['review'];
+                            insertDb("reviews", ["review", "door", "monster"], [$review, $roomID, $_SESSION['id']]);
+                        }
+                        else {
+                            print("you have to book the room before reviewing it");
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>

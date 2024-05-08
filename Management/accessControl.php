@@ -53,4 +53,3 @@
 			timerRelocation('../Pages/index.php');	//ERROR
 		}
 	}
-?>
