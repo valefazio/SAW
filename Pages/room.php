@@ -129,42 +129,56 @@ function hasBookedBefore(string $roomID): bool
                     <h2>Booking</h2>
                 </div>
                 <div id="RoomCalendar">
-                    <input type="text" id="calendar" name="calendar">
-                    <input method="POST" type="submit" id="RoomBookButton" value="Book">
-                    <?php
-                    if (isset($_POST['submit'])) {
-                            if(notBooked($date, $roomID)) {
-                                print("ciao");
-                                $date = $_POST['calendar'];
-                                if(insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['id']])){
-                                    print("room booked");
+                    <form method="POST">
+                        <label for="calendar">Choose a date:</label>
+                        <input type="date" id="bookingDate" name="calendar">
+                        <input type="submit" id="RoomBookButton" name="RoomBookButton" value="Book">
+                    </form>
+
+                    <script>
+                        document.getElementById("RoomBookButton").addEventListener("click", function () {
+                            alert("entro1");
+                            <?php
+                            //echo "<script>console.log('ciao');</script>";
+                            
+                                //echo "<script>console.log('ciao');</script>";
+                                if (notBooked($date, $roomID)) {
+                                    print("alert('entro2')");
+                                    $date = $_POST['bookingDate'];
+                                    if (insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['email']])) {
+                                        //print ("room booked");
+                                        print ("alert('room booked')");
+                                    } else {
+                                        relocation("404.php");
+                                    }
+                                } else {
+                                    print("alert('the room  is already booked for that day')");
+                                    //print ("the room  is already booked for that day");
                                 }
-                                else {
-                                    relocation("404.php");
-                                }
-                            }
-                            else {
-                                print("the room  is already booked for that day");
-                            }
-                    }
-                    ?>
+                            
+                            ?>
+                        });
+                    </script>
+
+
                 </div>
                 <div id="ReviewArea">
-                    <input type="text" id="review" name="review">
-                    <input id="RoomReviewButton" method="POST" type="submit" value="Review">
+                    <form>
+                        <label for="calendar">Leave a review:</label>
+                        <input type="number" id="review" name="review" min="1" max="5">
+                        <input id="RoomReviewButton" method="POST" type="submit" value="Review">
+                    </form>
                     <?php
                     if (isset($_POST['submit'])) {
-                        if(hasBookedBefore($roomID)) {
+                        if (hasBookedBefore($roomID)) {
                             $review = $_POST['review'];
-                            if(insertDb("reviews", ["review", "door", "monster"], [$review, $roomID, $_SESSION['id']])){
-                                print("review added");
-                            }
-                            else {
+                            if (insertDb("reviews", ["review", "door", "monster"], [$review, $roomID, $_SESSION['id']])) {
+                                print ("review added");
+                            } else {
                                 relocation("404.php");
                             }
-                        }
-                        else {
-                            print("you have to book the room before reviewing it");
+                        } else {
+                            print ("you have to book the room before reviewing it");
                         }
                     }
                     ?>
