@@ -66,7 +66,7 @@
                     <script>
                         document.getElementById("delete-button").addEventListener("click", function () {
                             if (confirm("Are you sure you want to delete your account?")) {
-                                window.location.href = "../Management/delete_account.php";
+                                window.location.href = "../Management/delete_profile.php";
                             }
                         });
                     </script>
@@ -81,8 +81,12 @@
             event.preventDefault();
         }
     });
-
 </script>
+
+<?php
+include ("../Management/footer.html");
+?>
+
 </html>
 
 

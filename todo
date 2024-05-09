@@ -18,6 +18,7 @@ To fix:
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?) @done
 - dopo modifica dare avviso o scrivi sotto del successo @done
 - mettere votazioni a caso a utenti
+- controlli formato password non funzionano
 
 - controlli valori di ritorno
 - gestione degli errori

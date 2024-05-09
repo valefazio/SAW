@@ -33,7 +33,8 @@
             $_GET['search'] = true;
         } else if ($queryParam === 'bookings') {
             echo "<h1 class='title'>YOuR BOOkinGs</h1>";
-			echo "<p style='text-align: right; margin-right: 30px'>Go to CALENDAR to see the bookings per day</p><br>";
+			echo "<p style='text-align: right; margin-right: 30px'>Go to 
+            <a href='calendar.php'>CALENDAR</a> to see the bookings per day</p><br>";
             $_GET['bookings'] = true;
         }
         include ("../Management/showHouses.php");
