@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		alert("Utente già registrato");
 		if (session_status() == PHP_SESSION_ACTIVE)
 			session_abort();
-		relocation("");
+		relocation("registration.html");
 		exit;
 	}
 	$firstname = htmlspecialchars(trim($_POST["firstname"]));
@@ -43,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$_SESSION['email'] = $email;
 	relocation("../home.php");
+	echo "Registrazione avvenuta con successo" . $_SESSION['email'];
 	exit;
 }
 

@@ -36,7 +36,9 @@ function getTableInfoDb(string $table): ?array
         $columnName = $col["Field"];
         $isPrimaryKey = $col["Key"] === "PRI"; // Check if the column is a primary key
         $cols[] = $columnName;
-        $primaryKeys[] = $isPrimaryKey;
+        if ($isPrimaryKey) {
+            $primaryKeys[] = $columnName;
+        }
     }
 
     disconnectDb($conn);
@@ -48,10 +50,16 @@ function insertDb(string $table, array $columns, array $values): bool
 {
     $conn = accessDb();
     $infoTab = getTableInfoDb($table);
+    logs('ok');
+
+    foreach($infoTab["is_primary_key"] as $key) {
+        logs($key);
+    }
 
     //determine if query is already present in the db
     foreach ($infoTab["columnName"] as $col) {
-        if ($infoTab["is_primary_key"]) {
+        logs($col . ": " . in_array($infoTab["columnName"], $infoTab["is_primary_key"]));
+        if (in_array($infoTab["columnName"], $infoTab["is_primary_key"])) {
             $query = "SELECT * FROM {$table} WHERE {$col} = ?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("s", $values[array_search($col, $columns)]);
@@ -59,6 +67,8 @@ function insertDb(string $table, array $columns, array $values): bool
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 logs('record già presente con stessa chiave primaria');
+                logs($result->num_rows);
+                logs($result->fetch_assoc()["email"]);
                 return false;
             }
         }

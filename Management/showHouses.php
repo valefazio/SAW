@@ -84,12 +84,12 @@
 			$doors = selectQuery(
 				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
-								RIGHT JOIN calendar AS Ca ON D.address = Ca.door AND Ca.monster = '" . $_SESSION['email'] . "'
+								JOIN calendar AS Ca ON D.address = Ca.door AND Ca.monster = '" . $_SESSION['email'] . "'
 				WHERE Ca.date >= CURDATE()
 				ORDER BY Ca.date ASC"
 			);
 			if ($doors->num_rows == 0) {
-				echo "<h3 style='text-align: center'> There are no bookings</h3>";
+				echo "<h3 style='text-align: center'>There are no bookings</h3>";
 				return;
 			}
 		} else
