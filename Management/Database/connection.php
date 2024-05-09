@@ -50,15 +50,14 @@ function insertDb(string $table, array $columns, array $values): bool
 {
     $conn = accessDb();
     $infoTab = getTableInfoDb($table);
-    logs('ok');
 
-    foreach($infoTab["is_primary_key"] as $key) {
+    /* foreach($infoTab["is_primary_key"] as $key) {
         logs($key);
-    }
+    } */
 
     //determine if query is already present in the db
     foreach ($infoTab["columnName"] as $col) {
-        logs($col . ": " . in_array($infoTab["columnName"], $infoTab["is_primary_key"]));
+        //logs($col . ": " . in_array($infoTab["columnName"], $infoTab["is_primary_key"]));
         if (in_array($infoTab["columnName"], $infoTab["is_primary_key"])) {
             $query = "SELECT * FROM {$table} WHERE {$col} = ?";
             $stmt = $conn->prepare($query);
@@ -67,8 +66,8 @@ function insertDb(string $table, array $columns, array $values): bool
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 logs('record già presente con stessa chiave primaria');
-                logs($result->num_rows);
-                logs($result->fetch_assoc()["email"]);
+                /* logs($result->num_rows);
+                logs($result->fetch_assoc()["email"]); */
                 return false;
             }
         }
@@ -158,6 +157,7 @@ function selectWithFinalConditions(string $table, array $columns, array $whereCo
         $query = substr($query, 0, -4);	//rimuovo l'ultima virgola
     }
     $query .= " " . $conds;
+    //echo "console.log('".$query."');";
     $stmt = $conn->prepare($query);
     $result = $stmt->execute($whereVal);
     if (!$result)

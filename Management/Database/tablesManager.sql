@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     booking_date DATE,
     door VARCHAR(255) NOT NULL,
     monster VARCHAR(255) NOT NULL,
-    review FLOAT NOT NULL CHECK (review >= 0.0 AND review <= 5.0),
+    review INT NOT NULL CHECK (review >= 0.0 AND review <= 5.0),
     review_text TEXT NULL,
     FOREIGN KEY (monster) REFERENCES users(email) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (door) REFERENCES doors(address) ON DELETE CASCADE ON UPDATE CASCADE
@@ -125,17 +125,6 @@ BEGIN
     IF count_reviews = 0 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Cannot insert review. No previous booking exists in the calendar table or all bookings are for future dates.';
-    ELSE
-        -- Get the booking date from the calendar table and insert it into the booking_date column
-        SET NEW.booking_date = (
-            SELECT date 
-            FROM calendar 
-            WHERE door = NEW.door 
-            AND monster = NEW.monster 
-            AND date < CURDATE()
-            ORDER BY date DESC
-            LIMIT 1
-        );
     END IF;
 END//
 DELIMITER ;
