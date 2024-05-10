@@ -11,16 +11,23 @@ h1 {
     font-size: 70px;
 }
 
+img {
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 #main {
     margin: 5px 5%;
  }
 
  #firstArea {
-    margin-right: 20px;
     margin-bottom: 20px;
     background-color: var(--colorD);
     border-radius: 20px;
     padding: 10px;
+    width: 70%;
 }
  
 
@@ -28,23 +35,19 @@ h1 {
     margin-bottom: 10px;
 }
 
-#RoomPicture {
-    margin-bottom: 20px;
-}
 
 #RoomPicture img {
-    max-width: 20%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px; 
+    max-width: 300px;
 }
+
 
 #RoomKids {
     margin-bottom: 20px;
-    margin-right: 20px;
     background-color: var(--colorD);
     border-radius: 20px;
     padding: 10px;
+    width: 400px;
 }
 
 #RoomKids p {
@@ -72,7 +75,17 @@ h1 {
     margin-bottom: 20px;
 }
 
-#RoomBookButton, #RoomReviewButton, #save, #share{
+#RoomBookButton, #RoomReviewButton {
+    padding: 10px 20px;
+    background-color: var(--colorC);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#share {
     padding: 10px 20px;
     background-color: var(--colorC);
     color: white;
@@ -83,7 +96,9 @@ h1 {
 }
 
 #headerbtns {
-    margin-top: 15px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
 }
 
 #RoomBookButton button:hover, #RoomReviewButton button:hover, #save button:hover, #share button:hover {
@@ -97,10 +112,11 @@ h1 {
 
 #info {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 #header {
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -109,6 +125,17 @@ h1 {
     display: flex;
 }
 
+#ReviewArea {
+    margin-bottom: 20px;
+    background-color: var(--colorD);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#pictureAndFirst {
+    display: flex;
+    justify-content: space-between;
+}
 
 
 .heart,
@@ -119,6 +146,8 @@ h1 {
 }
 
 .heart {
+    padding-right: 20px;
+    padding-top:10px ;
 	color: rgba(0, 0, 0, 0);
 	-webkit-text-stroke: 2px #000000;
 }

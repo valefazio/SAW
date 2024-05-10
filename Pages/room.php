@@ -2,7 +2,6 @@
 <html lang="it">
 
 <?php
-//session_start();
 include ("../Management/accessControl.php");
 ?>
 
@@ -47,6 +46,8 @@ $resScaredOf = selectDb("scaredOf", [], ["kid"], [$kids]);
 if ($resScaredOf->num_rows != 0) {
 	$rowScaredOf = $resScaredOf->fetch_assoc();
 	$scaredOf = $rowScaredOf['scare'];
+} else {
+	$scaredOf = "nothing";
 }
 
 $resRoomPicture = selectDb("room_pics", [], ["room_id"], [$roomID]);
@@ -82,45 +83,46 @@ function hasBookedBefore(string $address): bool
 			</div>
 			<div id="headerbtns">
 				<?php
-					/* HEART - SAVED */
-					$heart = "<p class='heart";
-					if (isLogged()) {	//se l'utente è loggato controllo se la stanza è nei preferiti
-						$res = selectDb("preferites", ["monster", "door"], ["monster", "door"], [$_SESSION['email'], $row["address"]]);
-						if ($res->num_rows > 0)
-							$heart .= " heart_red";
-					}
-					$heart .= "' onclick='hearts(" . strval(0) . ")'>❤</p>";
-					echo $heart;
-					echo "<p class='address' hidden>" . $address . "</p>"
+				/* HEART - SAVED */
+				$heart = "<p class='heart";
+				if (isLogged()) {	//se l'utente è loggato controllo se la stanza è nei preferiti
+					$res = selectDb("preferites", ["monster", "door"], ["monster", "door"], [$_SESSION['email'], $row["address"]]);
+					if ($res->num_rows > 0)
+						$heart .= " heart_red";
+				}
+				$heart .= "' onclick='hearts(" . strval(0) . ")'>❤</p>";
+				echo $heart;
+				echo "<p class='address' hidden>" . $address . "</p>";
 				?>
-				<button id="share" onclick="window.location.href='Share.php'">Share</button>
-				
+				<?php
+				$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+				?>
+				<button id="share" onclick="copyToClipboard($url)">Share</button>
 			</div>
 		</div>
-		<div id="RoomPicture">
-			<img src="<?php print ("../");
-			print ($picture); ?>" alt="Room Picture">
+		<div id="pictureAndFirst">
+			<div id="RoomPicture">
+				<img src="<?php print ("../");
+				print ($picture); ?>" alt="Room Picture">
+			</div>
+			<div id="firstArea">
+				<h2>Description</h2>
+				<div id="RoomAddress">
+					<h2>Address</h2>
+					<p><?php print ($address); ?></p>
+				</div>
+				<div id="RoomReviews">
+					<h2>Reviews</h2>
+					<p><?php print ($reviews);
+					print ("⭐️"); ?></p>
+				</div>
+			</div>
 		</div>
+
 		<div id="info">
 			<div id="RoomInfos">
-				<div id="firstArea">
-					<div id="RoomAddress">
-						<h2><?php print ($address); ?></h2>
-					</div>
-					<div id="RoomReviews">
-						<h2>Reviews</h2>
-						<p><?php print ($reviews);
-						print ("⭐️"); ?></p>
-					</div>
-					<div id="RoomDescription">
-						<h2>Description</h2>
-						<p>Here you can find a description of the room</p>
-					</div>
-				</div>
 				<div id="RoomKids">
 					<h2>Kids</h2>
-					<p>Here you can find information about the kids</p>
-
 					<p><?php print ("kid name: ");
 					print ($kidsName); ?></p>
 					<p><?php print ("kid phone number: ");
@@ -141,7 +143,6 @@ function hasBookedBefore(string $address): bool
 						<input type="date" id="bookingDate" name="bookingDate">
 						<button type="submit" id="RoomBookButton" name="RoomBookButton">Book</button>
 					</form>
-
 					<?php
 					if (isset($_POST['RoomBookButton'])) {
 						$date = $_POST['bookingDate'];
@@ -156,52 +157,51 @@ function hasBookedBefore(string $address): bool
 						}
 					}
 					?>
-
 				</div>
-				<div id="ReviewArea">
-					<form method="POST" action="">
-						<label for="review">Leave a review:</label>
-						<select id="review" name="review">
-							<option value="1" title="one star">⭐️</option>
-							<option value="2" title="two stars">⭐️⭐️</option>
-							<option value="3" title="three stars">⭐️⭐️⭐️</option>
-							<option value="4" title="four stars">⭐️⭐️⭐️⭐️</option>
-							<option value="5" title="five stars">⭐️⭐️⭐️⭐️⭐️</option>
-						</select><br>
-						<label for="bookedDates">Choose a booking to review:</label>
-						<?php
-						$numdates = 0;
-						$dates = selectQuery("SELECT date FROM calendar WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "' AND date NOT IN (SELECT booking_date FROM reviews WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "') ORDER BY date DESC");
-						if ($dates->num_rows != 0) {
-							$rowDates = $dates->fetch_assoc();
-							echo "<select id='bookedDates' name='bookedDates'>";
-							do {
-								echo "<option value='" . $rowDates['date'] . "'>" . $rowDates['date'] . "</option>";
-								$numdates++;
-							} while ($rowDates = $dates->fetch_assoc());
-							echo "</select>";
-						}
-						?>
-						<button id="RoomReviewButton" type="submit" name="RoomReviewButton">Review</button>
-					</form>
+			</div>
+			<div id="ReviewArea">
+				<h2>Review</h2>
+				<form method="POST" action="">
+					<label for="review">Leave a review:</label>
+					<select id="review" name="review">
+						<option value="1" title="one star">⭐️</option>
+						<option value="2" title="two stars">⭐️⭐️</option>
+						<option value="3" title="three stars">⭐️⭐️⭐️</option>
+						<option value="4" title="four stars">⭐️⭐️⭐️⭐️</option>
+						<option value="5" title="five stars">⭐️⭐️⭐️⭐️⭐️</option>
+					</select><br>
 					<?php
-					if (isset($_POST['RoomReviewButton'])) {
-						if ($numdates > 0) {
-							if (isset($_POST['review'])) {
-								$review = $_POST['review'];
-								if (insertDb("reviews", ["review", "door", "monster", "booking_date"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates']])) {
-									print ("review added");
-								} else {
-									relocation("404.php");
-								}
-							}
-
-						} else {
-							print ("you have to book the room before reviewing it");
-						}
+					$numdates = 0;
+					$dates = selectQuery("SELECT date FROM calendar WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "' AND date NOT IN (SELECT booking_date FROM reviews WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "') ORDER BY date DESC");
+					if ($dates->num_rows != 0) {
+						$rowDates = $dates->fetch_assoc();
+						echo "<label for='bookedDates'>Choose a booking to review:</label> <select id='bookedDates' name='bookedDates'>";
+						do {
+							echo "<option value='" . $rowDates['date'] . "'>" . $rowDates['date'] . "</option>";
+							$numdates++;
+						} while ($rowDates = $dates->fetch_assoc());
+						echo "</select>";
 					}
 					?>
-				</div>
+					<button id="RoomReviewButton" type="submit" name="RoomReviewButton">Review</button>
+				</form>
+				<?php
+				if (isset($_POST['RoomReviewButton'])) {
+					if ($numdates > 0) {
+						if (isset($_POST['review'])) {
+							$review = $_POST['review'];
+							if (insertDb("reviews", ["review", "door", "monster", "booking_date"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates']])) {
+								print ("review added");
+							} else {
+								relocation("404.php");
+							}
+						}
+
+					} else {
+						print ("you have to book the room before reviewing it");
+					}
+				}
+				?>
 			</div>
 		</div>
 	</div>
