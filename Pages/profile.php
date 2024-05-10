@@ -63,9 +63,12 @@
                 <div class="button-container">
                     <button type="submit" id="update-button" style="cursor: pointer">Confirm Changes</button>
                     <button type="button" id="delete-button" style="cursor: pointer"">Delete Account</button>
+                    <!-- Impostare variabile di sessione per evitare accesso da link -->
                     <script>
                         document.getElementById("delete-button").addEventListener("click", function () {
                             if (confirm("Are you sure you want to delete your account?")) {
+                                //Variabile di sessione per evitare che l'utente vi acceda direttamente
+                                
                                 window.location.href = "../Management/delete_profile.php";
                             }
                         });

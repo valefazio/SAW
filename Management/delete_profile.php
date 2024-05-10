@@ -9,7 +9,12 @@ if (!session_start())
     if (!isset($_SESSION['email'])) {
         // User is not logged in
         echo "You must be logged in to delete your account.";
-        relocation("../Pages/login.php");
+        relocation("../Pages/Access/login.html");
+    }
+
+    if (!isset($_SESSION['delete'])) {
+        // User accessed this page without clicking the delete button
+        relocation("../Pages/404.php");
     }
 
     // Get the user ID from the session
@@ -17,6 +22,8 @@ if (!session_start())
 
     // Delete the account from the database
     $result = removeDb("users", ["email"], [$email]);
+
+    unset($_SESSION["delete"]);
 
     if ($result) {
         // Account deleted successfully
