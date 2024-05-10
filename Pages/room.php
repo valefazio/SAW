@@ -14,6 +14,7 @@ include ("../Management/accessControl.php");
 	<link rel="stylesheet" href="../Management/Style/calendarSelect.css">
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<script src="../Management/scripts/showHousesScripts.js" defer></script>
 </head>
 
 <?php
@@ -80,8 +81,20 @@ function hasBookedBefore(string $address): bool
 				<h1><?php print (strtolower($name)); ?></h1>
 			</div>
 			<div id="headerbtns">
-				<button id="save" onclick="window.location.href='Save.php'">Save</button>
+				<?php
+					/* HEART - SAVED */
+					$heart = "<p class='heart";
+					if (isLogged()) {	//se l'utente è loggato controllo se la stanza è nei preferiti
+						$res = selectDb("preferites", ["monster", "door"], ["monster", "door"], [$_SESSION['email'], $row["address"]]);
+						if ($res->num_rows > 0)
+							$heart .= " heart_red";
+					}
+					$heart .= "' onclick='hearts(" . strval(0) . ")'>❤</p>";
+					echo $heart;
+					echo "<p class='address' hidden>" . $address . "</p>"
+				?>
 				<button id="share" onclick="window.location.href='Share.php'">Share</button>
+				
 			</div>
 		</div>
 		<div id="RoomPicture">
