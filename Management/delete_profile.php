@@ -12,7 +12,7 @@ if (!session_start())
         relocation("../Pages/Access/login.html");
     }
 
-    if (!isset($_SESSION['delete'])) {
+    if (($_SESSION['status']) != "delete") {
         // User accessed this page without clicking the delete button
         relocation("../Pages/404.php");
     }

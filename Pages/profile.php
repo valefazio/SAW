@@ -68,7 +68,7 @@
                         document.getElementById("delete-button").addEventListener("click", function () {
                             if (confirm("Are you sure you want to delete your account?")) {
                                 //Variabile di sessione per evitare che l'utente vi acceda direttamente
-                                
+                                <?php $_SESSION["status"] = "delete"; ?>
                                 window.location.href = "../Management/delete_profile.php";
                             }
                         });
@@ -83,6 +83,8 @@
         if (!confirm("Are you sure you want to update your profile?")) {
             event.preventDefault();
         }
+        else
+            <?php $_SESSION["status"] = "update"; ?>;
     });
 </script>
 
