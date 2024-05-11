@@ -35,9 +35,9 @@
 
                     <label for="confirm-password">Confirm Password</label>
                     <input type="password" id="confirm-password" name="confirm-password" required>
+                    <input type="checkbox" id="show-pass" onclick="togglePassword()" style="width:10%;">Show password
                 </div>
                 <input type="submit" value="Sign-up" id="register-button" disabled style="cursor: pointer;">
-
                 <div id="switchForm">
                     <a href="login.html">Already registered? Login here</a>
                 </div>
@@ -67,14 +67,29 @@
         confirmPasswordInput.addEventListener("input", toggleRegisterButton);
 
         function toggleRegisterButton() {
-            //checkEmailFormat();
-            //checkPasswordFormat();
+            checkEmailFormat();
+            checkPasswordFormat();
             checkPasswordMatch();
 
             if (firstnameInput.value !== "" && lastnameInput.value !== "" && passwordInput.value !== "" && confirmPasswordInput.value !== "" && emailInput.value !== "")
                 registerButton.removeAttribute("disabled");
             else
                 registerButton.setAttribute("disabled", "disabled");
+        }
+
+        function togglePassword() {	//show password in plain text or not
+            var passField = document.getElementById("pass");
+            var confirmPassField = document.getElementById("confirm-password");
+            var showPassCheckbox = document.getElementById("show-pass");
+
+            if (showPassCheckbox.checked) {
+                passField.type = "text";
+                confirmPassField.type = "text";
+            } else {
+                passField.type = "password";
+                confirmPassField.type = "password";
+            }
+            toggleLoginButton();
         }
     </script>
 </body>

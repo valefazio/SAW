@@ -97,7 +97,7 @@ function hasBookedBefore(string $address): bool
 				<?php
 				$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 				?>
-				<button id="share" onclick="copyToClipboard($url)">Share</button>
+				<button id="share" onclick="copyToClipboard(<?php print($url);?>)">Share</button>
 			</div>
 		</div>
 		<div id="pictureAndFirst">
@@ -140,7 +140,7 @@ function hasBookedBefore(string $address): bool
 				<div id="RoomCalendar">
 					<form method="POST" action="">
 						<label for="bookingDate">Choose a date:</label>
-						<input type="date" id="bookingDate" name="bookingDate">
+						<input type="date" id="bookingDate" name="bookingDate"><br>
 						<button type="submit" id="RoomBookButton" name="RoomBookButton">Book</button>
 					</form>
 					<?php

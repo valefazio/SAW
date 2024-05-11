@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="checkFields.js"></script>
+    <script src="./checkFields.js"></script>
     <link rel="stylesheet" type="text/css" href="../../Management/Style/forms.css">
     <title>Login</title>
 </head>
@@ -17,14 +17,10 @@
                 <h1>lOgin</h1>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
-
                 <label for="pass">Password</label>
                 <input type="password" id="pass" name="pass" required>
                 <div class="checkboxes">
                 <input type="checkbox" id="show-pass" onclick="togglePassword()" style="width:10%;">Show password
-                </div>
-                <div class="checkboxes">
-                <input type="checkbox" id="remember-me" style="width:10%;">Remember me
                 </div>
             </div>
             <input type="submit" value="Login" id="login-button" disabled style="cursor: pointer;">
@@ -51,10 +47,10 @@
         // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
         emailInput.addEventListener("input", toggleLoginButton);
         passwordInput.addEventListener("input", togglePassword);
+        
         function toggleLoginButton() {
-            checkEmailFormat();
-            //checkPasswordFormat();	//DEBUG
-
+            //checkEmailFormat(); Non credo siano necessari
+            //checkPasswordFormat();	
             if (emailInput.value !== "" && passwordInput.value !== "") {
                 loginButton.removeAttribute("disabled");
             } else {
