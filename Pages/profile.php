@@ -1,7 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
 <title>Profile</title>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="../Management/Style/profile.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../Management/Style/profile.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script> src="checkFields.js"</script>
 </head>
 
 <body>
@@ -62,8 +66,13 @@
                 <input type="password" name="pass" id="pass" class="form-control">
                 <div class="button-container">
                     <button type="submit" id="update-button" style="cursor: pointer">Confirm Changes</button>
-                    <button type="button" id="delete-button" style="cursor: pointer"">Delete Account</button>
-                    <!-- Impostare variabile di sessione per evitare accesso da link -->
+                    <script>
+                        const emailInput = document.getElementById("email");
+                        const passwordInput = document.getElementById("pass");
+                        checlEmailFormat();
+                        checkPasswordFormat();
+                    </script>
+                    <button type="button" id="delete-button" style="cursor: pointer">Delete Account</button>
                     <script>
                         document.getElementById("delete-button").addEventListener("click", function () {
                             if (confirm("Are you sure you want to delete your account?")) {

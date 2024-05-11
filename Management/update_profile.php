@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             alert("Utente già registrato");
             if (session_status() == PHP_SESSION_ACTIVE)
                 session_abort();
-            relocation("");
+            relocation("../Pages/profile.php");
             exit;
         }
     }
