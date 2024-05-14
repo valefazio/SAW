@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS kids (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    phone VARCHAR(255) NULL,
+    birthDate DATE NULL,
     profile_picture_path VARCHAR(255) NULL
 );
 CREATE TABLE IF NOT EXISTS countries (
@@ -143,32 +143,32 @@ INSERT INTO countries (name) VALUES ('United States');
 INSERT INTO countries (name) VALUES ('Canada');
 INSERT INTO countries (name) VALUES ('Mexico');
 
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Alice', '1234567890', 'Management/Images/kids/alice.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Boo', '1234567890', 'Management/Images/kids/boo.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Charlie', '1234567890', 'Management/Images/kids/charlie.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Daisy', '1234567890', 'Management/Images/kids/daisy.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Eva', '1234567890', 'Management/Images/kids/eva.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Finn', '1234567890', 'Management/Images/kids/finn.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Gina', '1234567890', 'Management/Images/kids/gina.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Hugo', '1234567890', 'Management/Images/kids/hugo.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Ivy', '1234567890', 'Management/Images/kids/ivy.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Jack', '1234567890', 'Management/Images/kids/jack.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Katie', '1234567890', 'Management/Images/kids/katie.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Liam', '1234567890', 'Management/Images/kids/liam.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Mia', '1234567890', 'Management/Images/kids/mia.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Noah', '1234567890', 'Management/Images/kids/noah.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Olivia', '1234567890', 'Management/Images/kids/olivia.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Parker', '1234567890', 'Management/Images/kids/parker.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Quinn', '1234567890', 'Management/Images/kids/quinn.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Ryan', '1234567890', 'Management/Images/kids/ryan.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Sophia', '1234567890', 'Management/Images/kids/sophia.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Thomas', '1234567890', 'Management/Images/kids/thomas.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Uma', '1234567890', 'Management/Images/kids/uma.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Violet', '1234567890', 'Management/Images/kids/violet.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('William', '1234567890', 'Management/Images/kids/william.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Xavier', '1234567890', 'Management/Images/kids/xavier.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Yara', '1234567890', 'Management/Images/kids/yara.jpg');
-INSERT INTO kids (name, phone, profile_picture_path) VALUES ('Zane', '1234567890', 'Management/Images/kids/zane.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Alice', '2015-03-21', 'Management/Images/kids/alice.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Boo', '2011-11-05', 'Management/Images/kids/boo.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Charlie', '2010-09-17', 'Management/Images/kids/charlie.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Daisy', '2012-05-30', 'Management/Images/kids/daisy.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Eva', '2014-07-08', 'Management/Images/kids/eva.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Finn', '2013-01-14', 'Management/Images/kids/finn.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Gina', '2010-12-02', 'Management/Images/kids/gina.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Hugo', '2011-08-26', 'Management/Images/kids/hugo.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Ivy', '2012-10-09', 'Management/Images/kids/ivy.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Jack', '2014-04-18', 'Management/Images/kids/jack.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Katie', '2013-06-25', 'Management/Images/kids/katie.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Liam', '2010-02-07', 'Management/Images/kids/liam.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Mia', '2011-10-31', 'Management/Images/kids/mia.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Noah', '2013-09-10', 'Management/Images/kids/noah.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Olivia', '2014-12-28', 'Management/Images/kids/olivia.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Parker', '2012-08-14', 'Management/Images/kids/parker.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Quinn', '2010-06-03', 'Management/Images/kids/quinn.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Ryan', '2011-03-17', 'Management/Images/kids/ryan.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Sophia', '2014-02-22', 'Management/Images/kids/sophia.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Thomas', '2013-07-05', 'Management/Images/kids/thomas.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Uma', '2012-11-11', 'Management/Images/kids/uma.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Violet', '2010-09-03', 'Management/Images/kids/violet.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('William', '2011-05-19', 'Management/Images/kids/william.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Xavier', '2014-06-27', 'Management/Images/kids/xavier.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Yara', '2013-04-09', 'Management/Images/kids/yara.jpg');
+INSERT INTO kids (name, birthDate, profile_picture_path) VALUES ('Zane', '2010-01-01', 'Management/Images/kids/zane.jpg');
 
 INSERT INTO scaredOf (scare, kid) VALUES ('Orc', 2);
 INSERT INTO scaredOf (scare, kid) VALUES ('Troll', 3);
