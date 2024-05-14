@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Profile</title>
+    <title>Profile</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Management/Style/profile.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script> src="checkFields.js"</script>
+    <script src="Access/checkFields.js"></script>
 </head>
 
 <body>
@@ -34,67 +35,108 @@
                 else
                     echo "../Management/Images/users/00.jpg";
                 ?> width="90">
-                <input id="fileInput" type="file"name="profile_picture" accept=".jpg, .jpeg, .png"
+                <input id="fileInput" type="file" name="profile_picture" accept=".jpg, .jpeg, .png"
                     style="display: none;">
             </div>
 
             <script>
-                // Quando l'immagine del profilo viene cliccata, simula un click sull'input del file
-                document.getElementById("profilePicture").addEventListener("click", function () {
-                    document.getElementById("fileInput").click();
-                });
 
-                // Quando un file viene selezionato, aggiorna l'immagine del profilo
-                document.getElementById("fileInput").addEventListener("change", function (event) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        document.getElementById("profilePicture").src = e.target.result;
-                    };
-                    reader.readAsDataURL(event.target.files[0]);
-                });
             </script>
             <div class="form-group">
                 <label for="firstname">First Name</label>
                 <input type="text" name="firstname" id="firstname" value="<?php echo $row["firstname"]; ?>"
-                    class="form-control">
+                    class="form-control" required>
                 <label for="lastname">Last Name</label>
                 <input type="text" name="lastname" id="lastname" value="<?php echo $row["lastname"]; ?>"
-                    class="form-control">
+                    class="form-control" required>
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="<?php echo $row["email"]; ?>" class="form-control">
-                <label for="password">Password</label>
-                <input type="password" name="pass" id="pass" class="form-control">
+                <input type="email" name="email" id="email" value="<?php echo $row["email"]; ?>" class="form-control"
+                    required>
+                <label for="password">Password
+                    <span class="help"
+                        title="La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero">
+                        help_outline
+                    </span>
+                </label>
+                <input type="password" name="pass" id="pass" class="form-control" required>
+                <input type="checkbox" id="show-pass" onclick="togglePassword()" style="width:10%"> Show Password
                 <div class="button-container">
                     <button type="submit" id="update-button" style="cursor: pointer">Confirm Changes</button>
-                    <script>
-                        const emailInput = document.getElementById("email");
-                        const passwordInput = document.getElementById("pass");
-                        checlEmailFormat();
-                        checkPasswordFormat();
-                    </script>
                     <button type="button" id="delete-button" style="cursor: pointer">Delete Account</button>
-                    <script>
-                        document.getElementById("delete-button").addEventListener("click", function () {
-                            if (confirm("Are you sure you want to delete your account?")) {
-                                //Variabile di sessione per evitare che l'utente vi acceda direttamente
-                                <?php $_SESSION["status"] = "delete"; ?>
-                                window.location.href = "../Management/delete_profile.php";
-                            }
-                        });
-                    </script>
                 </div>
             </div>
         </form>
     </div>
 </body>
+
 <script>
+
+    // Quando l'immagine del profilo viene cliccata, simula un click sull'input del file
+    document.getElementById("profilePicture").addEventListener("click", function () {
+        <?php //$_SESSION['status'] = "update"; ?>;
+        document.getElementById("fileInput").click();
+    });
+
+    // Quando un file viene selezionato, aggiorna l'immagine del profilo
+    document.getElementById("fileInput").addEventListener("change", function (event) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("profilePicture").src = e.target.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    });
+
     document.getElementById("update-button").addEventListener("click", function () {
         if (!confirm("Are you sure you want to update your profile?")) {
             event.preventDefault();
         }
         else
-            <?php $_SESSION["status"] = "update"; ?>;
+            <?php $_SESSION['status'] = "update"; ?>;
     });
+
+    document.getElementById("delete-button").addEventListener("click", function () {
+        if (!confirm("Are you sure you want to delete your account?")) {
+            event.preventDefault();
+        }
+        else {
+            <?php $_SESSION['status'] = "delete"; ?>;
+            window.location.href = "../Management/delete_profile.php";
+        }
+    });
+
+    const firstnameInput = document.getElementById("firstname");
+    const lastnameInput = document.getElementById("lastname");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("pass");
+    const updateButton = document.getElementById("update-button");
+
+    // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
+    firstnameInput.addEventListener("input", toggleupdateButton);
+    lastnameInput.addEventListener("input", toggleupdateButton);
+    emailInput.addEventListener("input", toggleupdateButton);
+    passwordInput.addEventListener("input", toggleupdateButton);
+
+    function toggleupdateButton() {
+        checkEmailFormat();
+        checkPasswordFormat();
+
+        if (firstnameInput.value !== "" && lastnameInput.value !== "" && passwordInput.value !== "" && emailInput.value !== "")
+            updateButton.removeAttribute("disabled");
+        else
+            updateButton.setAttribute("disabled", "disabled");
+    }
+
+    function togglePassword() {	//show password in plain text or not
+        var passField = document.getElementById("pass");
+        var showPassCheckbox = document.getElementById("show-pass");
+
+        if (showPassCheckbox.checked) {
+            passField.type = "text";
+        } else {
+            passField.type = "password";
+        }
+        toggleLoginButton();
+    }
 </script>
 
 <?php
@@ -102,5 +144,3 @@ include ("../Management/footer.html");
 ?>
 
 </html>
-
-
