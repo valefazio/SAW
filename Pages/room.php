@@ -17,6 +17,9 @@ include ("../Management/accessControl.php");
 </head>
 
 <?php
+/* if (!isLogged()) {
+	relocation("Access/login.html");
+} */
 
 $roomID = selectDb("doors_id", [], ["id"], [$_SERVER['QUERY_STRING']])->fetch_assoc()['address'];
 $res = selectDb("doors", [], ["address"], [$roomID]);
@@ -26,28 +29,6 @@ if ($res->num_rows != 0) {
 	$address = $row['address'];
 	$country = $row['country'];
 	$reviews = $row['reviews'];
-}
-
-$resKids = selectDb("resides", [], ["door"], [$roomID]);
-if ($resKids->num_rows != 0) {
-	$rowKids = $resKids->fetch_assoc();
-	$kids = $rowKids['kid'];
-}
-
-$resKidsInfo = selectDb("kids", [], ["id"], [$kids]);
-if ($resKidsInfo->num_rows != 0) {
-	$rowKidsInfo = $resKidsInfo->fetch_assoc();
-	$kidsName = $rowKidsInfo['name'];
-	$kidsPhone = $rowKidsInfo['phone'];
-	$kidsPicture = $rowKidsInfo['profile_picture_path'];
-}
-
-$resScaredOf = selectDb("scaredOf", [], ["kid"], [$kids]);
-if ($resScaredOf->num_rows != 0) {
-	$rowScaredOf = $resScaredOf->fetch_assoc();
-	$scaredOf = $rowScaredOf['scare'];
-} else {
-	$scaredOf = "nothing";
 }
 
 $resRoomPicture = selectDb("room_pics", [], ["room_id"], [$roomID]);
@@ -60,12 +41,6 @@ function notBooked(string $address, string $date): bool
 {
 	$res = selectDb("calendar", [], ["door", "date"], [$address, $date]);
 	return ($res->num_rows == 0);
-}
-
-function hasBookedBefore(string $address): bool
-{
-	$res = selectDb("calendar", [], ["door", "monster"], [$address, $_SESSION['email']]);
-	return ($res->num_rows != 0);
 }
 
 ?>
@@ -97,7 +72,7 @@ function hasBookedBefore(string $address): bool
 				<?php
 				$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 				?>
-				<button id="share" onclick="copyToClipboard(<?php print($url);?>)">Share</button>
+				<button id="share" onclick="copyToClipboard(<?php print ($url); ?>)">Share</button>
 			</div>
 		</div>
 		<div id="pictureAndFirst">
@@ -123,14 +98,60 @@ function hasBookedBefore(string $address): bool
 			<div id="RoomInfos">
 				<div id="RoomKids">
 					<h2>Kids</h2>
-					<p><?php print ("kid name: ");
-					print ($kidsName); ?></p>
-					<p><?php print ("kid phone number: ");
-					print ($kidsPhone); ?></p>
-					<p><?php print ("Scared of: ");
-					print ($scaredOf); ?></p>
-					<img src="<?php print ("../");
-					print ($kidsPicture); ?>" alt="Kids Picture">
+					<?php
+					$resKids = selectDb("resides", [], ["door"], [$roomID]);
+					$kids = 0;
+					$scaredOf = "";
+					if ($resKids->num_rows != 0) {
+						foreach ($resKids as $kidsHere) {
+							echo "<div class='kidContainer'>";
+							$kiddo = selectDb("kids", [], ["id"], [$kidsHere['kid']])->fetch_assoc();
+							echo "<img class='kid' title='" . $kiddo["name"] . "' alt='image of " . $kiddo["name"] . "'src='../";
+							if ($kiddo["profile_picture_path"] == NULL)
+								echo "Management/Images/00.jpg'";//>";
+							else
+								echo $kiddo["profile_picture_path"] . "'";// . "'>";
+							if ($kids == 0)
+								echo " style='margin-left: 0px'>";
+							else
+								echo " style='margin-left:" . (($kids) * (80)) . "px; margin-top: -117px; position: absolute;'>";
+							?>
+
+							<script>
+								var nameTag = document.createElement("p");
+								nameTag.innerHTML = "<?php print ($kiddo["name"]); ?>";
+								nameTag.classList.add("nameTag");
+								var kids = document.getElementsByClassName("kid").length - 1;
+								nameTag.style.marginTop = "-30px";
+								nameTag.style.marginLeft = (20 + kids * 80) + "px";
+								nameTag.style.position = "absolute";
+								document.getElementsByClassName("kidContainer")[kids].appendChild(nameTag);
+							</script>
+							<?php
+
+							$scareQuery = selectQuery("SELECT S.scare FROM kids AS K JOIN scaredOf AS S ON K.id = S.kid WHERE K.name = '" . $kiddo["name"] . "'");
+								$scaredOf .= "<b>" . $kiddo["name"] . "</b> is scared of ";
+								if($scareQuery->num_rows > 0) {
+								$scare = $scareQuery->fetch_assoc();
+								while ($scare) {
+									$scaredOf .= $scare["scare"];
+									$scare = $scareQuery->fetch_assoc();
+									if ($scare)
+										$scaredOf .= ", ";
+									else
+										$scaredOf .= "<br>";
+								}
+							} else
+								$scaredOf .= "nothing<br>";
+							$kids++;
+							echo "</div>";
+						}
+							echo "<br>" . $scaredOf;
+					} else {
+						print ("<p>No kids in this room</p>");
+					}
+					?>
+
 				</div>
 			</div>
 			<div id="bookingArea">
