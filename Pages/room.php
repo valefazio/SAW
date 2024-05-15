@@ -19,7 +19,7 @@ include ("../Management/accessControl.php");
 <?php
 if (!isLogged()) {
 	relocation("Access/login.html");
-} 
+}
 
 $roomID = selectDb("doors_id", [], ["id"], [$_SERVER['QUERY_STRING']])->fetch_assoc()['address'];
 $res = selectDb("doors", [], ["address"], [$roomID]);
@@ -42,6 +42,8 @@ function notBooked(string $address, string $date): bool
 	$res = selectDb("calendar", [], ["door", "date"], [$address, $date]);
 	return ($res->num_rows == 0);
 }
+
+
 
 ?>
 
@@ -72,7 +74,17 @@ function notBooked(string $address, string $date): bool
 				<?php
 				$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 				?>
-				<button id="share" onclick="copyToClipboard(<?php print ($url); ?>)">Share</button>
+				<button id="share">Share</button>
+				<script>document.getElementById("share").addEventListener("click", function () {
+						var dummy = document.createElement("input");
+						var text = window.location.href;
+						document.body.appendChild(dummy);
+						dummy.value = text;
+						dummy.select();
+						document.execCommand("copy");
+						document.body.removeChild(dummy);
+						alert("URL copiato negli appunti!");
+					});</script>
 			</div>
 		</div>
 		<div id="pictureAndFirst">
@@ -130,8 +142,8 @@ function notBooked(string $address, string $date): bool
 							<?php
 
 							$scareQuery = selectQuery("SELECT S.scare FROM kids AS K JOIN scaredOf AS S ON K.id = S.kid WHERE K.name = '" . $kiddo["name"] . "'");
-								$scaredOf .= "<b>" . $kiddo["name"] . "</b> is scared of ";
-								if($scareQuery->num_rows > 0) {
+							$scaredOf .= "<b>" . $kiddo["name"] . "</b> is scared of ";
+							if ($scareQuery->num_rows > 0) {
 								$scare = $scareQuery->fetch_assoc();
 								while ($scare) {
 									$scaredOf .= $scare["scare"];
@@ -146,7 +158,7 @@ function notBooked(string $address, string $date): bool
 							$kids++;
 							echo "</div>";
 						}
-							echo "<br>" . $scaredOf;
+						echo "<br>" . $scaredOf;
 					} else {
 						print ("<p>No kids in this room</p>");
 					}

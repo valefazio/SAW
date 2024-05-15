@@ -69,14 +69,6 @@ button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.nameTag {
-	/* text-align: center; */
-	border: 1px solid #000;
-	width: fit-content;
-	padding: 2px 4px;
-	border-radius: 5px;
-	background-color: #fff;
-}
 
 #bookingArea {
     margin-bottom: 20px;
@@ -173,4 +165,13 @@ button:hover {
 
 .heart:hover {
 	transform: scale(1.08) translateY(-2px);
+}
+
+.nameTag {
+	/* text-align: center; */
+	border: 1px solid #000;
+	width: fit-content;
+	padding: 2px 4px;
+	border-radius: 5px;
+	background-color: #fff;
 }
