@@ -17,9 +17,9 @@ include ("../Management/accessControl.php");
 </head>
 
 <?php
-/* if (!isLogged()) {
+if (!isLogged()) {
 	relocation("Access/login.html");
-} */
+} 
 
 $roomID = selectDb("doors_id", [], ["id"], [$_SERVER['QUERY_STRING']])->fetch_assoc()['address'];
 $res = selectDb("doors", [], ["address"], [$roomID]);
