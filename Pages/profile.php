@@ -114,7 +114,7 @@
     emailInput.addEventListener("input", toggleupdateButton);
     passwordInput.addEventListener("input", toggleupdateButton);
 
-    function toggleupdateButton() {
+    function toggleUpdateButton() {
         checkEmailFormat();
         checkPasswordFormat();
 
@@ -133,7 +133,7 @@
         } else {
             passField.type = "password";
         }
-        toggleLoginButton();
+        toggleUpdateButton();
     }
 </script>
 
