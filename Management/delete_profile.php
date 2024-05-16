@@ -13,11 +13,11 @@ if (!isset($_SESSION['email'])) {
 }
 
 //stampa se la sessione è aperta
-/* echo "<script>alert(" . session_status() .");</script>";
-if(isset($_SESSION['stato']))
-    echo "<script>alert(" . $_SESSION['stato'] .");</script>";
+/* echo "<script>alert(" . session_status() .");</script>"; */
+/* if(isset($_SESSION['stato']))
+    echo "<script>alert('" . $_SESSION['stato'] ."');</script>";
 else
-    echo "<script>alert('stato non settato');</script>"; */
+    echo "<script>alert('stato non settato');</script>";  */
 /* echo "<script>alert('" . isset($_SESSION['stato']) ."');</script>";
 echo "<script>alert('" . $_SESSION['stato'] ."');</script>"; */
 if (!isset($_SESSION['stato']) || $_SESSION['stato'] != "delete") {

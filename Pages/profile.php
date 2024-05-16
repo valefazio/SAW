@@ -27,7 +27,7 @@
         $row = $result->fetch_assoc();
     ?>
     <div id="form-totale" class="profile-container">
-        <form action="../Management/update_profile.php" method="post" enctype="multipart/form-data" class="profile">
+        <form action="" method="post" enctype="multipart/form-data" class="profile">
             <div class="ProfilePicture">
                 <img id="profilePicture" class="rounded-circle mt-5" src=<?php
                 if ($row["profile_picture"])
@@ -58,7 +58,7 @@
                 <input type="password" name="pass" id="pass" class="form-control">
                 <input type="checkbox" id="show-pass" onclick="togglePassword()" style="width:10%"> Show Password
                 <div class="button-container">
-                    <button type="submit" id="update-button" style="cursor: pointer">Confirm Changes</button>
+                    <button type="button" id="update-button" style="cursor: pointer">Confirm Changes</button>
                     <button type="button" id="delete-button" style="cursor: pointer">Delete Account</button>
                 </div>
             </div>
@@ -88,8 +88,16 @@
             event.preventDefault();
         }
         else{
-            <?php $_SESSION['stato'] = "update"; ?>;
-            window.location.href = "../Management/update_profile.php";
+            $.ajax({
+			type: "POST",
+			url: "../Management/profileUtility.php",
+			data: {to_do: 'update'},
+			success: function (res) {
+				if (res == true)
+                    window.location.href = "../Management/update_profile.php";
+				else console.log("Error remove");   //ERROR
+			}
+		});
         }
     });
 
@@ -98,9 +106,16 @@
             event.preventDefault();
         }
         else {
-            /* '<%Session["status"] = "delete";%>'; */
-            <?php $_SESSION['stato'] = "delete"; ?>
-            window.location.href = "../Management/delete_profile.php";
+            $.ajax({
+			type: "POST",
+			url: "../Management/profileUtility.php",
+			data: {to_do: 'delete'},
+			success: function (res) {
+				if (res == true)
+                    window.location.href = "../Management/delete_profile.php";
+				else console.log("Error remove");   //ERROR
+			}
+		});
         }
     });
 

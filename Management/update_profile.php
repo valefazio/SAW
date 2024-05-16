@@ -12,6 +12,10 @@ if (!isset($_SESSION['email'])) {
     relocation("../Pages/Access/login.html");
 }
 
+/* if(isset($_SESSION['stato']))
+    echo "<script>alert('" . $_SESSION['stato'] ."');</script>";
+else
+    echo "<script>alert('stato non settato');</script>";  */
 if (!isset($_SESSION['stato']) || $_SESSION['stato'] != "update") {
     // User accessed this page without clicking the update button
     relocation("../Pages/404.php");
