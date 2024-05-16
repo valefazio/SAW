@@ -27,7 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         relocation("../Pages/profile.php");
     } */
 
-    $user = selectDb("users", ["email, firstname, lastname"], ["email"], [$_SESSION["email"]]);
+    $user = selectDb("users", ["email", "firstname", "lastname"], ["email"], [$_SESSION["email"]]);
+    if($user->num_rows == 0) {
+        alert("Errore durante il caricamento del profilo");
+        relocation("../Pages/404.php");
+        exit;
+    }
     $user = $user->fetch_assoc();
     $fieldsToUpdate = [];
     $valuesToUpdate = [];
@@ -106,23 +111,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $firstname = htmlspecialchars(trim($_POST["firstname"]));
-    if($firstname != $user['firstname']){
+    if ($firstname != $user['firstname']) {
         array_push($fieldsToUpdate, "firstname");
         array_push($valuesToUpdate, $firstname);
     }
     $lastname = htmlspecialchars(trim($_POST["lastname"]));
-    if($lastname != $user['lastname']){
+    if ($lastname != $user['lastname']) {
         array_push($fieldsToUpdate, "lastname");
         array_push($valuesToUpdate, $lastname);
     }
     $psw = htmlspecialchars(trim($_POST["pass"]));
-    if($psw != ""){
+    if ($psw != "") {
         $psw = password_hash($psw, PASSWORD_DEFAULT);
         array_push($fieldsToUpdate, "password");
         array_push($valuesToUpdate, $psw);
     }
 
-    if(count($fieldsToUpdate) == 0){
+    if (count($fieldsToUpdate) == 0) {
         alert("Nessuna modifica effettuata", "warning");
         relocation("../Pages/profile.php");
         exit;
@@ -136,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             alert("Modifiche effettuate con successo", "success");
             relocation("../Pages/profile.php");
             exit;
-        
+
         }
     }
 }
