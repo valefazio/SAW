@@ -109,10 +109,10 @@
     const updateButton = document.getElementById("update-button");
 
     // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
-    firstnameInput.addEventListener("input", toggleupdateButton);
-    lastnameInput.addEventListener("input", toggleupdateButton);
-    emailInput.addEventListener("input", toggleupdateButton);
-    passwordInput.addEventListener("input", toggleupdateButton);
+    firstnameInput.addEventListener("input", toggleUpdateButton);
+    lastnameInput.addEventListener("input", toggleuUdateButton);
+    emailInput.addEventListener("input", toggleUpdateButton);
+    passwordInput.addEventListener("input", toggleUpdateButton);
 
     function toggleUpdateButton() {
         checkEmailFormat();
