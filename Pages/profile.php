@@ -133,7 +133,7 @@
         } else {
             passField.type = "password";
         }
-        toggleLoginButton();
+        /* toggleButton(); */
     }
 </script>
 
