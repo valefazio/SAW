@@ -100,8 +100,13 @@ function notBooked(string $address, string $date): bool
 				</div>
 				<div id="RoomReviews">
 					<h2>Reviews</h2>
-					<p><?php print ($reviews);
-					print ("⭐️"); ?></p>
+					<p><?php
+					if ($reviews == 0)
+						print ("No reviews yet 🙁");
+					else {
+						print ($reviews . "⭐️");
+					}
+					; ?></p>
 				</div>
 			</div>
 		</div>
@@ -194,49 +199,54 @@ function notBooked(string $address, string $date): bool
 			</div>
 			<div id="ReviewArea">
 				<h2>Review</h2>
-				<form method="POST" action="">
-					<label for="review">Leave a review:</label>
-					<select id="review" name="review">
-						<option value="1" title="one star">⭐️</option>
-						<option value="2" title="two stars">⭐️⭐️</option>
-						<option value="3" title="three stars">⭐️⭐️⭐️</option>
-						<option value="4" title="four stars">⭐️⭐️⭐️⭐️</option>
-						<option value="5" title="five stars">⭐️⭐️⭐️⭐️⭐️</option>
-					</select><br>
+				<?php
+				$dates = selectQuery("SELECT date FROM calendar WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "' AND date NOT IN (SELECT booking_date FROM reviews WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "') ORDER BY date DESC");
+				if ($dates->num_rows != 0) { ?>
+					<form method="POST" action="">
+						<label for="review">Leave a review:</label>
+						<select id="review" name="review">
+							<option value="1" title="one star">⭐️</option>
+							<option value="2" title="two stars">⭐️⭐️</option>
+							<option value="3" title="three stars">⭐️⭐️⭐️</option>
+							<option value="4" title="four stars">⭐️⭐️⭐️⭐️</option>
+							<option value="5" title="five stars">⭐️⭐️⭐️⭐️⭐️</option>
+						</select><br>
+						<?php
+						$numdates = 0;
+
+						if ($dates->num_rows != 0) {
+							$rowDates = $dates->fetch_assoc();
+							echo "<label for='bookedDates'>Choose a booking to review:</label> <select id='bookedDates' name='bookedDates'>";
+							do {
+								echo "<option value='" . $rowDates['date'] . "'>" . $rowDates['date'] . "</option>";
+								$numdates++;
+							} while ($rowDates = $dates->fetch_assoc());
+							echo "</select>";
+						}
+						?>
+						<button id="RoomReviewButton" type="submit" name="RoomReviewButton">Review</button>
+					</form>
 					<?php
-					$numdates = 0;
-					$dates = selectQuery("SELECT date FROM calendar WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "' AND date NOT IN (SELECT booking_date FROM reviews WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "') ORDER BY date DESC");
-					if ($dates->num_rows != 0) {
-						$rowDates = $dates->fetch_assoc();
-						echo "<label for='bookedDates'>Choose a booking to review:</label> <select id='bookedDates' name='bookedDates'>";
-						do {
-							echo "<option value='" . $rowDates['date'] . "'>" . $rowDates['date'] . "</option>";
-							$numdates++;
-						} while ($rowDates = $dates->fetch_assoc());
-						echo "</select>";
+					if (isset($_POST['RoomReviewButton'])) {
+						if ($numdates > 0) {
+							if (isset($_POST['review'])) {
+								$review = $_POST['review'];
+								if (insertDb("reviews", ["review", "door", "monster", "booking_date"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates']])) {
+									print ("review added");
+								} else {
+									relocation("404.php");
+								}
+							}
+
+						} else {
+							print ("you have to book the room before reviewing it");
+						}
 					}
 					?>
-					<button id="RoomReviewButton" type="submit" name="RoomReviewButton">Review</button>
-				</form>
-				<?php
-				if (isset($_POST['RoomReviewButton'])) {
-					if ($numdates > 0) {
-						if (isset($_POST['review'])) {
-							$review = $_POST['review'];
-							if (insertDb("reviews", ["review", "door", "monster", "booking_date"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates']])) {
-								print ("review added");
-							} else {
-								relocation("404.php");
-							}
-						}
-
-					} else {
-						print ("you have to book the room before reviewing it");
-					}
-				}
-				?>
+				</div>
 			</div>
-		</div>
+		<?php } else
+					print ("you have to book the room before reviewing it"); ?>
 	</div>
 	<?php
 	include ("../Management/footer.html");

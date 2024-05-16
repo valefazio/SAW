@@ -55,7 +55,7 @@
                         help_outline
                     </span>
                 </label>
-                <input type="password" name="pass" id="pass" class="form-control" required>
+                <input type="password" name="pass" id="pass" class="form-control">
                 <input type="checkbox" id="show-pass" onclick="togglePassword()" style="width:10%"> Show Password
                 <div class="button-container">
                     <button type="submit" id="update-button" style="cursor: pointer">Confirm Changes</button>
