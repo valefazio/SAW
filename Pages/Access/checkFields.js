@@ -29,3 +29,13 @@ function checkPasswordMatch() {
         confirmPasswordInput.setAttribute('style', 'border-color: #ccc');
     }
 }
+
+function toggleButton(button) {
+    //checkEmailFormat(); Non credo siano necessari
+    //checkPasswordFormat();	
+    if (emailInput.value !== "" && passwordInput.value !== "") {
+        button.removeAttribute("disabled");
+    } else {
+        button.setAttribute("disabled", "disabled");
+    }
+}

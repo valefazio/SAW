@@ -45,18 +45,8 @@
         const loginButton = document.getElementById("login-button");
 
         // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
-        emailInput.addEventListener("input", toggleLoginButton);
+        emailInput.addEventListener("input", toggleButton(loginButton));
         passwordInput.addEventListener("input", togglePassword);
-        
-        function toggleLoginButton() {
-            //checkEmailFormat(); Non credo siano necessari
-            //checkPasswordFormat();	
-            if (emailInput.value !== "" && passwordInput.value !== "") {
-                loginButton.removeAttribute("disabled");
-            } else {
-                loginButton.setAttribute("disabled", "disabled");
-            }
-        }
 
         function togglePassword() {	//show password in plain text or not
             var passField = document.getElementById("pass");
@@ -67,7 +57,7 @@
             } else {
                 passField.type = "password";
             }
-            toggleLoginButton();
+            toggleButton(loginButton);
         }
     </script>
 </body>
