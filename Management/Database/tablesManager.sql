@@ -129,10 +129,20 @@ BEGIN
 END//
 DELIMITER ;
 
-
-
-
-
+DELIMITER //
+CREATE TRIGGER aggiorna_media_recensioni_update
+AFTER INSERT ON reviews
+FOR EACH ROW
+BEGIN
+    UPDATE doors
+    SET reviews = (
+        SELECT AVG(review)
+        FROM reviews
+        WHERE door = NEW.door
+    )
+    WHERE address = NEW.door;
+END;
+//
 
 INSERT INTO countries (name) VALUES ('Spain');
 INSERT INTO countries (name) VALUES ('France');
