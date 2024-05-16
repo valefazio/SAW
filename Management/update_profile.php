@@ -12,11 +12,11 @@ if (!isset($_SESSION['email'])) {
     relocation("../Pages/Access/login.html");
 }
 
-if ($_SESSION['status'] != "update") {
+/* if ($_SESSION['status'] != "update") {
     // User accessed this page without clicking the update button
     relocation("../Pages/404.php");
 }
-
+ */
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {

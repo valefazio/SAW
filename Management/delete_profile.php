@@ -12,10 +12,10 @@ if (!isset($_SESSION['email'])) {
     relocation("../Pages/Access/login.html");
 }
 
-if (($_SESSION['status']) != "delete") {
+/* if (($_SESSION['status']) != "delete") {
     // User acceded this page without clicking the delete button
     relocation("../Pages/404.php");
-}
+} */
 
 // Get the user ID from the session
 $email = $_SESSION['email'];

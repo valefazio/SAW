@@ -90,8 +90,6 @@
         if (!confirm("Are you sure you want to update your profile?")) {
             event.preventDefault();
         }
-        else
-            <?php $_SESSION['status'] = "update"; ?>;
     });
 
     document.getElementById("delete-button").addEventListener("click", function () {
@@ -99,7 +97,7 @@
             event.preventDefault();
         }
         else {
-            <?php $_SESSION['status'] = "delete"; ?>;
+            <?php //$_SESSION['status'] = "delete"; ?>;
             window.location.href = "../Management/delete_profile.php";
         }
     });
@@ -140,7 +138,7 @@
 </script>
 
 <?php
-include ("../Management/footer.html");
+    include ("../Management/footer.html");
 ?>
 
 </html>
