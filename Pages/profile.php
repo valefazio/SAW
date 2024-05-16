@@ -110,7 +110,7 @@
 
     // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
     firstnameInput.addEventListener("input", toggleUpdateButton);
-    lastnameInput.addEventListener("input", toggleuUdateButton);
+    lastnameInput.addEventListener("input", toggleUdateButton);
     emailInput.addEventListener("input", toggleUpdateButton);
     passwordInput.addEventListener("input", toggleUpdateButton);
 
