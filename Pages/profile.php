@@ -70,7 +70,7 @@
 
     // Quando l'immagine del profilo viene cliccata, simula un click sull'input del file
     document.getElementById("profilePicture").addEventListener("click", function () {
-        <?php //$_SESSION['status'] = "update"; ?>;
+        <?php $_SESSION['stato'] = "update"; ?>
         document.getElementById("fileInput").click();
     });
 
@@ -87,6 +87,10 @@
         if (!confirm("Are you sure you want to update your profile?")) {
             event.preventDefault();
         }
+        else{
+            <?php $_SESSION['stato'] = "update"; ?>;
+            window.location.href = "../Management/update_profile.php";
+        }
     });
 
     document.getElementById("delete-button").addEventListener("click", function () {
@@ -94,7 +98,8 @@
             event.preventDefault();
         }
         else {
-            <?php //$_SESSION['status'] = "delete"; ?>;
+            /* '<%Session["status"] = "delete";%>'; */
+            <?php $_SESSION['stato'] = "delete"; ?>
             window.location.href = "../Management/delete_profile.php";
         }
     });

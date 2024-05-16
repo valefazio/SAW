@@ -1,6 +1,6 @@
 <?php
-include("utility.php");
-include("Database/connection.php");
+include ("utility.php");
+include ("Database/connection.php");
 
 if (!session_start())
     exit("Troubles starting session.");
@@ -12,10 +12,18 @@ if (!isset($_SESSION['email'])) {
     relocation("../Pages/Access/login.html");
 }
 
-/* if (($_SESSION['status']) != "delete") {
+//stampa se la sessione è aperta
+/* echo "<script>alert(" . session_status() .");</script>";
+if(isset($_SESSION['stato']))
+    echo "<script>alert(" . $_SESSION['stato'] .");</script>";
+else
+    echo "<script>alert('stato non settato');</script>"; */
+/* echo "<script>alert('" . isset($_SESSION['stato']) ."');</script>";
+echo "<script>alert('" . $_SESSION['stato'] ."');</script>"; */
+if (!isset($_SESSION['stato']) || $_SESSION['stato'] != "delete") {
     // User acceded this page without clicking the delete button
     relocation("../Pages/404.php");
-} */
+}
 
 // Get the user ID from the session
 $email = $_SESSION['email'];
