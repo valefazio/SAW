@@ -243,10 +243,10 @@ function notBooked(string $address, string $date): bool
 						}
 					}
 					?>
-				</div>
-			</div>
-		<?php } else
+				<?php } else
 					print ("you have to book the room before reviewing it"); ?>
+			</div>
+		</div>
 	</div>
 	<?php
 	include ("../Management/footer.html");
