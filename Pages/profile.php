@@ -58,7 +58,7 @@
                         help_outline
                     </span>
                 </label>
-                <input type="password" name="pass" id="pass" class="form-control" required>
+                <input type="password" name="pass" id="pass" class="form-control">
                 <input type="checkbox" id="show-pass" onclick="togglePassword()" style="width:10%"> Show Password
                 <div class="button-container">
                     <button type="submit" id="update-button" style="cursor: pointer">Confirm Changes</button>
@@ -110,7 +110,7 @@
 
     // Aggiungi un gestore di eventi per verificare se tutti i campi sono stati riempiti
     firstnameInput.addEventListener("input", toggleUpdateButton);
-    lastnameInput.addEventListener("input", toggleUdateButton);
+    lastnameInput.addEventListener("input", toggleUpdateButton)
     emailInput.addEventListener("input", toggleUpdateButton);
     passwordInput.addEventListener("input", toggleUpdateButton);
 
