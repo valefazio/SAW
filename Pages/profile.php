@@ -47,8 +47,8 @@
                 <input type="text" name="lastname" id="lastname" value="<?php echo $row["lastname"]; ?>"
                     class="form-control" required>
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="<?php echo $row["email"]; ?>" class="form-control"
-                    required>
+                <input type="email" name="email" id="email" value="<?php echo $row["email"]; ?>" 
+                    class="form-control" required>
                 <label for="password">Password
                     <span class="help"
                         title="La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero">
@@ -70,7 +70,6 @@
 
     // Quando l'immagine del profilo viene cliccata, simula un click sull'input del file
     document.getElementById("profilePicture").addEventListener("click", function () {
-        <?php $_SESSION['stato'] = "update"; ?>
         document.getElementById("fileInput").click();
     });
 
