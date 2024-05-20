@@ -184,14 +184,18 @@ function notBooked(string $address, string $date): bool
 					<?php
 					if (isset($_POST['RoomBookButton'])) {
 						$date = $_POST['bookingDate'];
-						if (notBooked($roomID, $date)) {
-							if (insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['email']])) {
-								print ("room booked");
-							} else {
-								relocation("404.php");
-							}
+						if ($date < date("Y-m-d")) {
+							print ("you can't book a room in the past");
 						} else {
-							print ("the room  is already booked for that day");
+							if (notBooked($roomID, $date)) {
+								if (insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['email']])) {
+									print ("room booked");
+								} else {
+									relocation("404.php");
+								}
+							} else {
+								print ("the room  is already booked for that day");
+							}
 						}
 					}
 					?>
@@ -200,7 +204,19 @@ function notBooked(string $address, string $date): bool
 			<div id="ReviewArea">
 				<h2>Review</h2>
 				<?php
-				$dates = selectQuery("SELECT date FROM calendar WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "' AND date NOT IN (SELECT booking_date FROM reviews WHERE door = '$roomID' AND monster = '" . $_SESSION['email'] . "') ORDER BY date DESC");
+				$dates = selectQuery("SELECT date 
+FROM calendar 
+WHERE door = '$roomID' 
+  AND monster = '" . $_SESSION['email'] . "' 
+  AND date NOT IN (
+    SELECT booking_date 
+    FROM reviews 
+    WHERE door = '$roomID' 
+      AND monster = '" . $_SESSION['email'] . "'
+  ) 
+  AND date < CURDATE() 
+ORDER BY date DESC
+");
 				if ($dates->num_rows != 0) { ?>
 					<form method="POST" action="">
 						<label for="review">Leave a review:</label>
@@ -232,19 +248,19 @@ function notBooked(string $address, string $date): bool
 							if (isset($_POST['review'])) {
 								$review = $_POST['review'];
 								if (insertDb("reviews", ["review", "door", "monster", "booking_date"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates']])) {
-									print ("review added");
+									alert("Review left successfully!");
 								} else {
 									relocation("404.php");
 								}
 							}
 
 						} else {
-							print ("you have to book the room before reviewing it");
+							print ("There a are no bookings to review");
 						}
 					}
 					?>
 				<?php } else
-					print ("you have to book the room before reviewing it"); ?>
+					print ("there are no bookings to review"); ?>
 			</div>
 		</div>
 	</div>
