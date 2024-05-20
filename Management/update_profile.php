@@ -12,21 +12,9 @@ if (!isset($_SESSION['email'])) {
     relocation("../Pages/Access/login.html");
 }
 
-/* if (!isset($_SESSION['stato']) || $_SESSION['stato'] != "update") {
-    // User accessed this page without clicking the update button
-    relocation("../Pages/404.php");
-} */
-
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    /* if (!isFilled("firstname") && !isFilled("lastname") && !isFilled("email") && !isFilled("pass")) {
-        alert("Compilare tutti i campi", "warning");
-        if (session_status() == PHP_SESSION_ACTIVE)
-            session_abort();
-        relocation("../Pages/profile.php");
-    } */
-
     $user = selectDb("users", ["email", "firstname", "lastname"], ["email"], [$_SESSION["email"]]);
     if($user->num_rows == 0) {
         alert("Errore durante il caricamento del profilo");
@@ -144,4 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }
     }
+} else {
+    relocation("../Pages/404.php");
+    exit;
 }
