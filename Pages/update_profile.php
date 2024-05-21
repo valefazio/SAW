@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     //gestione upload di foto profilo
-    if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 0) {
+    /* if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 0) {
         $file = $_FILES["profile_picture"];
         $file_name = $file["name"];
         $file_tmp = $file["tmp_name"];
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         alert("Errore durante il caricamento del file");
         relocation("show_profile.php");
         exit;
-    }
+    } */
 
     $firstname = htmlspecialchars(trim($_POST["firstname"]));
     if ($firstname != $user['firstname']) {
