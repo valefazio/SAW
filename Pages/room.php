@@ -99,17 +99,20 @@ if ($resRoomPicture->num_rows != 0) {
 				</div>
 				<div id="RoomReviews">
 					<h2>Reviews</h2>
-					<p><?php
-						//want to print all the reviews in column
-						$reviews = selectDb("reviews", ["review", "review_text", "monster"], ["door"], [$roomID]);
-						if ($reviews->num_rows != 0) {
-							$review = $reviews->fetch_assoc();
-							while ($review) {
-								echo  $review["review"] . "⭐️,  " . $review["review_text"] . " by <b>". $review["monster"] . "</b><br>";
+					<div id="reviewsBox" style="overflow-y:scroll;">
+							<?php
+							//want to print all the reviews in column
+							$reviews = selectDb("reviews", ["review", "review_text", "monster", "review_date"], ["door"], [$roomID]);
+							if ($reviews->num_rows != 0) {
 								$review = $reviews->fetch_assoc();
-							}
-						} else print ("No reviews yet");
-					?></p>
+								while ($review) {
+									echo "<p>" . $review["review"] . "⭐️,  " . $review["review_text"] . " by <b>" . $review["monster"] . ", " . $review["review_date"] . "</b></p>";
+									$review = $reviews->fetch_assoc();
+								}
+							} else
+								print ("No reviews yet");
+							?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -117,7 +120,7 @@ if ($resRoomPicture->num_rows != 0) {
 		<div id="info">
 			<div id="RoomInfos">
 				<div id="RoomKids">
-					<h2>Kids</h2>
+					<h2>KIDS</h2>
 					<?php
 					$resKids = selectDb("resides", [], ["door"], [$roomID]);
 					$kids = 0;
@@ -176,7 +179,7 @@ if ($resRoomPicture->num_rows != 0) {
 			</div>
 			<div id="bookingArea">
 				<div id="RoomBooking">
-					<h2>Booking</h2>
+					<h2>BOOKING</h2>
 				</div>
 				<div id="RoomCalendar">
 					<form method="POST" action="">
@@ -205,7 +208,7 @@ if ($resRoomPicture->num_rows != 0) {
 				</div>
 			</div>
 			<div id="ReviewArea">
-				<h2>Review</h2>
+				<h2>REVIEW</h2>
 				<?php
 				$dates = selectQuery("SELECT date 
 									FROM calendar 
