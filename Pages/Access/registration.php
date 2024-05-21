@@ -6,7 +6,7 @@ if (!session_start())
 
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	if (!isFilled("firstname") && !isFilled("lastname") && !isFilled("email") && !isFilled("pass") && !isFilled("confirm-password")) {
+	if (!isFilled("firstname") && !isFilled("lastname") && !isFilled("email") && !isFilled("pass") && !isFilled("confirm")) {
 		alert("Compilare tutti i campi", "warning");
 		if (session_status() == PHP_SESSION_ACTIVE)
 			session_abort();
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email = htmlspecialchars(trim($_POST['email']));
 	$psw = password_hash(trim($_POST['pass']), PASSWORD_DEFAULT);
 
-	if (!password_verify($_POST['confirm-password'], $psw)) {
+	if (!password_verify($_POST['confirm'], $psw)) {
 		alert("Le password inserite non combaciano", "warning");
 		if (session_status() == PHP_SESSION_ACTIVE)
 			session_abort();
