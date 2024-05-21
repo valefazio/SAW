@@ -59,34 +59,34 @@
 			}
 		} else if (isset($_GET['search'])) {
 			unset($_GET['search']);
-			 $query =  "SELECT DISTINCT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+			$query = "SELECT DISTINCT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 						FROM doors AS D 
 						LEFT JOIN countries AS C ON D.country = C.id 
 						JOIN resides AS R ON D.address = R.door 
 						JOIN kids AS K ON R.kid = K.id ";
-			if(isset($_POST['location']) || isset($_POST['calendar']) || isset($_POST['level'])){
+			if (isset($_POST['location']) || isset($_POST['calendar']) || isset($_POST['level'])) {
 				$query .= " WHERE ";
 				$ands = false;
-				if(isset($_POST['location'])) {
+				if (isset($_POST['location'])) {
 					$query .= "C.name = '" . strtolower($_POST['location']) . "'";
 					$ands = true;
 				}
-				if(isset($_POST['calendar'])) {
-					if($ands)
+				if (isset($_POST['calendar'])) {
+					if ($ands)
 						$query .= " AND ";
 					else
 						$ands = true;
 					$query .= "D.address NOT IN (SELECT DISTINCT door FROM calendar WHERE calendar.date = STR_TO_DATE('" . $_POST['calendar'] . "', '%d/%m/%Y') AND calendar.door = D.address)";
 					$ands = true;
 				}
-				if(isset($_POST['level'])) {
-					if($ands)
+				if (isset($_POST['level'])) {
+					if ($ands)
 						$query .= " AND ";
-					$levelScare = array(5,4,3,2,1,0);
+					$levelScare = array(5, 4, 3, 2, 1, 0);
 					$query .= "(SELECT COUNT(*) FROM scaredOf WHERE scaredOf.kid = K.id) = " . $levelScare[intval($_POST['level'])];
 				}
 			}
- 
+
 			$query .= " ORDER BY D.name ASC";
 			try {
 				$doors = selectQuery($query);
@@ -115,7 +115,7 @@
 					WHERE Ca.monster = 'vale@gmail.com' AND Ca.date >= CURDATE()
 					GROUP BY Ca.door
 				) AS CaDistinct ON D.address = CaDistinct.door
-				ORDER BY CaDistinct.min_date ASC";				
+				ORDER BY CaDistinct.min_date ASC";
 			try {
 				$doors = selectQuery($query);
 			} catch (mysqli_sql_exception $e) {
@@ -143,7 +143,7 @@
 				}
 			}
 		}
-		
+
 
 		/* DISPLAY ROOMS */
 		if ($doors->num_rows > 0) {
@@ -165,7 +165,7 @@
 
 					/* DOOR - image */
 					echo "<img class='doorPic' src='../" . $row["doorPic"] . "' alt='image of the Door'>";
-					
+
 					/* KIDS - images */
 					$kids = 0;
 					while ($kiddo = $kid->fetch_assoc()) {
@@ -196,7 +196,7 @@
 						$level = selectQuery($query);
 						if ($level->num_rows > 0) {
 							$level = $level->fetch_assoc();
-							switch($level["level"]){
+							switch ($level["level"]) {
 								case 5:
 								case 4:
 									echo "<p class='level' title='level: Easy' style=' margin-left: " . (250) + $kids * (-50) . "px' >🟢</p>";
@@ -212,7 +212,7 @@
 							}
 						}
 					}
-					}
+				}
 				echo "<div class='box_text'>";
 				/* NOME STANZA */
 				echo "<h2>" . $row["name"] . "</h2>";
@@ -227,13 +227,10 @@
 				if (!str_contains(strtolower($row["address"]), strtolower($row["country"])))
 					echo ", " . $row["country"];
 				echo "</i></p>";
-				
-				if(($idQuery = selectDb("doors_id", ["id"], ["address"], [$row["address"]])) != null){
-					if(($row_id = $idQuery->fetch_assoc()) == null)
-						header("Location: ../Pages/404.php");
-				} else {
-					header("Location: ../Pages/404.php");
-				}
+
+				if (($idQuery = selectDb("doors_id", ["id"], ["address"], [$row["address"]])) == null)
+					echo "<script>window.location.href = '../Pages/404.php';</script>";
+				$row_id = $idQuery->fetch_assoc();
 				?>
 				<script>
 					document.getElementsByClassName('box_text')[<?php echo $i; ?>].addEventListener('click', function () {
