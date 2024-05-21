@@ -148,6 +148,42 @@ button:hover {
     justify-content: space-between;
 }
 
+#reviewsBox {
+    margin: 2px;
+    padding: 5px;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+#reviewsBox {
+    margin: 20px auto; /* Aumenta il margine e centra il contenitore */
+    padding: 15px; /* Aumenta il padding per un aspetto più spazioso */
+    border-radius: 10px; /* Mantiene gli angoli arrotondati */
+    background-color: #f9f9f9; /* Colore di sfondo chiaro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera */
+    max-width: 800px; /* Imposta una larghezza massima */
+    height:250px; /* Adatta l'altezza al contenuto */
+}
+
+#reviewsBox p {
+    border: 2px solid #000; /* Imposta il colore del bordo */
+    border-radius: 10px; /* Arrotonda gli angoli */
+    padding: 10px; /* Aumenta il padding per una maggiore leggibilità */
+    margin-top: 15px; /* Aumenta il margine superiore */
+    margin-bottom: 15px; /* Aumenta il margine inferiore */
+    background-color: var(--colorD); /* Imposta il colore di sfondo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aggiunge un'ombra */
+    font-family: Arial, sans-serif; /* Cambia il font */
+    font-size: 16px; /* Cambia la dimensione del font */
+    color: #333; /* Colore del testo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiunge una transizione */
+}
+
+#reviewsBox p:hover {
+    transform: scale(1.02); /* Aumenta leggermente le dimensioni al passaggio del mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Aumenta l'ombra al passaggio del mouse */
+}
+
 
 .heart,
 .heart_red {
