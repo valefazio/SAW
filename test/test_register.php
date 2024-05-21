@@ -32,8 +32,7 @@ function register($email, $password, $first_name, $last_name, $baseurl) {
     $result = curl_exec($ch);
 
     /* Delete comment below to see what is returned */
-    // echo $result;
-    echo "<script>console.log('Registration: $result');</script>";
+    // echo $result;zz
 
     if (curl_errno($ch)) {
         echo 'Error:' . curl_error($ch);

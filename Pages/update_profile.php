@@ -1,6 +1,6 @@
 <?php
-include ("utility.php");
-include ("Database/connection.php");
+include ("../Management/utility.php");
+include ("../Management/Database/connection.php");
 
 if (!session_start())
     exit("Troubles starting session.");
@@ -9,7 +9,7 @@ if (!session_start())
 if (!isset($_SESSION['email'])) {
     // User is not logged in
     echo "You must be logged in to update your account.";
-    relocation("../Pages/login.html");
+    relocation("login.html");
 }
 
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = selectDb("users", ["email", "firstname", "lastname"], ["email"], [$_SESSION["email"]]);
     if($user->num_rows == 0) {
         alert("Errore durante il caricamento del profilo");
-        relocation("../Pages/404.php");
+        relocation("404.php");
         exit;
     }
     $user = $user->fetch_assoc();
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             alert("Il campo email non rispetta il formato richiesto", "warning");
             if (session_status() == PHP_SESSION_ACTIVE)
                 session_abort();
-            relocation("../Pages/show_profile.php");
+            relocation("show_profile.php");
         }
 
         //controllo in caso di email già registrata
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 alert("Email già in utilizzo");
                 if (session_status() == PHP_SESSION_ACTIVE)
                     session_abort();
-                relocation("../Pages/show_profile.php");
+                relocation("show_profile.php");
                 exit;
             }
         }
@@ -72,29 +72,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         unlink($file_destination);
                     } else {
                         alert("Errore durante il caricamento del file");
-                        relocation("../Pages/404.php");
+                        relocation("404.php");
                         exit;
                     }
                 } else {
                     alert("File troppo grande");
                     if (session_status() == PHP_SESSION_ACTIVE)
                         session_abort();
-                    relocation("../Pages/show_profile.php");
+                    relocation("show_profile.php");
                     exit;
                 }
             } else {
                 alert("Errore durante il caricamento del file");
-                relocation("../Pages/show_profile.php");
+                relocation("show_profile.php");
                 exit;
             }
         } else {
             alert("Formato file non supportato");
-            relocation("../Pages/show_profile.php");
+            relocation("show_profile.php");
             exit;
         }
     } else if ($_FILES["profile_picture"]["error"] == 0) {
         alert("Errore durante il caricamento del file");
-        relocation("../Pages/show_profile.php");
+        relocation("show_profile.php");
         exit;
     }
 
@@ -117,22 +117,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (count($fieldsToUpdate) == 0) {
         alert("Nessuna modifica effettuata", "warning");
-        relocation("../Pages/show_profile.php");
+        relocation("show_profile.php");
         exit;
     } else {
         if (!updateDb("users", $fieldsToUpdate, $valuesToUpdate, ["email"], [$_SESSION["email"]])) {
             alert("Errore durante l'aggiornamento del profilo");
-            relocation("../Pages/404.php");
+            relocation("404.php");
             exit;
         } else {
             $_SESSION["email"] = $email;
             alert("Modifiche effettuate con successo", "success");
-            relocation("../Pages/show_profile.php");
+            relocation("show_profile.php");
             exit;
 
         }
     }
 } else {
-    relocation("../Pages/404.php");
+    relocation("404.php");
     exit;
 }
