@@ -14,7 +14,7 @@ require 'utils.php';
 /*                                            */
 /* DO NOT UPLOAD TEST FILES ON SAW21!         */
 /**********************************************/
-$baseurl = "localhost/SAW"; 
+$baseurl = "localhost/SAW/Pages"; 
 
 echo "[+] Testing Registration - Login - Show Profile<br>";
 

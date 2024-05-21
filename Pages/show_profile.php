@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Management/Style/profile.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="Access/checkFields.js"></script>
+    <script src="../Management/scripts/checkFields.js"></script>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
     <?php
     include ("../Management/accessControl.php");
     if (!isLogged()) {
-        echo "<script> window.location.href = 'Access/login.html';</script>";
+        echo "<script> window.location.href = 'login.html';</script>";
         exit;
     }
     $result = getUsers($_SESSION["email"]);

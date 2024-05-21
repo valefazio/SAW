@@ -1,6 +1,6 @@
 <?php
-include ("../../Management/utility.php");
-include ("../../Management/Database/connection.php");
+include ("../Management/utility.php");
+include ("../Management/Database/connection.php");
 if (!session_start())
 	exit ("Troubles starting session.");
 
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		relocation("../404.php");
 
 	$_SESSION['email'] = $email;
-	relocation("../home.php");
+	relocation("home.php");
 	echo "Registrazione avvenuta con successo" . $_SESSION['email'];
 	exit;
 }

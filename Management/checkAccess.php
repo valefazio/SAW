@@ -1,5 +1,5 @@
 <?php
-include("../../Management/accessControl.php");
+include("accessControl.php");
 
 if(isLogged()) {
     header("Location: ../index.php");
@@ -8,8 +8,8 @@ if(isLogged()) {
 
 $queryParam = $_SERVER['QUERY_STRING'];
 if ($queryParam === 'login')
-    header("Location: login.html");
+    header("Location: ../Pages/login.html");
 else if ($queryParam === 'registration') 
-    header("Location: registration.html");
+    header("Location: ../Pages/registration.html");
 else
     header("Location: ../home.php");

@@ -1,6 +1,6 @@
 <?php
-include("../../Management/utility.php");
-include("../../Management/Database/connection.php");
+include("../Management/utility.php");
+include("../Management/Database/connection.php");
 if(!session_start()) exit("Troubles starting session.");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass")) {	//ha inserito i dati
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 		if(updateDb("users", ["remember_token_created_at"], ["CURRENT_TIMESTAMP"], ["email"], [$email]) == false)
 			relocation("../404.php");
 	}
-	header("Location: ../home.php");
+	header("Location: home.php");
 	exit;
 } else {
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['submit']))

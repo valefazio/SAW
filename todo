@@ -16,6 +16,7 @@ To fix:
 - dopo modifica dare avviso o scrivi sotto del successo @done
 - mettere votazioni a caso a utenti
 - controlli formato password non funzionano @done
+- sostituire i login.html con checkaccess.php
 
 - quando accedi controllare che il cookie non sia scaduto
 - gestione scadenza remember-me nel db

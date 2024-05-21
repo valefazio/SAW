@@ -25,10 +25,10 @@
         echo "<script>createNewElement('../Pages/showDestinations.php?bookings', 'door_front', 'Your bookings');</script>";
         echo "<script>createNewElement('../Pages/showDestinations.php?saved', 'favorite', 'Saved');</script>";
         echo "<script>createNewElement('../Pages/calendar.php', 'calendar_month', 'Calendar');</script>";
-        echo "<script>createNewElement('../Pages/Access/logout.php', 'logout', 'Logout');</script>";
+        echo "<script>createNewElement('../Pages/logout.php', 'logout', 'Logout');</script>";
     } else {
-        echo "<script>createNewElement('../Pages/Access/checkAccess.php?login', 'login', 'Login');</script>";
-        echo "<script>createNewElement('../Pages/Access/checkAccess.php?registration', 'add_box', 'Register');</script>";
+        echo "<script>createNewElement('../Management/checkAccess.php?login', 'login', 'Login');</script>";
+        echo "<script>createNewElement('../Management/checkAccess.php?registration', 'add_box', 'Register');</script>";
     }
     ?>
 

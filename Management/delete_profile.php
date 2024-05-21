@@ -9,7 +9,7 @@ if (!session_start())
 if (!isset($_SESSION['email'])) {
     // User is not logged in
     echo "You must be logged in to delete your account.";
-    relocation("../Pages/Access/login.html");
+    relocation("../Pages/login.html");
 }
 
 //stampa se la sessione è aperta
