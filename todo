@@ -52,3 +52,11 @@ Debugging
 - ERROR --> da controllare
 - MANAGE --> decidere cosa fare
 - 
+
+ Warning: move_uploaded_file(../Management/Images/users/664c6db2c0cc51.35341202.png): Failed to open stream: Permission denied in /chroot/home/S5175314/public_html/Management/update_profile.php on line 69
+
+Warning: move_uploaded_file(): Unable to move "/tmp/phpGbN4Y1" to "../Management/Images/users/664c6db2c0cc51.35341202.png" in /chroot/home/S5175314/public_html/Management/update_profile.php on line 69
+
+Warning: file_get_contents(../Management/Images/users/664c6db2c0cc51.35341202.png): Failed to open stream: No such file or directory in /chroot/home/S5175314/public_html/Management/update_profile.php on line 70
+
+Warning: unlink(../Management/Images/users/664c6db2c0cc51.35341202.png): No such file or directory in /chroot/home/S5175314/public_html/Management/update_profile.php on line 72
