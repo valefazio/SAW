@@ -3,6 +3,9 @@
 
 <?php
 include ("../Management/accessControl.php");
+if (!isLogged()) {
+	relocation("Access/login.html");
+}
 ?>
 
 <head>
@@ -17,8 +20,11 @@ include ("../Management/accessControl.php");
 </head>
 
 <?php
-if (!isLogged()) {
-	relocation("Access/login.html");
+
+function notBooked(string $address, string $date): bool
+{
+	$res = selectDb("calendar", [], ["door", "date"], [$address, $date]);
+	return ($res->num_rows == 0);
 }
 
 $roomID = selectDb("doors_id", [], ["id"], [$_SERVER['QUERY_STRING']])->fetch_assoc()['address'];
@@ -28,7 +34,6 @@ if ($res->num_rows != 0) {
 	$name = $row['name'];
 	$address = $row['address'];
 	$country = $row['country'];
-	$reviews = $row['reviews'];
 }
 
 $resRoomPicture = selectDb("room_pics", [], ["room_id"], [$roomID]);
@@ -36,15 +41,6 @@ if ($resRoomPicture->num_rows != 0) {
 	$rowRoomPicture = $resRoomPicture->fetch_assoc();
 	$picture = $rowRoomPicture['filename'];
 }
-
-function notBooked(string $address, string $date): bool
-{
-	$res = selectDb("calendar", [], ["door", "date"], [$address, $date]);
-	return ($res->num_rows == 0);
-}
-
-
-
 ?>
 
 <body>
@@ -96,7 +92,7 @@ function notBooked(string $address, string $date): bool
 				print ($picture); ?>" alt="Room Picture">
 			</div>
 			<div id="firstArea">
-				<h2>Description</h2>
+				<h2>DESCRIPTION</h2>
 				<div id="RoomAddress">
 					<h2>Address</h2>
 					<p><?php print ($address); ?></p>
@@ -104,12 +100,16 @@ function notBooked(string $address, string $date): bool
 				<div id="RoomReviews">
 					<h2>Reviews</h2>
 					<p><?php
-					if ($reviews == 0)
-						print ("No reviews yet 🙁");
-					else {
-						print ($reviews . "⭐️");
-					}
-					; ?></p>
+						//want to print all the reviews in column
+						$reviews = selectDb("reviews", ["review", "review_text", "monster"], ["door"], [$roomID]);
+						if ($reviews->num_rows != 0) {
+							$review = $reviews->fetch_assoc();
+							while ($review) {
+								echo  $review["review"] . "⭐️,  " . $review["review_text"] . " by <b>". $review["monster"] . "</b><br>";
+								$review = $reviews->fetch_assoc();
+							}
+						} else print ("No reviews yet");
+					?></p>
 				</div>
 			</div>
 		</div>
@@ -222,7 +222,7 @@ function notBooked(string $address, string $date): bool
 									");
 				if ($dates->num_rows != 0) { ?>
 					<form method="POST" action="">
-						<label for="review">Leave a review:</label>
+						<label for="review">Leave a rating:</label>
 						<select id="review" name="review">
 							<option value="1" title="one star">⭐️</option>
 							<option value="2" title="two stars">⭐️⭐️</option>
@@ -232,7 +232,6 @@ function notBooked(string $address, string $date): bool
 						</select><br>
 						<?php
 						$numdates = 0;
-
 						if ($dates->num_rows != 0) {
 							$rowDates = $dates->fetch_assoc();
 							echo "<label for='bookedDates'>Choose a booking to review:</label> <select id='bookedDates' name='bookedDates'>";
@@ -240,19 +239,26 @@ function notBooked(string $address, string $date): bool
 								echo "<option value='" . $rowDates['date'] . "'>" . $rowDates['date'] . "</option>";
 								$numdates++;
 							} while ($rowDates = $dates->fetch_assoc());
-							echo "</select>";
+							echo "</select><br>";
 						}
 						?>
+						<label for="comment">Leave a comment:</label>
+						<textarea id="comment" name="comment" maxlength="50" required></textarea><br>
 						<button id="RoomReviewButton" type="submit" name="RoomReviewButton">Review</button>
 					</form>
 					<?php
 					if (isset($_POST['RoomReviewButton'])) {
 						if ($numdates > 0) {
 							if (isset($_POST['review'])) {
+								$comment = $_POST['comment'];
 								$review = $_POST['review'];
 								if (insertDb("reviews", ["review", "door", "monster", "booking_date"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates']])) {
-									alert("Review left successfully!");
-									relocation("room.php?" . $_SERVER['QUERY_STRING']);
+									if (updateDb("reviews", ["review_text"], [$comment], ["door", "monster", "booking_date"], [$roomID, $_SESSION['email'], $_POST['bookedDates']])) {
+										alert("Review left successfully!");
+										relocation("room.php?" . $_SERVER['QUERY_STRING']);
+									} else {
+										relocation("404.php");
+									}
 								} else {
 									relocation("404.php");
 								}
