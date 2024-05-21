@@ -32,17 +32,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             alert("Il campo email non rispetta il formato richiesto", "warning");
             if (session_status() == PHP_SESSION_ACTIVE)
                 session_abort();
-            relocation("../Pages/profile.php");
+            relocation("../Pages/show_profile.php");
         }
 
         //controllo in caso di email già registrata
         if ($email != $_SESSION['email']) {
             $res = selectDb("users", ["email"], ["email"], [$email]);
             if ($res->num_rows != 0) {
-                alert("Utente già registrato");
+                alert("Email già in utilizzo");
                 if (session_status() == PHP_SESSION_ACTIVE)
                     session_abort();
-                relocation("../Pages/profile.php");
+                relocation("../Pages/show_profile.php");
                 exit;
             }
         }
@@ -79,22 +79,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     alert("File troppo grande");
                     if (session_status() == PHP_SESSION_ACTIVE)
                         session_abort();
-                    relocation("../Pages/profile.php");
+                    relocation("../Pages/show_profile.php");
                     exit;
                 }
             } else {
                 alert("Errore durante il caricamento del file");
-                relocation("../Pages/profile.php");
+                relocation("../Pages/show_profile.php");
                 exit;
             }
         } else {
             alert("Formato file non supportato");
-            relocation("../Pages/profile.php");
+            relocation("../Pages/show_profile.php");
             exit;
         }
     } else if ($_FILES["profile_picture"]["error"] == 0) {
         alert("Errore durante il caricamento del file");
-        relocation("../Pages/profile.php");
+        relocation("../Pages/show_profile.php");
         exit;
     }
 
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (count($fieldsToUpdate) == 0) {
         alert("Nessuna modifica effettuata", "warning");
-        relocation("../Pages/profile.php");
+        relocation("../Pages/show_profile.php");
         exit;
     } else {
         if (!updateDb("users", $fieldsToUpdate, $valuesToUpdate, ["email"], [$_SESSION["email"]])) {
@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $_SESSION["email"] = $email;
             alert("Modifiche effettuate con successo", "success");
-            relocation("../Pages/profile.php");
+            relocation("../Pages/show_profile.php");
             exit;
 
         }

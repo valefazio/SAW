@@ -21,7 +21,7 @@
     <?php
     include "accessControl.php";
     if(isLogged()) {
-        echo "<script>createNewElement('../Pages/profile.php', 'manage_accounts', 'Profile');</script>";
+        echo "<script>createNewElement('../Pages/show_profile.php', 'manage_accounts', 'Profile');</script>";
         echo "<script>createNewElement('../Pages/showDestinations.php?bookings', 'door_front', 'Your bookings');</script>";
         echo "<script>createNewElement('../Pages/showDestinations.php?saved', 'favorite', 'Saved');</script>";
         echo "<script>createNewElement('../Pages/calendar.php', 'calendar_month', 'Calendar');</script>";

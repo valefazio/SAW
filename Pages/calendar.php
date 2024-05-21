@@ -21,7 +21,7 @@
 	</nav>
 	
 	<div id="eventsCalendar">
-		<script src="../Management/Scripts/calendarScripts.js"></script>
+		<script src="../Management/scripts/calendarScripts.js"></script>
 	</div>
 
 	<?php

@@ -82,25 +82,6 @@
         reader.readAsDataURL(event.target.files[0]);
     });
 
-    //ora però update_profile non riceve più i file perchè non è più un campo submit
-    document.getElementById("update-button").addEventListener("click", function () {
-        if (!confirm("Are you sure you want to update your profile?")) {
-            event.preventDefault();
-        }
-        else{
-            $.ajax({
-			type: "POST",
-			url: "../Management/profileUtility.php",
-			data: {to_do: 'update'},
-			success: function (res) {
-				if (res == true)
-                    window.location.href = "../Management/update_profile.php";
-				else console.log("Error update");   //ERROR
-			}
-		});
-        }
-    });
-
     document.getElementById("delete-button").addEventListener("click", function () {
         if (!confirm("Are you sure you want to delete your account?")) {
             event.preventDefault();
@@ -109,7 +90,7 @@
             $.ajax({
 			type: "POST",
 			url: "../Management/profileUtility.php",
-			data: {to_do: 'delete'},
+			data: {},
 			success: function (res) {
 				if (res == true)
                     window.location.href = "../Management/delete_profile.php";
@@ -133,18 +114,21 @@
 
     function toggleUpdateButton() {
         checkEmailFormat();
-		if(passwordInput.value !== "") {
+
+		/* if(passwordInput.value !== "") {
         	checkPasswordFormat();
 			passwordInput.setAttribute("required", "required");
-		}
+            fieldsToCheck.push(passwordInput);
+		} */
 
         if (firstnameInput.value !== "" && lastnameInput.value !== ""/*  && passwordInput.value !== "" */ && emailInput.value !== "")
             updateButton.removeAttribute("disabled");
         else
             updateButton.setAttribute("disabled", "disabled");
+        
     }
 
-    function togglePassword() {	//show password in plain text or not
+    /* function togglePassword() {	//show password in plain text or not
         var passField = document.getElementById("pass");
         var showPassCheckbox = document.getElementById("show-pass");
 
@@ -154,7 +138,7 @@
             passField.type = "password";
         }
         toggleUpdateButton();
-    }
+    } */
 </script>
 
 <?php

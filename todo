@@ -1,16 +1,13 @@
 To fix:
 - nel calendario mettere non selezionabili i giorni passati @done
 - MODIFICARE connection.php -> PREPARED STATEMENT @done
-- quando accedi controllare che il cookie non sia scaduto
-- gestione scadenza remember-me nel db
-- remember me non funziona
 - visualizza password @done
 - password dimenticata
-- mettere placeholders nei form
+- mettere placeholders nei form @done
 - controllo js form + campo rosso se vuoto nei form @done
 - fare la trim nel login
 - fare logo @done
-- privacy e cookies
+- privacy e cookies @done
 - cancella profilo @done
 - togliere username e mettere nome e cognome (controllare che non contengano numeri e caratteri speciali) @done
 - dividere form login e registratione in html e php @done
@@ -18,10 +15,14 @@ To fix:
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?) @done
 - dopo modifica dare avviso o scrivi sotto del successo @done
 - mettere votazioni a caso a utenti
-- controlli formato password non funzionano
+- controlli formato password non funzionano @done
 
-- controlli valori di ritorno
-- gestione degli errori
+- quando accedi controllare che il cookie non sia scaduto
+- gestione scadenza remember-me nel db
+- remember me non funziona
+
+- controlli valori di ritorno @done
+- gestione degli errori @done
 - togliere gli alert @done
     - fare pagine di errore @done
 - COSA VOGLIAMO FARE DELLA HOME - PRIMA PARTE? @done
@@ -36,13 +37,13 @@ HOME:
         - LOGIN @done
             - Registrati @done
           che diventa PROFILO:
-            - show profile
-                - modifica profilo
+            - show profile @done
+                - modifica profilo @done
             - le tue prenotazioni @done
             - i tuoi salvati/preferiti --> carrello @done
             - calendario degli impegni @done
                 - mostra a elenco @done
-                - valutazione
+                - valutazione @done
             - logout @done
 
 Debugging

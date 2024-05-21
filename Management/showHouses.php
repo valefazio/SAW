@@ -21,22 +21,38 @@
 		$i = 0;
 		if (isset($_GET['usersFavorites'])) {
 			unset($_GET['usersFavorites']);
-			$doors = selectQuery(
-				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+			$query = "SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
-				WHERE D.reviews >= 2 ORDER BY D.reviews DESC"
-			);
+				WHERE D.reviews >= 2 ORDER BY D.reviews DESC";
+			try {
+				$doors = selectQuery($query);
+			} catch (mysqli_sql_exception $e) {
+				if ($e->getCode() == 1055) {
+					// Handle the exception
+					header("Location: ../Pages/404.php");
+				} else {
+					throw $e;
+				}
+			}
 		} else if (isset($_GET['saved'])) {
 			if (!isLogged())
 				header("Location: ../Pages/Access/login.html");
 			unset($_GET['saved']);
-			$doors = selectQuery(
-				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+			$query = "SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
 				WHERE D.address IN (
 					SELECT door FROM preferites WHERE monster = '" . $_SESSION['email'] . "') 
-				ORDER BY D.name ASC"
-			);
+				ORDER BY D.name ASC";
+			try {
+				$doors = selectQuery($query);
+			} catch (mysqli_sql_exception $e) {
+				if ($e->getCode() == 1055) {
+					// Handle the exception
+					header("Location: ../Pages/404.php");
+				} else {
+					throw $e;
+				}
+			}
 			if ($doors->num_rows == 0) {
 				echo "<h3 style='text-align: center'> There are no destinations saved</h3>";
 				return;
@@ -67,12 +83,21 @@
 					if($ands)
 						$query .= " AND ";
 					$levelScare = array(5,4,3,2,1,0);
-					$query .= "(SELECT COUNT(*) FROM scaredOf WHERE scaredOf.kid = K.id) = " . $levelScare[intval($_POST['level'])] . " GROUP BY K.id";
+					$query .= "(SELECT COUNT(*) FROM scaredOf WHERE scaredOf.kid = K.id) = " . $levelScare[intval($_POST['level'])];
 				}
 			}
  
 			$query .= " ORDER BY D.name ASC";
-			$doors = selectQuery($query);
+			try {
+				$doors = selectQuery($query);
+			} catch (mysqli_sql_exception $e) {
+				if ($e->getCode() == 1055) {
+					// Handle the exception
+					header("Location: ../Pages/404.php");
+				} else {
+					throw $e;
+				}
+			}
 			if ($doors->num_rows == 0) {
 				echo "<h3 style='text-align: center'> No results found</h3>";
 				return;
@@ -81,19 +106,43 @@
 			if (!isLogged())
 				header("Location: ../Pages/Access/login.html");
 			unset($_GET['bookings']);
-			$doors = selectQuery(
-				"SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
-				FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id 
-								JOIN calendar AS Ca ON D.address = Ca.door AND Ca.monster = '" . $_SESSION['email'] . "'
-				WHERE Ca.date >= CURDATE()
-				ORDER BY Ca.date ASC"
-			);
+			$query = "SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
+				FROM doors AS D 
+				LEFT JOIN countries AS C ON D.country = C.id 
+				JOIN (
+					SELECT Ca.door, MIN(Ca.date) AS min_date
+					FROM calendar AS Ca 
+					WHERE Ca.monster = 'vale@gmail.com' AND Ca.date >= CURDATE()
+					GROUP BY Ca.door
+				) AS CaDistinct ON D.address = CaDistinct.door
+				ORDER BY CaDistinct.min_date ASC";				
+			try {
+				$doors = selectQuery($query);
+			} catch (mysqli_sql_exception $e) {
+				if ($e->getCode() == 1055) {
+					// Handle the exception
+					header("Location: ../Pages/404.php");
+				} else {
+					throw $e;
+				}
+			}
 			if ($doors->num_rows == 0) {
 				echo "<h3 style='text-align: center'>There are no bookings</h3>";
 				return;
 			}
-		} else
-			$doors = selectQuery("SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id ORDER BY D.name ASC");
+		} else {
+			$query = "SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews FROM doors AS D LEFT JOIN countries AS C ON D.country = C.id ORDER BY D.name ASC";
+			try {
+				$doors = selectQuery($query);
+			} catch (mysqli_sql_exception $e) {
+				if ($e->getCode() == 1055) {
+					// Handle the exception
+					header("Location: ../Pages/404.php");
+				} else {
+					throw $e;
+				}
+			}
+		}
 		
 
 		/* DISPLAY ROOMS */
@@ -178,12 +227,23 @@
 				if (!str_contains(strtolower($row["address"]), strtolower($row["country"])))
 					echo ", " . $row["country"];
 				echo "</i></p>";
-				//Add link to the door page
-				echo "<script>";
-				$row_id = selectDb("doors_id", ["id"], ["address"], [$row["address"]])->fetch_assoc();
-				echo "document.getElementsByClassName('box_text')[".$i."].addEventListener('click', function () {window.location.href = 'room.php?' + '" . $row_id['id'] . "';});";
-				echo "document.getElementsByClassName('doorPic')[".$i."].addEventListener('click', function () {window.location.href = 'room.php?' + '" . $row_id['id'] . "';});";
-				echo "</script>";
+				
+				if(($idQuery = selectDb("doors_id", ["id"], ["address"], [$row["address"]])) != null){
+					if(($row_id = $idQuery->fetch_assoc()) == null)
+						header("Location: ../Pages/404.php");
+				} else {
+					header("Location: ../Pages/404.php");
+				}
+				?>
+				<script>
+					document.getElementsByClassName('box_text')[<?php echo $i; ?>].addEventListener('click', function () {
+						window.location.href = 'room.php?' + '<?php echo $row_id['id']; ?>';
+					});
+					document.getElementsByClassName('doorPic')[<?php echo $i; ?>].addEventListener('click', function () {
+						window.location.href = 'room.php?' + '<?php echo $row_id['id']; ?>';
+					});
+				</script>
+				<?php
 				echo "</div></div>";
 
 				$i++;

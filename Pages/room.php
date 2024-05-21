@@ -181,7 +181,7 @@ function notBooked(string $address, string $date): bool
 				<div id="RoomCalendar">
 					<form method="POST" action="">
 						<label for="bookingDate">Choose a date:</label>
-						<input type="date" id="bookingDate" name="bookingDate"><br>
+						<input type="date" id="bookingDate" name="bookingDate" required><br>
 						<button type="submit" id="RoomBookButton" name="RoomBookButton">Book</button>
 					</form>
 					<?php

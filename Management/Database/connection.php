@@ -157,9 +157,12 @@ function selectWithFinalConditions(string $table, array $columns, array $whereCo
         $query = substr($query, 0, -4);	//rimuovo l'ultima virgola
     }
     $query .= " " . $conds;
-    //echo "console.log('".$query."');";
+    //echo "<script>console.log('".$query."');</script>";
     $stmt = $conn->prepare($query);
-    $result = $stmt->execute($whereVal);
+    $types = str_repeat('s', count($whereVal));
+    $stmt->bind_param($types, ...$whereVal);
+    $result = $stmt->execute();
+
     if (!$result)
         return null;
     $result = $stmt->get_result();
