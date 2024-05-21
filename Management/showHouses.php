@@ -112,7 +112,8 @@
 				JOIN (
 					SELECT Ca.door, MIN(Ca.date) AS min_date
 					FROM calendar AS Ca 
-					WHERE Ca.monster = 'vale@gmail.com' AND Ca.date >= CURDATE()
+					WHERE Ca.monster = '" . $_SESSION['email'] .
+					 "' AND Ca.date >= CURDATE()
 					GROUP BY Ca.door
 				) AS CaDistinct ON D.address = CaDistinct.door
 				ORDER BY CaDistinct.min_date ASC";
