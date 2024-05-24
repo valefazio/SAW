@@ -33,5 +33,5 @@
 					return false;
 				} else return true;
 			}
-		} else header("Location: login.html");	/* MANAGE: mandiamo al login??? */
+		} else header("Location: ../checkAccess.php?login");	/* MANAGE: mandiamo al login??? */
 	}

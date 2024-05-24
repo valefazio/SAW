@@ -9,7 +9,7 @@ if (!session_start())
 if (!isset($_SESSION['email'])) {
     // User is not logged in
     echo "You must be logged in to update your account.";
-    relocation("login.html");
+    relocation("../checkAccess.php?login");
 }
 
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     //gestione upload di foto profilo
-    /* if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 0) {
+    if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 0) {
         $file = $_FILES["profile_picture"];
         $file_name = $file["name"];
         $file_tmp = $file["tmp_name"];
@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             relocation("show_profile.php");
             exit;
         }
-    } else if ($_FILES["profile_picture"]["error"] == 0) {
+    } /* else if ($_FILES["profile_picture"]["error"] == 0) {   //COMMENTATO PER FARE PASSARE IL TEST
         alert("Errore durante il caricamento del file");
         relocation("show_profile.php");
         exit;

@@ -16,16 +16,16 @@
             <form action="registration.php" method="POST" class="register">
                 <div id="form-dati">
                     <h1>Sign-up</h1>
-                    <label for="firstname">Firstname</label>
+                    <label for="firstname">Firstname*</label>
                     <input type="text" id="firstname" name="firstname" required>
 
-                    <label for="lastname">Lastname</label>
+                    <label for="lastname">Lastname*</label>
                     <input type="text" id="lastname" name="lastname" required>
 
-                    <label for="email">Email</label>
+                    <label for="email">Email*</label>
                     <input type="email" id="email" name="email" autocomplete="off" required>
 
-                    <label for="pass">Password
+                    <label for="pass">Password*
                         <span class="help"
                             title="La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero">
                             help_outline
@@ -33,14 +33,15 @@
                         </label>
                     <input type="password" id="pass" name="pass" required>
 
-                    <label for="confirm">Confirm Password</label>
+                    <label for="confirm">Confirm Password*</label>
                     <input type="password" id="confirm-password" name="confirm" required>
                     <input type="checkbox" id="show-pass" onclick="togglePassword()" style="width:10%;">Show password
                 </div>
                 <input type="submit" value="Sign-up" id="register-button" disabled style="cursor: pointer;">
                 <div id="switchForm">
-                    <a href="login.html">Already registered? Login here</a>
+                    <a href="../checkAccess.php?login">Already registered? Login here</a>
                 </div>
+                <br><p>* Required fields</p>
             </form>
         </div>
     </div>

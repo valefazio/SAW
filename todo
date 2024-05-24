@@ -5,7 +5,6 @@ To fix:
 - password dimenticata
 - mettere placeholders nei form @done
 - controllo js form + campo rosso se vuoto nei form @done
-- fare la trim nel login
 - fare logo @done
 - privacy e cookies @done
 - cancella profilo @done
@@ -14,9 +13,12 @@ To fix:
 - aggiungere gli alt alle immagini @done
 - trigger: nuovo utente -> foto profilo di default (o basta che returni null?) @done
 - dopo modifica dare avviso o scrivi sotto del successo @done
-- mettere votazioni a caso a utenti
 - controlli formato password non funzionano @done
-- sostituire i login.html con checkaccess.php
+- fare la trim nel login
+- mettere votazioni a caso a utenti
+- sostituire i ../checkAccess.php?login con checkaccess.php
+- var_dump(filter_var('bob@example.com', FILTER_VALIDATE_EMAIL));
+- controllare nome e cognome ma accettare accenti e apostrofi
 
 - quando accedi controllare che il cookie non sia scaduto
 - gestione scadenza remember-me nel db
