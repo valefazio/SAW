@@ -33,5 +33,5 @@
 					return false;
 				} else return true;
 			}
-		} else header("Location: ../checkAccess.php?login");	/* MANAGE: mandiamo al login??? */
+		} else header("Location: ../Management/checkAccess.php?login");	/* MANAGE: mandiamo al login??? */
 	}

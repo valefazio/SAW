@@ -9,7 +9,7 @@ if (!session_start())
 if (!isset($_SESSION['email'])) {
     // User is not logged in
     echo "You must be logged in to update your account.";
-    relocation("../checkAccess.php?login");
+    relocation("../Management/checkAccess.php?login");
 }
 
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";

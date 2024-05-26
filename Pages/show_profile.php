@@ -19,7 +19,7 @@
     <?php
     include ("../Management/accessControl.php");
     if (!isLogged()) {
-        echo "<script> window.location.href = '../checkAccess.php?login';</script>";
+        echo "<script> window.location.href = '../Management/checkAccess.php?login';</script>";
         exit;
     }
     $result = getUsers($_SESSION["email"]);

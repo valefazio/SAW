@@ -9,7 +9,7 @@ function hearts(i) {
 			success: function (res) {
 				if (res == true)
 					heart[i].classList.add('heart_red');
-				else window.location.href = "../Pages/../checkAccess.php?login";
+				else window.location.href = "../Pages/../Management/checkAccess.php?login";
 			}
 		});
 	} else {

@@ -4,7 +4,7 @@
 <?php
 include ("../Management/accessControl.php");
 if (!isLogged()) {
-	relocation("../checkAccess.php?login");
+	relocation("../Management/checkAccess.php?login");
 }
 ?>
 

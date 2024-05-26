@@ -16,7 +16,7 @@ To fix:
 - controlli formato password non funzionano @done
 - fare la trim nel login
 - mettere votazioni a caso a utenti
-- sostituire i ../checkAccess.php?login con checkaccess.php
+- sostituire i ../Management/checkAccess.php?login con Management/checkAccess.php
 - var_dump(filter_var('bob@example.com', FILTER_VALIDATE_EMAIL));
 - controllare nome e cognome ma accettare accenti e apostrofi
 

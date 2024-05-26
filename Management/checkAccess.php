@@ -8,7 +8,7 @@ if(isLogged()) {
 
 $queryParam = $_SERVER['QUERY_STRING'];
 if ($queryParam === 'login')
-    header("Location: ../Pages/../checkAccess.php?login");
+    header("Location: ../Pages/login.html");
 else if ($queryParam === 'registration') 
     header("Location: ../Pages/registration.html");
 else

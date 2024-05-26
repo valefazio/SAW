@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 		alert("L\'email o la password non sono corrette", "warning");
 		if (session_status() == PHP_SESSION_ACTIVE)
 			session_abort();
-		relocation("../checkAccess.php?login");
+		relocation("../Management/checkAccess.php?login");
 		exit;
 	}
 
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 		alert("L\'email o la password non sono corrette", "warning");
 		if (session_status() == PHP_SESSION_ACTIVE)
 			session_abort();
-		relocation("../checkAccess.php?login");
+		relocation("../Management/checkAccess.php?login");
 		exit;
 	}
 
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 	exit;
 } else {
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['submit']))
-		header("Location: ../checkAccess.php?login");
+		header("Location: ../Management/checkAccess.php?login");
 	//else wait for data...
 }
 

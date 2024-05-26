@@ -27,8 +27,8 @@
         echo "<script>createNewElement('../Pages/calendar.php', 'calendar_month', 'Calendar');</script>";
         echo "<script>createNewElement('../Pages/logout.php', 'logout', 'Logout');</script>";
     } else {
-        echo "<script>createNewElement('../Management/checkAccess.php?login', 'login', 'Login');</script>";
-        echo "<script>createNewElement('../Management/checkAccess.php?registration', 'add_box', 'Register');</script>";
+        echo "<script>createNewElement('../Management/Management/checkAccess.php?login', 'login', 'Login');</script>";
+        echo "<script>createNewElement('../Management/Management/checkAccess.php?registration', 'add_box', 'Register');</script>";
     }
     ?>
 
