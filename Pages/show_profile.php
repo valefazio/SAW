@@ -114,6 +114,7 @@
 
     function toggleUpdateButton() {
         checkEmailFormat();
+        checkNameFormat();
 
 		/* if(passwordInput.value !== "") {
         	checkPasswordFormat();
