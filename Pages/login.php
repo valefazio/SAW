@@ -4,7 +4,7 @@ include("../Management/Database/connection.php");
 if(!session_start()) exit("Troubles starting session.");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass")) {	//ha inserito i dati
-	$email = htmlspecialchars($_POST['email']);
+	$email = htmlspecialchars(trim($_POST['email']));
 
 	$res = selectDb("users", ["email", "password"], ["email"], [$email]);
 	if ($res->num_rows == 0) {
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isFilled("email") && isFilled("pass
 	}
 
 	$row = $res->fetch_assoc();
-	$password = $_POST['pass'];
+	$password = trim($_POST['pass']);
 
 	if (!password_verify($password, $row['password'])) {
 		alert("L\'email o la password non sono corrette", "warning");
