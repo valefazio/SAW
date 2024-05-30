@@ -39,3 +39,22 @@ function toggleButton(button) {
         button.setAttribute("disabled", "disabled");
     }
 }
+
+function checkNameFormat() {
+    var namePattern = /^[a-zA-ZÀ-ÿ\s']+$/;
+    if (!firstnameInput.value.match(namePattern) || firstnameInput.value.length < 2 || firstnameInput.value.length > 50) {
+        firstnameInput.setCustomValidity('Il nome può contenere solo lettere e spazi');
+        firstnameInput.setAttribute('style', 'border-color: red; background-color: #fdd');
+    } else {
+        firstnameInput.setCustomValidity('');
+        firstnameInput.setAttribute('style', 'border-color: #ccc');
+    }
+
+    if (!lastnameInput.value.match(namePattern) || lastnameInput.value.length < 2 || lastnameInput.value.length > 50) {
+        lastnameInput.setCustomValidity('Il cognome può contenere solo lettere e spazi');
+        lastnameInput.setAttribute('style', 'border-color: red; background-color: #fdd');
+    } else {
+        lastnameInput.setCustomValidity('');
+        lastnameInput.setAttribute('style', 'border-color: #ccc');
+    }
+}
