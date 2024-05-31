@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $psw = htmlspecialchars(trim($_POST["pass"]));
     if ($psw != "") {
-        if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", $psw)) {
+        if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/", $psw)) {
             alert("La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero", "warning");
             relocation("show_profile.php");
             exit;
