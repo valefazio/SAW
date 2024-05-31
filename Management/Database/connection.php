@@ -51,10 +51,6 @@ function insertDb(string $table, array $columns, array $values): bool
     $conn = accessDb();
     $infoTab = getTableInfoDb($table);
 
-    /* foreach($infoTab["is_primary_key"] as $key) {
-        logs($key);
-    } */
-
     //determine if query is already present in the db
     foreach ($infoTab["columnName"] as $col) {
         //logs($col . ": " . in_array($infoTab["columnName"], $infoTab["is_primary_key"]));
@@ -65,9 +61,7 @@ function insertDb(string $table, array $columns, array $values): bool
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
-                logs('record già presente con stessa chiave primaria');
-                /* logs($result->num_rows);
-                logs($result->fetch_assoc()["email"]); */
+                //logs('record già presente con stessa chiave primaria');
                 return false;
             }
         }
@@ -85,7 +79,7 @@ function insertDb(string $table, array $columns, array $values): bool
             }
         }
         if (!$found) {
-            logs("vuoi inserire " . $colToInsert . " ma nel db non c'è");
+            //logs("vuoi inserire " . $colToInsert . " ma nel db non c'è");
             return false;
         }
     }
@@ -99,7 +93,13 @@ function insertDb(string $table, array $columns, array $values): bool
 
     $stmt = $conn->prepare($query);
     $newValues = array_values($values);
+	$stmt->bind_param(str_repeat('s', count($values)), ...$newValues);
     $result = $stmt->execute($newValues);
+	if($stmt->affected_rows == 0) {
+		//logs("nessuna riga inserita");
+		return false;
+	}
+	$stmt->close();
     if (!$result)
         return false;
     disconnectDb($conn);
@@ -112,7 +112,7 @@ function selectDb(string $table, array $columns, array $whereCol, array $whereVa
 
 function selectWithFinalConditions(string $table, array $columns, array $whereCol, array $whereVal, string $conds): ?mysqli_result {
     if(count($whereCol) != count($whereVal)) {
-        logs("numero colonne e valori non corrispondono");
+        //logs("numero colonne e valori non corrispondono");
         return null;
     }
     $conn = accessDb();
@@ -132,7 +132,7 @@ function selectWithFinalConditions(string $table, array $columns, array $whereCo
                 }
             }
             if (!$found) {
-                logs("vuoi inserire " . $colToSelect . " ma nel db non c'è");
+                //logs("vuoi inserire " . $colToSelect . " ma nel db non c'è");
                 return null;
             }
         }
@@ -150,7 +150,7 @@ function selectWithFinalConditions(string $table, array $columns, array $whereCo
                 }
             }
             if (!$found) {
-                logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
+                //logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
                 return null;
             }
         }
@@ -176,7 +176,7 @@ function updateDb(string $table, array $columns, array $values, array $whereCol,
     $conn = accessDb();
 
     if ((count($columns) != count($values)) || (count($whereCol) != count($whereVal))){
-        logs("numero colonne e valori non corrispondono");
+        //logs("numero colonne e valori non corrispondono");
         return false;
     }
     $infoTab = getTableInfoDb($table);
@@ -191,7 +191,7 @@ function updateDb(string $table, array $columns, array $values, array $whereCol,
             }
         }
         if (!$found) {
-            logs("vuoi inserire " . $colToSelect . " ma nel db non c'è");
+            //logs("vuoi inserire " . $colToSelect . " ma nel db non c'è");
             return false;
         }
     }
@@ -207,7 +207,7 @@ function updateDb(string $table, array $columns, array $values, array $whereCol,
                 }
             }
             if (!$found) {
-                logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
+                //logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
                 return false;
             }
         }
@@ -215,7 +215,13 @@ function updateDb(string $table, array $columns, array $values, array $whereCol,
     }
     $stmt = $conn->prepare($query);
     $newValues = array_merge(array_values($values), array_values($whereVal));
+	$stmt->bind_param(str_repeat('s', count($values) + count($whereVal)), ...$newValues);
     $result = $stmt->execute($newValues);
+	if($stmt->affected_rows == 0) {
+		//logs("nessuna riga aggiornata");
+		return false;
+	}
+	$stmt->close();
     if (!$result)
         return false;
     disconnectDb($conn);
@@ -253,13 +259,19 @@ function removeDb(string $table, array $whereCol, array $whereVal): bool
 			}
 		}
 		if (!$found) {
-			logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
+			//logs("vuoi inserire " . $whereCol[$i] . " ma nel db non c'è");
 			return false;
 		}
 	}
 	$query = substr($query, 0, -4);	//rimuovo l'ultimo AND
 	$stmt = $conn->prepare($query);
+	$stmt->bind_param(str_repeat('s', count($whereVal)), ...$whereVal);
 	$result = $stmt->execute($whereVal);
+	if($stmt->affected_rows == 0) {
+		//logs("nessuna riga rimossa");
+		return false;
+	}
+	$stmt->close();
 	if (!$result)
 		return false;
 	disconnectDb($conn);

@@ -20,6 +20,12 @@ To fix:
 - var_dump(filter_var('bob@example.com', FILTER_VALIDATE_EMAIL));
 - controllare nome e cognome ma accettare accenti e apostrofi
 
+- Permette di inviare header HTTP al client: 
+  Importante: dovrebbe essere invocata prima di
+  restituire al client dati in output, basta anche un solo
+  spazio vuoto (o una riga vuota nel file PHP cui
+  corrisponde il carattere “\n”) per causare un errore
+
 - quando accedi controllare che il cookie non sia scaduto
 - gestione scadenza remember-me nel db
 - remember me non funziona
