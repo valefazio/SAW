@@ -38,7 +38,7 @@
                 <input id="fileInput" type="file" name="profile_picture" accept=".jpg, .jpeg, .png"
                     style="display: none;">
             </div>
-			
+
             <div class="form-group">
                 <label for="firstname">First Name</label>
                 <input type="text" name="firstname" id="firstname" value="<?php echo $row["firstname"]; ?>"
@@ -47,8 +47,8 @@
                 <input type="text" name="lastname" id="lastname" value="<?php echo $row["lastname"]; ?>"
                     class="form-control" required>
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="<?php echo $row["email"]; ?>" 
-                    class="form-control" required>
+                <input type="email" name="email" id="email" value="<?php echo $row["email"]; ?>" class="form-control"
+                    required>
                 <label for="password">Password
                     <span class="help"
                         title="La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola e un numero">
@@ -88,15 +88,15 @@
         }
         else {
             $.ajax({
-			type: "POST",
-			url: "../Management/profileUtility.php",
-			data: {},
-			success: function (res) {
-				if (res == true)
-                    window.location.href = "../Management/delete_profile.php";
-				else console.log("Error remove");   //ERROR
-			}
-		});
+                type: "POST",
+                url: "../Management/profileUtility.php",
+                data: {},
+                success: function (res) {
+                    if (res == true)
+                        window.location.href = "../Management/delete_profile.php";
+                    else console.log("Error remove");   //ERROR
+                }
+            });
         }
     });
 
@@ -116,17 +116,17 @@
         checkEmailFormat();
         checkNameFormat();
 
-		/* if(passwordInput.value !== "") {
-        	checkPasswordFormat();
-			passwordInput.setAttribute("required", "required");
+        /* if(passwordInput.value !== "") {
+            checkPasswordFormat();
+            passwordInput.setAttribute("required", "required");
             fieldsToCheck.push(passwordInput);
-		} */
+        } */
 
         if (firstnameInput.value !== "" && lastnameInput.value !== ""/*  && passwordInput.value !== "" */ && emailInput.value !== "")
             updateButton.removeAttribute("disabled");
         else
             updateButton.setAttribute("disabled", "disabled");
-        
+
     }
 
     /* function togglePassword() {	//show password in plain text or not
@@ -143,7 +143,7 @@
 </script>
 
 <?php
-    include ("../Management/footer.html");
+include ("../Management/footer.html");
 ?>
 
 </html>

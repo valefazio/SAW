@@ -9,7 +9,7 @@ function hearts(i) {
 			success: function (res) {
 				if (res == true)
 					heart[i].classList.add('heart_red');
-				else window.location.href = "../Pages/../Management/checkAccess.php?login";
+				else window.location.href = "../Management/checkAccess.php?login";
 			}
 		});
 	} else {
@@ -32,7 +32,6 @@ doors = document.getElementsByClassName('doorPic');
 for (let i = 0; i < doors.length; i++) {
 	let s = doors[i].src;
 	doors[i].addEventListener('mouseenter', function () {
-		//this.src = "../Management/Images/rooms/"+(i+1)+"_1.jpg";
 		$.ajax({
 			type: "POST",
 			url: "../Management/showHousesFunctions.php",
