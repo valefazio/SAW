@@ -5,6 +5,8 @@ if (!session_start())
 	exit ("Troubles starting session.");
 
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+$password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (!isFilled("firstname") && !isFilled("lastname") && !isFilled("email") && !isFilled("pass") && !isFilled("confirm")) {
 		alert("Compilare tutti i campi", "warning");
@@ -14,7 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	$email = htmlspecialchars(trim($_POST['email']));
-	$psw = password_hash(trim($_POST['pass']), PASSWORD_DEFAULT);
+	$psw = trim($_POST['pass']);
+	if (!preg_match($password_pattern, $psw)) {
+		alert("La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola, un numero e un carratere speciale", "warning");
+		if (session_status() == PHP_SESSION_ACTIVE)
+			session_abort();
+		relocation("registration.html");
+		exit;
+	}
+
+	$psw = password_hash($psw, PASSWORD_DEFAULT);
 
 	if (!password_verify($_POST['confirm'], $psw)) {
 		alert("Le password inserite non combaciano", "warning");
