@@ -60,11 +60,11 @@ if ($resRoomPicture->num_rows != 0) {
 				<?php
 				/* HEART - SAVED */
 				$heart = "<p class='heart";
-				if (isLogged()) {	//se l'utente è loggato controllo se la stanza è nei preferiti
-					$res = selectDb("preferites", ["monster", "door"], ["monster", "door"], [$_SESSION['email'], $row["address"]]);
-					if ($res->num_rows > 0)
-						$heart .= " heart_red";
-				}
+				// controllo se la stanza è nei preferiti e nel caso metto il cuore rosso
+				$res = selectDb("preferites", ["monster", "door"], ["monster", "door"], [$_SESSION['email'], $row["address"]]);
+				if ($res->num_rows > 0)
+					$heart .= " heart_red";
+				// aggiungo l'event listener per il click 
 				$heart .= "' onclick='hearts(" . strval(0) . ")'>❤</p>";
 				echo $heart;
 				echo "<p class='address' hidden>" . $address . "</p>";
@@ -192,7 +192,8 @@ if ($resRoomPicture->num_rows != 0) {
 						} else {
 							if (notBooked($roomID, $date)) {
 								if (insertDb("calendar", ["date", "door", "monster"], [$date, $roomID, $_SESSION['email']])) {
-									print ("room booked");
+									alert("room booked successfully!");
+									relocation("room.php?" . $_SERVER['QUERY_STRING']);
 								} else {
 									relocation("404.php");
 								}
