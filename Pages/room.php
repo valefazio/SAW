@@ -21,12 +21,14 @@ if (!isLogged()) {
 
 <?php
 
+//funzione che controlla se la stanza è già stata prenotata per quel giorno
 function notBooked(string $address, string $date): bool
 {
 	$res = selectDb("calendar", [], ["door", "date"], [$address, $date]);
 	return ($res->num_rows == 0);
 }
 
+//
 $roomID = selectDb("doors_id", [], ["id"], [$_SERVER['QUERY_STRING']])->fetch_assoc()['address'];
 $res = selectDb("doors", [], ["address"], [$roomID]);
 if ($res->num_rows != 0) {
@@ -67,21 +69,16 @@ if ($resRoomPicture->num_rows != 0) {
 				echo $heart;
 				echo "<p class='address' hidden>" . $address . "</p>";
 				?>
-				<?php
-				/* SHARE */
-				$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-				?>
 				<button id="share">Share</button>
 				<script>
+					//sharing link system with clipboard API
 					document.getElementById("share").addEventListener("click", function () {
-						var dummy = document.createElement("input");
 						var text = window.location.href;
-						document.body.appendChild(dummy);
-						dummy.value = text;
-						dummy.select();
-						document.execCommand("copy");
-						document.body.removeChild(dummy);
-						alert("URL copiato negli appunti!");
+						navigator.clipboard.writeText(text).then(function () {
+							alert("URL copiato negli appunti!");
+						}).catch(function () {
+							alert("Copia negli appunti fallita!");
+						});
 					});
 				</script>
 			</div>
@@ -100,18 +97,18 @@ if ($resRoomPicture->num_rows != 0) {
 				<div id="RoomReviews">
 					<h2>Reviews</h2>
 					<div id="reviewsBox" style="overflow-y:scroll;">
-							<?php
-							//want to print all the reviews in column
-							$reviews = selectDb("reviews", ["review", "review_text", "monster", "review_date"], ["door"], [$roomID]);
-							if ($reviews->num_rows != 0) {
+						<?php
+						//want to print all the reviews in column
+						$reviews = selectDb("reviews", ["review", "review_text", "monster", "review_date"], ["door"], [$roomID]);
+						if ($reviews->num_rows != 0) {
+							$review = $reviews->fetch_assoc();
+							while ($review) {
+								echo "<p>" . $review["review"] . "⭐️,  " . $review["review_text"] . " by <b>" . $review["monster"] . ", " . $review["review_date"] . "</b></p>";
 								$review = $reviews->fetch_assoc();
-								while ($review) {
-									echo "<p>" . $review["review"] . "⭐️,  " . $review["review_text"] . " by <b>" . $review["monster"] . ", " . $review["review_date"] . "</b></p>";
-									$review = $reviews->fetch_assoc();
-								}
-							} else
-								print ("No reviews yet");
-							?>
+							}
+						} else
+							print ("No reviews yet");
+						?>
 					</div>
 				</div>
 			</div>
