@@ -103,8 +103,8 @@
 				return;
 			}
 		} else if (isset($_GET['bookings'])) {
-			if (!isLogged())
-				header("Location: ../Management/checkAccess.php?login");
+			/* if (!isLogged())
+				header("Location: ../Management/checkAccess.php?login"); */
 			unset($_GET['bookings']);
 			$query = "SELECT D.name, D.address, D.door_picture_path as 'doorPic', C.name as 'country', D.reviews 
 				FROM doors AS D 
