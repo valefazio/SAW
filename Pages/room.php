@@ -253,13 +253,9 @@ if ($resRoomPicture->num_rows != 0) {
 							if (isset($_POST['review'])) {
 								$comment = $_POST['comment'];
 								$review = $_POST['review'];
-								if (insertDb("reviews", ["review", "door", "monster", "booking_date"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates']])) {
-									if (updateDb("reviews", ["review_text"], [$comment], ["door", "monster", "booking_date"], [$roomID, $_SESSION['email'], $_POST['bookedDates']])) {
-										alert("Review left successfully!");
-										relocation("room.php?" . $_SERVER['QUERY_STRING']);
-									} else {
-										relocation("404.php");
-									}
+								if (insertDb("reviews", ["review", "door", "monster", "booking_date", "review_text"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates'], $comment])) {
+									alert("Review left successfully!");
+									relocation("room.php?" . $_SERVER['QUERY_STRING']);
 								} else {
 									relocation("404.php");
 								}
