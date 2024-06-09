@@ -243,8 +243,10 @@ if ($resRoomPicture->num_rows != 0) {
 							echo "</select><br>";
 						}
 						?>
-						<label for="comment">Leave a comment:</label>
-						<textarea id="comment" name="comment" maxlength="50" required></textarea><br>
+						<div id="container">
+							<label for="comment">Leave a comment:</label>
+							<textarea id="comment" name="comment" maxlength="50" required></textarea><br>
+						</div>
 						<button id="RoomReviewButton" type="submit" name="RoomReviewButton">Review</button>
 					</form>
 					<?php

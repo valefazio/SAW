@@ -23,6 +23,19 @@ button:hover {
     cursor: pointer;
 }
 
+textarea {
+    resize: none;
+    padding: 10px;
+    margin: 10px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1.3px;
+    border-radius: 5px;
+  }
+  
+  textarea:focus {
+    outline: 1px solid rgb(14, 51, 14);
+  }
+
 #main {
     margin: 5px 5%;
 }
@@ -184,6 +197,10 @@ button:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Aumenta l'ombra al passaggio del mouse */
 }
 
+#container {
+    display: grid;
+    font-size: 13px;
+  }
 
 .heart,
 .heart_red {
