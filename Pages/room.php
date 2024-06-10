@@ -198,7 +198,7 @@ if ($resRoomPicture->num_rows != 0) {
 									relocation("404.php");
 								}
 							} else {
-								print ("the room  is already booked for that day");
+								alert("the room  is already booked for that day");
 							}
 						}
 					}
