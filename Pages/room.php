@@ -198,7 +198,7 @@ if ($resRoomPicture->num_rows != 0) {
 									relocation("404.php");
 								}
 							} else {
-								print ("the room  is already booked for that day");
+								alert("the room  is already booked for that day");
 							}
 						}
 					}
@@ -243,8 +243,10 @@ if ($resRoomPicture->num_rows != 0) {
 							echo "</select><br>";
 						}
 						?>
-						<label for="comment">Leave a comment:</label>
-						<textarea id="comment" name="comment" maxlength="50" required></textarea><br>
+						<div id="container">
+							<label for="comment">Leave a comment:</label>
+							<textarea id="comment" name="comment" maxlength="50" required></textarea><br>
+						</div>
 						<button id="RoomReviewButton" type="submit" name="RoomReviewButton">Review</button>
 					</form>
 					<?php
@@ -253,15 +255,11 @@ if ($resRoomPicture->num_rows != 0) {
 							if (isset($_POST['review'])) {
 								$comment = $_POST['comment'];
 								$review = $_POST['review'];
-								if (isset($_POST['review'])) {
-									$comment = $_POST['comment'];
-									$review = $_POST['review'];
-									if (insertDb("reviews", ["review", "door", "monster", "booking_date", "review_date", "review_text"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates'], date("Y-m-d"), $comment])) {
-										alert("Review left successfully!");
-										relocation("room.php?" . $_SERVER['QUERY_STRING']);
-									} else {
-										relocation("404.php");
-									}
+								if (insertDb("reviews", ["review", "door", "monster", "booking_date", "review_text"], [$review, $roomID, $_SESSION['email'], $_POST['bookedDates'], $comment])) {
+									alert("Review left successfully!");
+									relocation("room.php?" . $_SERVER['QUERY_STRING']);
+								} else {
+									relocation("404.php");
 								}
 							}
 
